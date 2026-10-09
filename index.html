@@ -522,7 +522,7 @@ a.card[href="#care"]::after,a.card[href="#aerial"]::after{
 <div class="draft">
   <div class="wrap">
     <span class="tag">PREVIEW</span>
-    <p>Working version of the Chronicle website. Prices and service descriptions are final; contact details, photography and the domain are still to be filled in. Nothing here has been published publicly. This design preview embeds illustrative context imagery for the mockup; final production photography should be Chronicle-owned or commercially licensed.</p>
+    <p>Preview of the Chronicle website ahead of launch. Prices and service descriptions are final; photography, insurance details and the domain are still being finalised. This preview uses illustrative imagery; production photography will be Chronicle-owned or commercially licensed.</p>
   </div>
 </div>
 
@@ -531,7 +531,7 @@ a.card[href="#care"]::after,a.card[href="#aerial"]::after{
 <footer>
   <div class="wrap">
     <div class="fgrid">
-      <div><h4>Chronicle Care</h4>
+      <div><h4>Chronicle Home Watch</h4>
         <a href="#care">What a Chronicle is</a><a href="#baseline">The First Chronicle</a><a href="#recurring">Recurring visits</a>
         <a href="#storm">Storm season</a><a href="#arrival">Arrival &amp; departure</a><a href="#vendor">Vendor access</a><a href="#claims">Claim support</a></div>
       <div><h4>Chronicle Aerial</h4>
@@ -541,10 +541,10 @@ a.card[href="#care"]::after,a.card[href="#aerial"]::after{
         <a href="#pricing">Pricing</a><a href="#record">The record</a><a href="client-portal.html#dashboard" target="_blank" rel="noopener">Client portal</a><a href="#how-it-works">How we work</a><a href="#work">Work</a>
         <a href="#safety">Safety &amp; standards</a><a href="#faq">Questions</a><a href="#about">About</a><a href="#legal">Important</a></div>
       <div><h4>Chronicle Property Group LLC</h4>
-        <p>Naples, Florida<br>Serving Collier County<br><span style="color:#C9A96A">[phone]</span><br><span style="color:#C9A96A">[email]</span></p>
+        <p>Naples, Florida<br>Serving Collier County<br><span style="color:#C9A96A">[phone]</span><br><a href="mailto:info@chronicleproperty.com" style="color:#C9A96A">info@chronicleproperty.com</a></p>
         <a href="#quote" style="margin-top:10px;color:#C9A96A;font-weight:600">Request a proposal →</a></div>
     </div>
-    <p class="fbot"><b>Chronicle Property Group LLC</b> trading as Chronicle Care and Chronicle Aerial. A Chronicle is a visual record made from normal standing and walking positions. It is not a home inspection, a survey, an engineering or structural assessment, a mold or pest assessment, an appraisal, or a warranty. Chronicle is not a licensed home inspector, contractor, real estate broker or security agency, and does not repair, rent, guard or diagnose. Aerial imagery is not a land survey and is not a substitute for one. We do not guarantee that damage will not occur between visits.</p>
+    <p class="fbot"><b>Chronicle Property Group LLC</b> trading as Chronicle Home Watch and Chronicle Aerial. A Chronicle is a visual record made from normal standing and walking positions. It is not a home inspection, a survey, an engineering or structural assessment, a mold or pest assessment, an appraisal, or a warranty. Chronicle is not a licensed home inspector, contractor, real estate broker or security agency, and does not repair, rent, guard or diagnose. Aerial imagery is not a land survey and is not a substitute for one. We do not guarantee that damage will not occur between visits.</p>
   </div>
 </footer>
 
@@ -684,8 +684,8 @@ P.home = function(){
     eyebrow:'Chronicle Property Group · Naples, Florida',
     title:'Someone has to know what happened while you were away.',
     sub:'Property care for seasonally empty homes, and drone documentation for the people who have to prove what a site looked like on a given day. Two lines of work, one standard of record.',
-    stats:['FAA Part 107 certified','Fully insured','Reports within 24 hours','No referral fees, ever'],
-    acts:[['How Chronicle Care works','#care'],['Chronicle Aerial','#aerial'],['Request a proposal','#quote']]
+    stats:['FAA Part 107 certified','Based in Naples','Reports within 24 hours','No referral fees, ever'],
+    acts:[['How Chronicle Home Watch works','#care'],['Chronicle Aerial','#aerial'],['Request a proposal','#quote']]
   })
   + band('', ph('HERO PHOTOGRAPH','A Naples property at first light, shot wide with room for the headline. 21:9.','wide'))
   + band('band-gold', head('Two lines of work','One company, one standard','Both exist for the same reason: a dated, photographed, defensible record of what a property looked like, and what changed.')
@@ -701,7 +701,7 @@ P.home = function(){
       + '<div class="cd">Drone documentation flown by an FAA-certificated remote pilot. Construction progress, roof and thermal imagery, mapping, listing media and film, for owners, builders, agents and developers.</div>'
       + '<div class="cp">Five sectors →</div></a>'
       + '</div>')
-  + band('', head('Chronicle Care','What we look after') + linkcards(CARE_SERVICES))
+  + band('', head('Chronicle Home Watch','What we look after') + linkcards(CARE_SERVICES))
   + band('band-gold', head('Chronicle Aerial','What we fly') + linkcards(AERIAL_SERVICES, 'g5'))
   + band('', '<div class="split"><div>'+ph('PHOTOGRAPH','The same view, months apart. Two frames from one fixed standing point — the pair that explains the whole service.','sq')+'</div>'
       + '<div><p class="eyebrow">The question that starts every claim</p><h2 class="h2">“When was the property last checked, and by whom?”</h2>'
@@ -721,11 +721,11 @@ P.home = function(){
 };
 
 P.care = function(){
-  return phead('Chronicle Care','Monitor. Report. Advise.',
+  return phead('Chronicle Home Watch','Monitor. Report. Advise.',
       'Property care and home watch for homes that sit empty for part of the year. A scheduled attendance, reviewed against the same documented point library every single time, measured, photographed from fixed standing points, and reported within twenty-four hours.',
       subnav(CARE_NAV,'care'))
   + band('', ph('PHOTOGRAPH','Specialist at a property, shoe covers on, recording a reading. Working, not posed.','wide'))
-  + band('band-gold', head('The six services','What Chronicle Care covers') + linkcards(CARE_SERVICES))
+  + band('band-gold', head('The six services','What Chronicle Home Watch covers') + linkcards(CARE_SERVICES))
   + band('', head('The method','Nineteen zones, 172 points','Every visit works the same zones in the same order — outside in, the way a property naturally walks. A zone is only recorded as reviewed when every point in it for your service level was actually looked at.')
       + '<div class="grid g5" style="margin-top:22px;gap:9px">'
       + ZONES.map(function(z,i){ return '<div class="card" style="padding:12px 14px;gap:4px"><span class="k">'+(i<9?'0':'')+(i+1)+'</span><div style="font-size:13.5px;font-weight:500;line-height:1.35">'+z+'</div></div>'; }).join("")
@@ -749,7 +749,7 @@ P.care = function(){
 
 P.baseline = function(){
   return servicePage({
-    id:'baseline', nav:CARE_NAV, eyebrow:'Chronicle Care · Service 01',
+    id:'baseline', nav:CARE_NAV, eyebrow:'Chronicle Home Watch · Service 01',
     title:'The First Chronicle',
     lead:'One extended visit before anything else — three to five hours recording the condition of the whole property, so that every visit afterwards has something to be compared against.',
     photo:'The baseline in progress — data plate being photographed in a garage, torch lighting it from the side.',
@@ -786,7 +786,7 @@ P.baseline = function(){
 
 P.recurring = function(){
   return servicePage({
-    id:'recurring', nav:CARE_NAV, eyebrow:'Chronicle Care · Service 02',
+    id:'recurring', nav:CARE_NAV, eyebrow:'Chronicle Home Watch · Service 02',
     title:'The Recurring Chronicle',
     lead:'The visit itself — every week or every fortnight, against the same point library, the same eleven readings and the same photographs from the same standing points.',
     photo:'A specialist walking the exterior of a lanai, phone in hand, mid-visit.',
@@ -823,7 +823,7 @@ P.recurring = function(){
 
 P.storm = function(){
   return servicePage({
-    id:'storm', nav:CARE_NAV, eyebrow:'Chronicle Care · Service 03',
+    id:'storm', nav:CARE_NAV, eyebrow:'Chronicle Home Watch · Service 03',
     title:'Storm season',
     lead:'From June to November the work changes. Before the weather: securing, closing and photographing. Afterwards: a damage record built for an insurance claim, with a pre-storm set to compare it against.',
     photo:'Lanai furniture secured and a property photographed from the street before a storm.',
@@ -861,7 +861,7 @@ P.storm = function(){
 
 P.arrival = function(){
   return servicePage({
-    id:'arrival', nav:CARE_NAV, eyebrow:'Chronicle Care · Service 04',
+    id:'arrival', nav:CARE_NAV, eyebrow:'Chronicle Home Watch · Service 04',
     title:'Arrival &amp; departure',
     lead:'The house cool, running and ready on the day you land — and properly closed, set and photographed after you leave.',
     photo:'A prepared interior: blinds open, lights on, a house that is ready rather than merely secure.',
@@ -895,7 +895,7 @@ P.arrival = function(){
 
 P.vendor = function(){
   return servicePage({
-    id:'vendor', nav:CARE_NAV, eyebrow:'Chronicle Care · Service 05',
+    id:'vendor', nav:CARE_NAV, eyebrow:'Chronicle Home Watch · Service 05',
     title:'Vendor access',
     lead:'Someone has to let the plumber in, and someone has to lock up after. We do that, and we record it — without pretending to supervise work we are not licensed to judge.',
     photo:'A specialist locking a door behind a departing vendor, logging the time.',
@@ -930,7 +930,7 @@ P.vendor = function(){
 
 P.claims = function(){
   return servicePage({
-    id:'claims', nav:CARE_NAV, eyebrow:'Chronicle Care · Service 06',
+    id:'claims', nav:CARE_NAV, eyebrow:'Chronicle Home Watch · Service 06',
     title:'Insurance claim support',
     lead:'When a claim starts, your record is already most of what an adjuster asks for. We assemble it, and we attend for the inspection if you want us there.',
     photo:'A claim package laid out — dated photographs, readings and the attendance log.',
@@ -973,7 +973,7 @@ P.aerial = function(){
       + '<div style="margin-top:22px">'+tbl(['Programme','Per month','A year'], AERIAL_MONTHLY, [1,2])+'</div>')
   + band('band-gold', head('How we fly','Non-negotiables') + '<div style="margin-top:20px">'+ticks([
       'Operated under <b>FAA Part 107</b> by a certificated remote pilot, with airspace authorization obtained before any flight that needs it.',
-      '<b>Unmanned aircraft liability insurance</b> carried on every job. A certificate is available on request.',
+      '<b>Unmanned aircraft liability insurance</b> in place before the first commission, and carried on every job after it. A certificate is available on request.',
       '<b>Written property owner authorization</b> before flying any site.',
       'The <b>pilot in command has sole authority</b> to delay, shorten or cancel for weather, airspace or safety. A cancelled flight is rescheduled, never charged.',
       '<b>No flights over people</b> who are not part of the operation, and no flights that put anyone at risk to get a shot.'
@@ -1079,7 +1079,7 @@ P.thermal = function(){
       ['A referral','The trade to call, and what to ask them.','check']],
     steps:[['Scheduling','Flown at the time of day the differential is readable, which is rarely midday.'],['Authorization','Owner permission and airspace clearance.'],['Scan','Thermal and visible, full coverage.'],['Report','Within five business days.']],
     priceHead:['Scan','Price'], price:[['Residential roof scan','$695'],['Solar array scan','$950']], priceNums:[1],
-    priceNote:'Often commissioned alongside a Chronicle Care baseline, where it is charged at the member rate.',
+    priceNote:'Often commissioned alongside a Chronicle Home Watch baseline, where it is charged at the member rate.',
     notIt:'<h3>An indicator, not a diagnosis</h3><p>A thermal anomaly means a temperature difference was detected. It does not establish that there is moisture, a leak, a defect or a failure, and nothing in a thermal report is an inspection, a diagnosis or a certification. Chronicle is not a licensed roofing contractor, electrical contractor or home inspector.</p><p>Every anomaly is referred to the appropriate licensed trade for assessment. Acting on a thermal report without that assessment is not something we recommend.</p>',
     faq:[['Will this tell me if my roof leaks?','No. It will tell you where the roof is behaving differently from the rest of it, which is where a roofer should look first. That is genuinely useful and it is not the same thing.'],
       ['When do you fly it?','Usually late afternoon or just after sunset, when the differential is strongest. A midday scan generally shows very little.']]
@@ -1105,13 +1105,13 @@ P.film = function(){
     steps:[['Brief and shot list','What it is for and what it has to show.'],['Recce and authorization','Access, hazards, airspace, owner permission.'],['Shoot day','Flown to the list, with room for the light.'],['Edit and delivery','Agreed turnaround, usually five to ten days.']],
     priceHead:['Booking','Price'], price:[['Half day','$895'],['Full day','$1,495']], priceNums:[1],
     priceNote:'Editing beyond the agreed cut is quoted separately. Travel beyond Collier and Lee is quoted separately.',
-    faq:[['Do you have insurance for a commercial shoot?','Yes — unmanned aircraft liability on every job, and a certificate on request, naming an additional insured where a production requires it.'],
+    faq:[['Do you have insurance for a commercial shoot?','Unmanned aircraft liability will be in place before our first commission and carried on every job, with a certificate on request naming an additional insured where a production requires it.'],
       ['Can you fly over a crowd or an event?','Not over people who are not part of the operation. There are ways to shoot an event safely and we will tell you honestly what is and is not possible before you book.']]
   });
 };
 
 P.record = function(){
-  return phead('Chronicle Care','The record you receive',
+  return phead('Chronicle Home Watch','The record you receive',
       'The visit is how we produce the record. The record is what you are buying — and it is the part that still matters three years later, when you are selling or making a claim.')
   + band('', '<div class="split"><div>'+ph('PHOTOGRAPH','The specimen report open on a tablet, in a kitchen.','sq')+'</div>'
       + '<div><p class="eyebrow">Open a complete one</p><h2 class="h2">A full specimen baseline report</h2>'
@@ -1146,8 +1146,8 @@ P.record = function(){
 
 P.pricing = function(){
   return phead('Pricing','Published, so you can work it out without a phone call',
-      'Chronicle Care is month to month with thirty days’ notice and seasonal suspension. Chronicle Aerial is per job, or on a monthly programme for projects that run.')
-  + band('', head('Chronicle Care','Monthly service') + '<div style="margin-top:22px">'+tbl(['Level','Frequency','Property','Per month'], TIERS, [3])+'</div>'
+      'Chronicle Home Watch is month to month with thirty days’ notice and seasonal suspension. Chronicle Aerial is per job, or on a monthly programme for projects that run.')
+  + band('', head('Chronicle Home Watch','Monthly service') + '<div style="margin-top:22px">'+tbl(['Level','Frequency','Property','Per month'], TIERS, [3])+'</div>'
       + '<p class="pnote">Month to month, 30 days’ notice. Seasonal suspension available — paused months are not charged. Prices exclude any applicable Florida sales tax.</p>')
   + band('band-gold', head('What each level includes','') + '<div style="margin-top:22px">'+tbl(['Level','Frequency','Included'], LEVELS)+'</div>')
   + band('', head('The First Chronicle','Once, before monthly service begins') + '<div style="margin-top:22px">'+tbl(['Property size','One time'], FIRST, [1])+'</div>'
@@ -1177,7 +1177,7 @@ P.pricing = function(){
 P['how-it-works'] = function(){
   return phead('How we work','From first call to a record that keeps building',
       'The same four steps for both lines of work, because the discipline behind them is the same: agree what will be done, do it the same way every time, and write down exactly what was found.')
-  + band('', head('Chronicle Care','Getting started') + steps([
+  + band('', head('Chronicle Home Watch','Getting started') + steps([
       ['A conversation','Fifteen minutes on the phone, or a walk round if you are in Naples. We will tell you honestly whether we are right for the property.'],
       ['A written proposal','A recommended level, a fixed price and the reasoning. No obligation and no follow-up calls.'],
       ['The questionnaire','About twenty minutes. It fills the agreement in, so nothing is ever asked twice.'],
@@ -1209,7 +1209,7 @@ P.work = function(){
       + '<div class="btnrow"><a class="btn solid" href="'+SPECIMEN+'" target="_blank" rel="noopener">Open the specimen report</a></div>')
   + band('band-gold', head('Coming here first','Three pieces of work already committed') + cards([
       ['A Habitat for Humanity build','Monthly aerial documentation of a community build in Naples, flown at no cost to the project, from groundbreaking to handover.','crane'],
-      ['The first three baselines','The first Chronicle Care properties, documented in full. Published as anonymised extracts with the owners’ permission.','file'],
+      ['The first three baselines','The first Chronicle Home Watch properties, documented in full. Published as anonymised extracts with the owners’ permission.','file'],
       ['A season of comparison frames','One property, one standing point, every visit from November to May — the series that explains the method better than any paragraph.','camera']
     ]))
   + band('', '<div class="grid g3">'+ph('PHOTOGRAPH','Project one — replace with real work','sq')+ph('PHOTOGRAPH','Project two','sq')+ph('PHOTOGRAPH','Project three','sq')+'</div>')
@@ -1235,7 +1235,7 @@ P.safety = function(){
       '<b>No flights over people</b> who are not part of the operation.',
       '<b>Maintenance and flight logs</b> kept for every aircraft and every mission.'
     ])+'</div>')
-  + band('', head('Insurance','Carried on every job') + '<div style="margin-top:20px">'+ticks([
+  + band('', head('Insurance','In place before the first job') + '<div style="margin-top:20px">'+ticks([
       '<b>Commercial general liability</b>, including care, custody and control — <b>[limits]</b>. Certificate available on request.',
       '<b>Unmanned aircraft liability</b> for all aerial work — <b>[limit]</b>, with additional insured endorsements where a project requires one.',
       '<b>Dishonesty or fidelity cover</b> appropriate to a keyholding service — <b>[limit]</b>.',
@@ -1250,10 +1250,10 @@ P.safety = function(){
 
 P.about = function(){
   return phead('About','Chronicle Property Group',
-      'A Florida limited liability company in Naples, trading as Chronicle Care and Chronicle Aerial.')
+      'A Florida limited liability company in Naples, trading as Chronicle Home Watch and Chronicle Aerial.')
   + band('', '<div class="split"><div>'+ph('PHOTOGRAPH','Portrait — on site and working, rather than a studio headshot.','tall')+'</div>'
       + '<div><p class="eyebrow">Why it exists</p><h2 class="h2">Built by someone from the owner’s side.</h2>'
-      + '<p class="lead">Chronicle was founded by George Cortbaoui after fourteen years on the owner’s side of major infrastructure projects — most recently as project manager on the Hamad Port project in Doha, and before that with Qatar’s Ministry of Transport and Communications, including four years on the port’s technical directorate committee.</p>'
+      + '<p class="lead">Chronicle was founded by George Cortbaoui after fourteen years on the owner’s side of major infrastructure projects — most recently as project manager on the Hamad Port project in Doha, and before that with Qatar’s Ministry of Transport and Communications, serving concurrently on the port’s technical directorate committee.</p>'
       + '<p class="lead" style="margin-top:12px">That work is about one thing: knowing, provably, what condition something is in and what has changed since you last looked. Applied to a house, that discipline is unusual in this industry — and it is the whole idea behind Chronicle.</p>'
       + '<p class="lead" style="margin-top:12px">He holds Columbia University certifications in construction cost estimating, scheduling and project management, and lives in Naples with his family.</p></div></div>')
   + band('band-gold', head('What we believe','Six things, and we hold to all of them') + cards([
@@ -1266,7 +1266,7 @@ P.about = function(){
     ]))
   + band('', head('The company','Structure') + '<div style="margin-top:20px">'+ticks([
       '<b>Chronicle Property Group LLC</b> — a Florida limited liability company, Naples.',
-      '<b>Chronicle Care</b> — property care and home watch. Monitor. Report. Advise.',
+      '<b>Chronicle Home Watch</b> — home watch and property care. Monitor. Report. Advise.',
       '<b>Chronicle Aerial</b> — drone documentation and imagery. Observe. Document. Deliver.',
       'Chronicle holds <b>no home inspector, contractor, real estate or security agency licence</b>, and performs no work requiring one.'
     ])+'</div>')
@@ -1276,7 +1276,7 @@ P.about = function(){
 P.faq = function(){
   return phead('Questions','The ones we are actually asked',
       'If yours is not here, ask — and we will add it.')
-  + band('', head('Chronicle Care','') + faq([
+  + band('', head('Chronicle Home Watch','') + faq([
       ['How is this different from a neighbour keeping an eye on it?','A neighbour is worth having. What they cannot give you is a dated, photographed record on the day an insurer asks for one — and it puts a real obligation on a friendship. We attend on a schedule, measure the same eleven things every time, and write it down.'],
       ['I have cameras and a leak sensor. Why would I need this?','They will tell you about the things they are pointed at. They will not tell you about humidity climbing week by week, a filter pressure rising, a stain appearing on a ceiling in a room with no camera, or a meter turning with every tap closed.'],
       ['Will you come on the same day each week?','No, deliberately. An attendance on a predictable day is a pattern anyone can read from the street. You know the interval, and you get a report within twenty-four hours of each visit.'],
@@ -1287,17 +1287,17 @@ P.faq = function(){
       ['How much can you spend without asking me?','Whatever you set. $250 per event is the usual figure, and only where waiting would make the damage worse. Above that we call you, or your emergency contact.']
     ]))
   + band('band-gold', head('Chronicle Aerial','') + faq([
-      ['Are you licensed and insured?','FAA Part 107 certificated remote pilot, with unmanned aircraft liability insurance on every job and a certificate available on request.'],
+      ['Are you licensed and insured?','FAA Part 107 certificated remote pilot. Unmanned aircraft liability insurance is being put in place before our first job, and a certificate will be available on request.'],
       ['Can you measure my property from the air?','We can produce scaled imagery you can understand a site from. We cannot determine a boundary or an elevation, and we will not pretend otherwise — that is a licensed surveyor’s work under chapter 472.'],
       ['Does a thermal scan prove I have a leak?','No. It shows where the surface is behaving differently, which is where a roofer should look first. That is genuinely useful and it is not the same thing as a diagnosis.'],
       ['What happens if the weather turns?','The flight is rescheduled and not charged. It is built into how we price rather than billed when it happens.'],
       ['Can you fly my condominium building?','With the association’s and the owner’s permission, and subject to airspace. Much of coastal Naples sits in controlled airspace, which we clear before every flight.']
     ]))
   + band('', head('Working with us','') + faq([
-      ['Is there a contract?','Chronicle Care is month to month with thirty days’ notice. Aerial work is per job or on a monthly programme with no minimum term. The record is what holds clients, not a lock-in.'],
+      ['Is there a contract?','Chronicle Home Watch is month to month with thirty days’ notice. Aerial work is per job or on a monthly programme with no minimum term. The record is what holds clients, not a lock-in.'],
       ['Do you take referral fees from trades?','Never, in either direction. If that ever changed, every client would be told in writing before it applied.'],
       ['What happens to my information?','It reaches Chronicle only. We never confirm to anyone that a property is empty, never disclose an address or an owner, and your record is exportable in full at any time.'],
-      ['Where do you work?','Collier County for Chronicle Care. Collier and Lee for Chronicle Aerial. Beyond that, quoted separately.']
+      ['Where do you work?','Collier County for Chronicle Home Watch. Collier and Lee for Chronicle Aerial. Beyond that, quoted separately.']
     ]))
   + cta('Still have a question?','Ask it directly. You will get an honest answer, including when the answer is that we are not the right people.',[['Talk to us','#contact'],['Request a proposal','#quote']]);
 };
@@ -1319,8 +1319,8 @@ P.contact = function(){
       'There is no sales team. If you call, you speak to the person who will be at your property.')
   + band('', head('Directly','') + '<div style="display:grid;gap:10px;max-width:640px;margin-top:20px">'
       + '<div class="copyrow"><span class="lab">Phone</span><span class="val" id="v-phone">[phone]</span><button type="button" data-copy="v-phone">Copy</button></div>'
-      + '<div class="copyrow"><span class="lab">Email</span><span class="val" id="v-email">[email]</span><button type="button" data-copy="v-email">Copy</button></div>'
-      + '<div class="copyrow"><span class="lab">Care</span><span class="val">Collier County</span></div>'
+      + '<div class="copyrow"><span class="lab">Email</span><span class="val" id="v-email">info@chronicleproperty.com</span><button type="button" data-copy="v-email">Copy</button></div>'
+      + '<div class="copyrow"><span class="lab">Home Watch</span><span class="val">Collier County</span></div>'
       + '<div class="copyrow"><span class="lab">Aerial</span><span class="val">Collier and Lee Counties</span></div>'
       + '</div>')
   + band('band-gold', head('Or send us the details','One business day') + '<div style="margin-top:22px" id="formzone"></div>')
@@ -1335,7 +1335,7 @@ P.contact = function(){
 P.legal = function(){
   return phead('Important','What Chronicle is, and what it is not',
       'This page says plainly what we are not licensed to do. We would rather you read it now than discover it in a dispute.')
-  + band('', head('Chronicle Care','') + '<div style="margin-top:20px">'+ticks([
+  + band('', head('Chronicle Home Watch','') + '<div style="margin-top:20px">'+ticks([
       '<b>Not a home inspection.</b> A Chronicle is not a home inspection and no report issued is a home inspection report. Chronicle does not hold itself out as a home inspector within the meaning of section 468.8311, Florida Statutes. For a pre-purchase, pre-sale, four-point, wind mitigation or warranty inspection, engage a licensed home inspector.',
       '<b>Not construction or repair work.</b> Chronicle is not a licensed contractor under chapter 489, Florida Statutes, and performs no work requiring a contractor’s licence — including roofing, plumbing, electrical, mechanical, pool and structural work.',
       '<b>Not property management or rental services.</b> Chronicle is not a real estate broker or sales associate under chapter 475, Florida Statutes, and does not list, rent, lease, show or manage property for rental.',
@@ -1359,7 +1359,7 @@ P.legal = function(){
 };
 
 /* ================= ROUTER ================= */
-var NAV = [["care","Chronicle Care"],["aerial","Chronicle Aerial"],["pricing","Pricing"],["work","Work"],["faq","Questions"],["about","About"],["contact","Contact"],["quote","Get a proposal"]];
+var NAV = [["care","Chronicle Home Watch"],["aerial","Chronicle Aerial"],["pricing","Pricing"],["work","Work"],["faq","Questions"],["about","About"],["contact","Contact"],["quote","Get a proposal"]];
 function renderNav(r){
   var portalLink = '<a href="'+PORTAL+'" target="_blank" rel="noopener">Client portal</a>';
   var group = {baseline:"care",recurring:"care",storm:"care",arrival:"care",vendor:"care",claims:"care",record:"care",
@@ -1403,7 +1403,7 @@ function getDb(){
   if (!dbPromise) dbPromise = (window.claude && window.claude.use) ? window.claude.use("db").catch(function(){ return null; }) : Promise.resolve(null);
   return dbPromise;
 }
-var SERVICES = ["Chronicle Care — not sure which level yet","Chronicle Care — Watch, every 14 days","Chronicle Care — Chronicle, weekly","Chronicle Care — Steward, weekly plus events","Chronicle Care — storm season only","Chronicle Aerial — real estate media","Chronicle Aerial — construction progress","Chronicle Aerial — mapping","Chronicle Aerial — thermal","Chronicle Aerial — film and media","Something else"];
+var SERVICES = ["Chronicle Home Watch — not sure which level yet","Chronicle Home Watch — Watch, every 14 days","Chronicle Home Watch — Chronicle, weekly","Chronicle Home Watch — Steward, weekly plus events","Chronicle Home Watch — storm season only","Chronicle Aerial — real estate media","Chronicle Aerial — construction progress","Chronicle Aerial — mapping","Chronicle Aerial — thermal","Chronicle Aerial — film and media","Something else"];
 function mountForm(){
   var zone = document.getElementById("formzone");
   if (!zone || zone.getAttribute("data-built")) return;

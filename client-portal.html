@@ -654,7 +654,7 @@ P.dashboard = function(){
 };
 
 P.chronicles = function(){
-  return '<div class="phead"><div><div class="ey">Chronicle Care</div><h1>Your Chronicles</h1></div>'
+  return '<div class="phead"><div><div class="ey">Chronicle Home Watch</div><h1>Your Chronicles</h1></div>'
     + '<div class="rt"><button class="btn" id="dl-visits">'+I.down+'Download the log (CSV)</button></div></div>'
     + '<p class="lead">Every attendance since the baseline, with arrival logged automatically. Select any row to open that report.</p>'
     + tbl(['Date','Visit','Headline','Points','Photos','On site','Actions'],
@@ -724,7 +724,7 @@ P.report = function(){
 
 P.gallery = function(){
   var byZone = ZONES.slice(0, 12);
-  return '<div class="phead"><div><div class="ey">Chronicle Care</div><h1>Photographs</h1></div></div>'
+  return '<div class="phead"><div><div class="ey">Chronicle Home Watch</div><h1>Photographs</h1></div></div>'
     + '<p class="lead">Every image from every visit, grouped by zone. The fixed comparison frames are taken from the same standing point each time, which is what lets a change be seen at all.</p>'
     + '<div class="card"><h3>The comparison series</h3><p>One standing point, one framing, every visit since '+PROP.since+'.</p>'
     + '<div class="gal" style="margin-top:14px">'
@@ -736,7 +736,7 @@ P.gallery = function(){
 };
 
 P.record = function(){
-  return '<div class="phead"><div><div class="ey">Chronicle Care</div><h1>Your record</h1></div>'
+  return '<div class="phead"><div><div class="ey">Chronicle Home Watch</div><h1>Your record</h1></div>'
     + '<div class="rt"><button class="btn" id="dl-assets">'+I.down+'Download the register (CSV)</button>'
     + '<button class="btn" id="dl-readings">'+I.down+'Readings (CSV)</button></div></div>'
     + '<p class="lead">Every major system captured from a photograph of its data plate at the baseline, and maintained since. Serial numbers are masked here as they are in anything shared outside your own file.</p>'
@@ -756,7 +756,7 @@ P.record = function(){
 
 P.documents = function(){
   var held = DOCS.filter(function(d){ return d[1] === "held"; }).length;
-  return '<div class="phead"><div><div class="ey">Chronicle Care</div><h1>Your documents</h1></div>'
+  return '<div class="phead"><div><div class="ey">Chronicle Home Watch</div><h1>Your documents</h1></div>'
     + '<div class="rt"><button class="btn gold" id="up-btn">'+I.up+'Add a document</button></div></div>'
     + '<p class="lead">'+held+' of '+DOCS.length+' in place. Everything here belongs to you and can be exported in full at any time, including after you stop using us.</p>'
     + '<div class="drop" id="dropzone"><p><b>Drag a file here, or use “Add a document”.</b></p>'
@@ -794,7 +794,7 @@ P.aerial = function(){
       + '<div class="note"><h3>Not a survey</h3><p>Aerial imagery is a visual and photogrammetric record. It is not a land survey, is not prepared by a licensed surveyor and mapper, and must not be relied on for boundaries, elevations or setting-out. Thermal anomalies are indicators for follow-up by a licensed trade, not a diagnosis.</p></div>';
   }
   return '<div class="phead"><div><div class="ey">Chronicle Aerial</div><h1>Aerial projects</h1></div></div>'
-    + '<p class="lead">Flights commissioned for this property, with every deliverable kept alongside your Chronicle Care record rather than in a separate system.</p>'
+    + '<p class="lead">Flights commissioned for this property, with every deliverable kept alongside your Chronicle Home Watch record rather than in a separate system.</p>'
     + '<div class="cards">' + AERIAL.map(function(p, i){
         return '<a class="card" href="#aerial" data-project="'+i+'" style="text-decoration:none;display:block">'
           + '<div style="display:flex;gap:9px;align-items:center;justify-content:space-between;flex-wrap:wrap">'
@@ -803,7 +803,7 @@ P.aerial = function(){
           + '<p class="tiny" style="margin-top:10px">'+p.date+' · '+p.files.length+' deliverables · '+p.sector+'</p></a>';
       }).join("") + '</div>'
     + '<h2 class="sec">Commission another flight</h2>'
-    + '<div class="card"><p>Roof and thermal surveys, a pre-storm photographic record, construction progress, or listing media if you are selling. Member rates apply to anything commissioned while you are with Chronicle Care.</p>'
+    + '<div class="card"><p>Roof and thermal surveys, a pre-storm photographic record, construction progress, or listing media if you are selling. Member rates apply to anything commissioned while you are with Chronicle Home Watch.</p>'
     + '<div style="margin-top:12px"><a class="btn gold" href="#account">Ask your contact</a></div></div>';
 };
 
