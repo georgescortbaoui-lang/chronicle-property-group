@@ -1,0 +1,1009 @@
+<!doctype html><html data-theme="dark"><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#faf9f5;color:#141413}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<title>Chronicle Client Portal</title>
+
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600&family=Inter:wght@400;500;600;700&display=swap">
+
+<style>
+/* Layout: an application shell — fixed navy rail on the left, ivory working area
+   on the right, collapsing to a top tab strip on a phone. */
+:root{
+  --bg:#FAF8F3; --surface:#FFFFFF; --surface2:#F4F1E9;
+  --ink:#14213D; --ink2:#55607A; --ink3:#7C8699;
+  --line:#E0DED6; --line2:#CFCCC2;
+  --gold:#A9823F; --goldbrand:#B8975A;
+  --good:#1FA862; --monitor:#2E5AA8; --action:#8E241B; --na:#6B7280;
+  --good-bg:#E6F5EC; --monitor-bg:#E7EDF8; --action-bg:#F8E8E6; --na-bg:#EEEFF1;
+  --deep:#14213D; --deeper:#0E1728; --onDeep:#F3F0E9; --onDeepDim:#A9B2C4;
+  --f-display:"Cinzel",Georgia,"Times New Roman",serif;
+  --f-body:"Inter",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --r:3px; --rail:238px;
+}
+@media (prefers-color-scheme:dark){ :root:not([data-theme="light"]){
+  --bg:#0E1728; --surface:#15203A; --surface2:#1B2745;
+  --ink:#F0EDE5; --ink2:#A7B1C6; --ink3:#7F8AA1;
+  --line:#28334F; --line2:#364364;
+  --gold:#CBA86A; --goldbrand:#C9A96A;
+  --good:#45C98A; --monitor:#6F9AE6; --action:#CF5445; --na:#93A0B5;
+  --good-bg:#10301F; --monitor-bg:#111F3C; --action-bg:#331512; --na-bg:#1D2436;
+  --deep:#0A1120; --deeper:#070C16; --onDeep:#F0EDE5; --onDeepDim:#94A0B8;
+  color-scheme:dark;
+}}
+:root[data-theme="dark"]{
+  --bg:#0E1728; --surface:#15203A; --surface2:#1B2745;
+  --ink:#F0EDE5; --ink2:#A7B1C6; --ink3:#7F8AA1;
+  --line:#28334F; --line2:#364364;
+  --gold:#CBA86A; --goldbrand:#C9A96A;
+  --good:#45C98A; --monitor:#6F9AE6; --action:#CF5445; --na:#93A0B5;
+  --good-bg:#10301F; --monitor-bg:#111F3C; --action-bg:#331512; --na-bg:#1D2436;
+  --deep:#0A1120; --deeper:#070C16; --onDeep:#F0EDE5; --onDeepDim:#94A0B8;
+  color-scheme:dark;
+}
+
+*{box-sizing:border-box}
+body{background:var(--bg); color:var(--ink); font-family:var(--f-body); font-size:14.5px; line-height:1.56; -webkit-font-smoothing:antialiased}
+h1,h2,h3{margin:0; text-wrap:balance} p{margin:0} a{color:inherit}
+:focus-visible{outline:2px solid var(--goldbrand); outline-offset:2px; border-radius:2px}
+svg.ic{width:18px; height:18px; stroke:currentColor; fill:none; stroke-width:1.6; stroke-linecap:round; stroke-linejoin:round; flex:none}
+
+/* demo banner */
+.demo{background:var(--deeper); color:var(--onDeepDim); border-bottom:1px solid rgba(169,130,63,.4)}
+.demo .in{max-width:1400px; margin:0 auto; padding:9px 20px; display:flex; gap:12px; align-items:flex-start}
+.demo .tag{font-size:9.5px; letter-spacing:.18em; font-weight:700; color:#C9A96A; border:1px solid rgba(201,169,106,.7); padding:2px 7px; border-radius:var(--r); white-space:nowrap; flex:none}
+.demo p{font-size:12px; min-width:0}
+
+/* shell */
+.shell{display:grid; grid-template-columns:var(--rail) minmax(0,1fr); min-height:70vh}
+.shell > *{min-width:0}
+.rail{background:var(--deep); color:var(--onDeep); padding:20px 0 26px; border-right:1px solid rgba(169,130,63,.3)}
+.rail .brand{display:flex; align-items:center; gap:10px; padding:0 20px 18px; text-decoration:none; color:inherit}
+.rail .brand .mark{height:25px; width:auto; color:#C9A96A; flex:none}
+.rail .brand .bt{font-family:var(--f-display); font-size:12.5px; letter-spacing:.2em; font-weight:600; line-height:1.2}
+.rail .brand .bt small{display:block; font-family:var(--f-body); font-size:7px; letter-spacing:.14em; color:var(--onDeepDim); margin-top:3px; font-weight:500}
+.rail .who{padding:13px 20px; margin:0 0 10px; border-block:1px solid rgba(255,255,255,.08)}
+.rail .who .n{font-size:13px; font-weight:600}
+.rail .who .s{font-size:11px; color:var(--onDeepDim); margin-top:3px}
+.rail nav{display:grid; gap:1px; padding:0 10px}
+.rail nav a{display:flex; align-items:center; gap:11px; font-size:13.5px; color:var(--onDeepDim); text-decoration:none; padding:9px 11px; border-radius:var(--r)}
+.rail nav a:hover{background:rgba(255,255,255,.06); color:var(--onDeep)}
+.rail nav a.on{background:rgba(201,169,106,.14); color:#C9A96A}
+.rail .foot{padding:20px 20px 0; margin-top:18px; border-top:1px solid rgba(255,255,255,.08); font-size:11.5px; color:var(--onDeepDim); line-height:1.6}
+.rail .foot a{color:#C9A96A; text-decoration:none; display:block; margin-top:7px}
+@media (max-width:900px){
+  .shell{grid-template-columns:1fr}
+  .rail{padding:14px 0; border-right:0; border-bottom:1px solid rgba(169,130,63,.3)}
+  .rail .who{display:none}
+  .rail{min-width:0; overflow:hidden}
+  .rail .brand{padding-inline:14px}
+  .rail nav{display:flex; overflow-x:auto; gap:4px; padding:0 14px; -webkit-overflow-scrolling:touch}
+  .rail nav a{white-space:nowrap; padding:8px 11px}
+  .rail .foot{display:none}
+}
+
+/* work area */
+.work{padding:26px 26px 50px; min-width:0}
+@media (max-width:700px){ .work{padding:20px 16px 40px} }
+.phead{display:flex; align-items:flex-end; gap:16px; flex-wrap:wrap; padding-bottom:14px; border-bottom:1px solid var(--line2); margin-bottom:22px}
+.phead h1{font-family:var(--f-display); font-weight:400; font-size:clamp(22px,3.4vw,31px); line-height:1.15}
+.phead .ey{font-size:10.5px; letter-spacing:.19em; text-transform:uppercase; color:var(--gold); font-weight:600; margin-bottom:7px}
+.phead .rt{margin-left:auto; display:flex; gap:9px; flex-wrap:wrap}
+.lead{color:var(--ink2); max-width:70ch; margin-bottom:20px}
+h2.sec{font-family:var(--f-display); font-weight:400; font-size:19px; margin:28px 0 13px; padding-bottom:9px; border-bottom:1px solid var(--line)}
+
+.btn{display:inline-flex; align-items:center; gap:7px; font:inherit; font-size:12.5px; font-weight:600; padding:8px 14px; border-radius:var(--r); border:1px solid var(--line2); background:var(--surface); color:var(--ink); cursor:pointer; text-decoration:none}
+.btn:hover{border-color:var(--goldbrand); color:var(--gold)}
+.btn.gold{background:var(--goldbrand); color:#14213D; border-color:var(--goldbrand)}
+.btn.gold:hover{color:#14213D; opacity:.9}
+.btn svg{width:15px; height:15px}
+
+/* tiles */
+.tiles{display:grid; gap:12px; grid-template-columns:repeat(auto-fit,minmax(168px,1fr))}
+.tile{background:var(--surface); border:1px solid var(--line); border-top:3px solid var(--tc,var(--goldbrand)); border-radius:var(--r); padding:15px 16px}
+.tile .k{font-size:10.5px; letter-spacing:.15em; text-transform:uppercase; color:var(--ink3); font-weight:600}
+.tile .v{font-family:var(--f-display); font-size:27px; line-height:1.1; margin-top:8px; color:var(--tc,var(--ink))}
+.tile .d{font-size:12px; color:var(--ink2); margin-top:6px; line-height:1.45}
+
+.card{background:var(--surface); border:1px solid var(--line); border-radius:var(--r); padding:17px}
+.cards{display:grid; gap:13px; grid-template-columns:repeat(auto-fit,minmax(250px,1fr))}
+.card h3{font-size:14.5px; font-weight:600}
+.card p{font-size:13px; color:var(--ink2); margin-top:7px; line-height:1.55}
+
+.chip{display:inline-flex; align-items:center; gap:5px; font-size:10.5px; font-weight:700; letter-spacing:.08em; text-transform:uppercase; padding:3px 8px; border-radius:999px; border:1px solid currentColor; white-space:nowrap}
+.c-good{color:var(--good); background:var(--good-bg)}
+.c-monitor{color:var(--monitor); background:var(--monitor-bg)}
+.c-action{color:var(--action); background:var(--action-bg)}
+.c-na{color:var(--na); background:var(--na-bg)}
+
+.tblwrap{overflow-x:auto; border:1px solid var(--line); border-radius:var(--r); background:var(--surface)}
+table{width:100%; border-collapse:collapse; font-size:13.5px}
+th{background:var(--deep); color:#fff; font-size:10px; letter-spacing:.13em; text-transform:uppercase; text-align:left; padding:9px 12px; font-weight:600; white-space:nowrap}
+td{padding:9px 12px; border-bottom:1px solid var(--line); vertical-align:top}
+tr:nth-child(even) td{background:var(--surface2)}
+td.num{text-align:right; font-variant-numeric:tabular-nums; white-space:nowrap}
+tr.clickable{cursor:pointer}
+tr.clickable:hover td{background:var(--surface2); color:var(--gold)}
+
+.ph{position:relative; border:1px solid var(--line2); border-radius:var(--r); aspect-ratio:4/3;
+  background:repeating-linear-gradient(135deg,transparent 0 8px, color-mix(in srgb,var(--line) 55%,transparent) 8px 9px), var(--surface2);
+  display:flex; flex-direction:column; align-items:center; justify-content:center; gap:4px; text-align:center; padding:12px}
+.ph .pk{font-size:9.5px; letter-spacing:.18em; text-transform:uppercase; font-weight:700; color:var(--gold)}
+.ph .pn{font-size:11.5px; color:var(--ink2); line-height:1.4}
+.gal{display:grid; gap:11px; grid-template-columns:repeat(auto-fill,minmax(176px,1fr))}
+
+ul.pts{margin:0; padding:0; list-style:none; display:grid; gap:9px}
+ul.pts li{display:grid; grid-template-columns:16px 1fr; gap:10px; font-size:13.5px; color:var(--ink2); line-height:1.5}
+ul.pts li::before{content:""; width:6px; height:6px; border-radius:50%; background:var(--goldbrand); margin-top:7px}
+ul.pts li > span{min-width:0}
+ul.pts li b{color:var(--ink)}
+
+.note{background:var(--surface); border:1px solid var(--line); border-left:4px solid var(--goldbrand); border-radius:var(--r); padding:15px 17px; margin-top:16px}
+.note h3{font-size:13.5px; font-weight:700; margin-bottom:8px}
+.note p{font-size:13px; color:var(--ink2); line-height:1.55}
+.note p + p{margin-top:8px}
+
+.drop{border:1px dashed var(--line2); border-radius:var(--r); padding:22px; text-align:center; background:var(--surface2)}
+.drop p{font-size:13px; color:var(--ink2)}
+.docrow{display:flex; align-items:center; gap:12px; padding:11px 14px; border:1px solid var(--line); border-radius:var(--r); background:var(--surface); flex-wrap:wrap}
+.docrow .nm{font-size:13.5px; font-weight:600; min-width:0; flex:1 1 150px}
+.docrow .nm small{display:block; font-weight:400; color:var(--ink3); font-size:11.5px; margin-top:2px}
+.docrow .rt{margin-left:auto; display:flex; gap:8px; align-items:center; flex-wrap:wrap}
+.docs{display:grid; gap:9px}
+
+.signin{max-width:430px; margin:46px auto; background:var(--surface); border:1px solid var(--line); border-radius:var(--r); padding:30px}
+.signin .mk{height:44px; width:auto; color:var(--goldbrand); display:block; margin:0 auto 18px}
+.signin h1{font-family:var(--f-display); font-weight:400; font-size:24px; text-align:center}
+.signin p{font-size:13px; color:var(--ink2); text-align:center; margin-top:10px; line-height:1.55}
+label{display:grid; gap:6px; font-size:11px; letter-spacing:.1em; text-transform:uppercase; color:var(--ink3); font-weight:600; margin-top:16px}
+input,textarea{font:inherit; font-size:14px; color:var(--ink); background:var(--surface); border:1px solid var(--line2); border-radius:var(--r); padding:9px 11px; width:100%; text-transform:none; letter-spacing:normal; font-weight:400}
+textarea{min-height:88px; resize:vertical}
+.msg{border:1px solid var(--line2); border-radius:var(--r); padding:11px 13px; font-size:13px; margin-top:12px; background:var(--surface)}
+.msg.ok{border-color:color-mix(in srgb,var(--good) 50%,transparent)}
+.msg.bad{border-color:color-mix(in srgb,var(--action) 50%,transparent)}
+.tiny{font-size:11.5px; color:var(--ink3); line-height:1.5}
+@media (prefers-reduced-motion:reduce){ *{transition:none!important} }
+
+/* ==========================================================
+   CHRONICLE CLIENT PORTAL — SIGNATURE DARK EDITION
+   Presentation layer only. Original portal copy/data/actions preserved.
+   ========================================================== */
+:root[data-theme="dark"]{
+  --bg:#07101D; --surface:#111F35; --surface2:#162640;
+  --ink:#F5F2EA; --ink2:#B5BFD0; --ink3:#8490A5;
+  --line:#293852; --line2:#3A4A68;
+  --gold:#D2AF6B; --goldbrand:#C9A96A;
+  --good:#4AC98E; --monitor:#78A6ED; --action:#D35B4C; --na:#98A5B9;
+  --good-bg:#102D20; --monitor-bg:#10233F; --action-bg:#351714; --na-bg:#1A2436;
+  --deep:#081321; --deeper:#050B14; --onDeep:#F6F2E9; --onDeepDim:#A5B1C4;
+  --r:14px; --rail:258px; color-scheme:dark;
+}
+html{background:#050B14}
+body{
+  background:
+    radial-gradient(circle at 65% -15%,rgba(91,124,153,.12),transparent 40rem),
+    linear-gradient(180deg,#07101D,#081321 55%,#07101D);
+}
+::selection{background:#C9A96A;color:#07101D}
+.demo{background:#050B14;border-bottom-color:rgba(201,169,106,.27)}
+.demo .tag{border-radius:999px;color:#DDC087}
+.shell{min-height:100vh}
+
+/* left rail */
+.rail{
+  position:sticky;top:0;height:100vh;
+  background:
+    radial-gradient(circle at 40% 5%,rgba(91,124,153,.12),transparent 18rem),
+    linear-gradient(180deg,#091525,#07101D 75%,#050B14);
+  border-right:1px solid rgba(201,169,106,.25);
+  box-shadow:14px 0 40px rgba(0,0,0,.16);
+}
+.rail .brand{padding:2px 22px 22px}
+.rail .brand .mark{height:30px}
+.rail .brand .bt{font-size:13px;letter-spacing:.23em}
+.rail .who{
+  margin:0 14px 15px;padding:15px 13px;
+  border:1px solid #263750;border-radius:13px;
+  background:rgba(255,255,255,.018)
+}
+.rail .who .n{color:#F5F2EA}
+.rail nav{gap:5px;padding:0 13px}
+.rail nav a{
+  border-radius:11px;padding:10px 12px;transition:.17s ease
+}
+.rail nav a:hover{background:#112039}
+.rail nav a.on{
+  background:linear-gradient(90deg,rgba(201,169,106,.16),rgba(201,169,106,.06));
+  color:#E4C98F;border:1px solid rgba(201,169,106,.20)
+}
+.rail .foot{margin:22px 14px 0;padding:19px 8px 0}
+
+/* working area */
+.work{padding:32px clamp(20px,3.3vw,48px) 64px}
+.phead{
+  padding-bottom:18px;margin-bottom:24px;
+  border-bottom:1px solid #31405D
+}
+.phead h1{font-size:clamp(25px,3.6vw,36px);letter-spacing:-.015em}
+.phead .ey{color:#D4B16D}
+.lead{font-size:14px;line-height:1.7}
+h2.sec{
+  font-size:20px;margin-top:34px;
+  border-bottom-color:#2B3A55;
+  padding-bottom:11px
+}
+.btn{
+  border-radius:999px;background:#101E34;border-color:#374866;
+  transition:.17s ease;padding:9px 15px
+}
+.btn:hover{background:#172741;border-color:#C9A96A}
+.btn.gold{background:#C9A96A;color:#07101D;box-shadow:0 9px 26px rgba(201,169,106,.14)}
+
+/* property dashboard visual */
+.property-hero{
+  position:relative;overflow:hidden;border-radius:18px;margin:0 0 24px;
+  min-height:255px;border:1px solid rgba(201,169,106,.28);
+  box-shadow:0 22px 55px rgba(0,0,0,.24)
+}
+.property-hero img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:saturate(.91) contrast(1.04) brightness(.78)}
+.property-hero::after{
+  content:"";position:absolute;inset:0;
+  background:linear-gradient(90deg,rgba(4,9,17,.86),rgba(4,9,17,.42) 54%,rgba(4,9,17,.08)),
+             linear-gradient(180deg,transparent 40%,rgba(4,9,17,.55))
+}
+.property-hero .ph-inner{position:relative;z-index:2;padding:29px;max-width:620px}
+.property-hero .ph-eye{font-size:10px;letter-spacing:.19em;text-transform:uppercase;color:#D8B875;font-weight:700}
+.property-hero h2{font-family:var(--f-display);font-weight:400;font-size:clamp(27px,4vw,40px);margin-top:8px}
+.property-hero p{color:#D7DFE8;margin-top:8px;max-width:58ch}
+.property-hero .ph-tags{display:flex;gap:8px;flex-wrap:wrap;margin-top:18px}
+.property-hero .ph-tags span{
+  padding:6px 9px;border-radius:999px;background:rgba(7,16,29,.63);
+  border:1px solid rgba(201,169,106,.35);color:#DCE2EA;font-size:10px
+}
+
+/* dashboard tiles */
+.tiles{gap:14px}
+.tile{
+  border-radius:15px;border-color:#2C3C58;
+  background:
+    linear-gradient(145deg,rgba(255,255,255,.025),transparent 42%),
+    #111F35;
+  box-shadow:0 10px 26px rgba(0,0,0,.13);
+  padding:17px 18px
+}
+.tile .v{font-size:29px}
+.tile .k{color:#8996AB}
+
+/* cards */
+.card{
+  border-radius:15px;border-color:#2C3C58;
+  background:
+    linear-gradient(145deg,rgba(255,255,255,.018),transparent 40%),
+    #111F35;
+  box-shadow:0 10px 28px rgba(0,0,0,.12)
+}
+.cards{gap:15px}
+.card h3{color:#F1EFEA}
+.card p{color:#B3BDCD}
+
+/* chips */
+.chip{border-width:1px;backdrop-filter:blur(8px)}
+.c-good{box-shadow:inset 0 0 0 1px rgba(74,201,142,.05)}
+.c-monitor{box-shadow:inset 0 0 0 1px rgba(120,166,237,.05)}
+.c-action{box-shadow:inset 0 0 0 1px rgba(211,91,76,.05)}
+
+/* tables */
+.tblwrap{
+  border-radius:15px;border-color:#2D3D58;
+  box-shadow:0 11px 30px rgba(0,0,0,.12)
+}
+th{background:#07111F;color:#DCE2EB;padding:10px 13px}
+td{border-bottom-color:#293850;color:#CBD2DE;padding:10px 13px}
+tr:nth-child(even) td{background:#14233D}
+tr.clickable:hover td{background:#1A2A47;color:#F3E8CE}
+
+/* contextual photo cards */
+.portal-photo{
+  position:relative;overflow:hidden;border-radius:13px;aspect-ratio:4/3;
+  border:1px solid #31425F;background:#0A1424;
+  box-shadow:0 8px 22px rgba(0,0,0,.14);
+  cursor:pointer
+}
+.portal-photo img{
+  position:absolute;inset:0;width:100%;height:100%;object-fit:cover;
+  filter:saturate(.93) contrast(1.03);transition:transform .28s ease
+}
+.portal-photo:hover img{transform:scale(1.025)}
+.portal-photo::after{
+  content:"";position:absolute;inset:0;
+  background:linear-gradient(180deg,transparent 46%,rgba(4,9,17,.82))
+}
+.portal-photo .pp-meta{
+  position:absolute;z-index:2;left:11px;right:11px;bottom:9px
+}
+.portal-photo .pp-meta b{
+  display:block;font-size:8px;color:#D8B875;letter-spacing:.14em;text-transform:uppercase
+}
+.portal-photo .pp-meta span{display:block;font-size:10.5px;color:#F0F3F7;margin-top:2px;line-height:1.3}
+.portal-photo .pp-tag{
+  position:absolute;z-index:2;right:8px;top:8px;background:rgba(5,11,20,.70);
+  border:1px solid rgba(201,169,106,.40);color:#DCC083;
+  font-size:8px;text-transform:uppercase;letter-spacing:.09em;padding:3px 6px;border-radius:999px
+}
+
+/* gallery */
+.gal{gap:13px;grid-template-columns:repeat(auto-fill,minmax(190px,1fr))}
+
+/* charts */
+.chart-shell{
+  padding:6px 4px 0;
+  background:linear-gradient(180deg,rgba(255,255,255,.012),transparent);
+  border-radius:12px
+}
+
+/* docs / upload */
+.drop{
+  border-radius:15px;border-color:#42506A;background:#101D32;
+  min-height:140px;display:grid;place-items:center
+}
+.docrow{
+  border-radius:13px;border-color:#2F405E;background:#111F35;
+  transition:border-color .17s ease
+}
+.docrow:hover{border-color:#53627A}
+.note{
+  border-radius:14px;background:#111F35;border-color:#2E3F5D;border-left-color:#C9A96A
+}
+
+/* sign in */
+.signin{
+  border-radius:20px;border-color:#32415D;
+  background:
+    radial-gradient(circle at 50% 0%,rgba(91,124,153,.12),transparent 18rem),
+    #111F35;
+  box-shadow:0 28px 70px rgba(0,0,0,.30);
+  padding:34px
+}
+.signin .mk{height:48px}
+input,textarea{
+  background:#0D192B;border-color:#3B4A65;border-radius:11px
+}
+
+/* media */
+@media(max-width:900px){
+ .rail{position:relative;height:auto}
+ .shell{grid-template-columns:1fr}
+ .rail nav{display:flex}
+ .property-hero{min-height:230px}
+}
+@media(max-width:650px){
+ .work{padding:20px 15px 44px}
+ .property-hero{min-height:290px}
+ .property-hero .ph-inner{padding:22px}
+ .gal{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
+
+</style>
+
+<div class="demo">
+  <div class="in">
+    <span class="tag">DEMONSTRATION</span>
+    <p>A working prototype of the Chronicle client portal, filled with specimen data. The property, the visits and the findings are illustrative — not a real property and not client work. Real client accounts require production hosting; what you can do here is use every screen. This Signature Dark preview adds embedded illustrative imagery; no external image hosting is required.</p>
+  </div>
+</div>
+
+<div class="shell">
+  <aside class="rail">
+    <a class="brand" href="#dashboard">
+      <svg class="mark" viewBox="15 33 170 134" fill="none" aria-hidden="true"><g stroke="currentColor" stroke-linecap="round"><path d="M 134.67 48.60 A 62 62 0 1 0 134.67 151.40" stroke-width="6"/><path d="M 117.53 64.05 A 40 40 0 1 0 117.53 135.95" stroke-width="6"/><path d="M 20 100 L 180 100" stroke-width="5"/></g><rect x="121" y="93" width="14" height="14" fill="currentColor" stroke="none"/></svg>
+      <span class="bt">CHRONICLE<small>CLIENT PORTAL</small></span>
+    </a>
+    <div class="who"><div class="n" id="who-n">Specimen Property</div><div class="s" id="who-s">Chronicle · weekly · since Sep 2026</div></div>
+    <nav id="nav"></nav>
+    <div class="foot">Questions about anything here?<a href="#account">Your Chronicle contact →</a></div>
+  </aside>
+  <div class="work" id="work"></div>
+</div>
+
+<script>
+(function(){
+"use strict";
+
+var PORTAL_VISUALS = {"IMG": {"property": "assets/portal-01.jpg", "fixed_compare": "assets/portal-02.jpg", "specialist": "assets/portal-03.jpg", "aerial_waterfront": "assets/portal-04.jpg", "report_tablet": "assets/portal-05.jpg", "fixed_method": "assets/portal-06.jpg", "portal": "assets/portal-07.jpg", "construction": "assets/portal-08.jpg", "mapping": "assets/portal-09.jpg", "thermal_project": "assets/portal-10.jpg", "portrait": "assets/portal-11.jpg", "equipment": "assets/portal-12.jpg", "lanai": "assets/portal-13.jpg", "storm": "assets/portal-14.jpg", "interior": "assets/portal-15.jpg", "access": "assets/portal-16.jpg", "claims": "assets/portal-17.jpg", "listing_aerial": "assets/portal-18.jpg", "construction_aerial": "assets/portal-19.jpg", "orthomosaic": "assets/portal-20.jpg", "thermal": "assets/portal-21.jpg", "film": "assets/portal-22.jpg"}, "STREET": {"20 Sep 2026": "assets/portal-23.jpg", "27 Sep 2026": "assets/portal-24.jpg", "4 Oct 2026": "assets/portal-25.jpg", "11 Oct 2026": "assets/portal-26.jpg", "18 Oct 2026": "assets/portal-27.jpg", "25 Oct 2026": "assets/portal-28.jpg"}};
+
+var I = {
+  grid:'<svg class="ic" viewBox="0 0 24 24"><rect x="3.5" y="3.5" width="7" height="7" rx="1"/><rect x="13.5" y="3.5" width="7" height="7" rx="1"/><rect x="3.5" y="13.5" width="7" height="7" rx="1"/><rect x="13.5" y="13.5" width="7" height="7" rx="1"/></svg>',
+  list:'<svg class="ic" viewBox="0 0 24 24"><path d="M8 6h13M8 12h13M8 18h13M3.5 6h.01M3.5 12h.01M3.5 18h.01"/></svg>',
+  camera:'<svg class="ic" viewBox="0 0 24 24"><path d="M3 8h3l1.5-2h9L18 8h3v12H3z"/><circle cx="12" cy="13.5" r="3.4"/></svg>',
+  file:'<svg class="ic" viewBox="0 0 24 24"><path d="M14 3H6v18h12V7z"/><path d="M14 3v4h4"/><path d="M9 12h6M9 16h6"/></svg>',
+  folder:'<svg class="ic" viewBox="0 0 24 24"><path d="M3 7.5h6l2 2.5h10v10H3z"/><path d="M3 7.5V5h6l2 2.5"/></svg>',
+  drone:'<svg class="ic" viewBox="0 0 24 24"><rect x="9" y="9" width="6" height="6" rx="1"/><path d="M9 9 5 5M15 9l4-4M9 15l-4 4M15 15l4 4"/><circle cx="4" cy="4" r="2"/><circle cx="20" cy="4" r="2"/><circle cx="4" cy="20" r="2"/><circle cx="20" cy="20" r="2"/></svg>',
+  user:'<svg class="ic" viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4.5 20.5c1.4-3.6 4.1-5.5 7.5-5.5s6.1 1.9 7.5 5.5"/></svg>',
+  down:'<svg class="ic" viewBox="0 0 24 24"><path d="M12 3.5v12M7 11l5 5 5-5M4 20.5h16"/></svg>',
+  up:'<svg class="ic" viewBox="0 0 24 24"><path d="M12 20.5v-12M7 13l5-5 5 5M4 3.5h16"/></svg>',
+  back:'<svg class="ic" viewBox="0 0 24 24"><path d="M15 5l-7 7 7 7"/></svg>'
+};
+var GL = {good:["Good","c-good"], monitor:["Monitor","c-monitor"], action:["Action","c-action"], na:["Not reached","c-na"]};
+function chip(k, label){ return '<span class="chip '+GL[k][1]+'">'+(label||GL[k][0])+'</span>'; }
+function esc(s){ return String(s).replace(/[&<>"]/g,function(c){return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c];}); }
+function portalPhotoSrc(k,n){
+  if(k === "STREET VIEW") return PORTAL_VISUALS.STREET[n] || PORTAL_VISUALS.IMG.property;
+  if(k === "ZONE"){
+    var z = {
+      "Arrival & approach":"property","Roof & attic":"thermal","Exterior envelope":"listing_aerial",
+      "Lanai, pool & spa":"lanai","Waterfront":"aerial_waterfront","Garage & vehicles":"equipment",
+      "Security & access":"access","Interior general":"interior","Kitchen & appliances":"report_tablet",
+      "Laundry":"specialist","Bathrooms & plumbing":"interior","HVAC & air":"equipment"
+    }; return PORTAL_VISUALS.IMG[z[n]||"property"];
+  }
+  if(k.indexOf("AERIAL") === 0){
+    var p = (state.project != null) ? AERIAL[state.project].sector : "";
+    if(p === "Thermal"){
+      var t={"Overview":"thermal_project","South plane":"thermal","East plane":"thermal_project","Detail — anomaly 1":"thermal","Detail — anomaly 2":"thermal_project","Flight path":"mapping"};
+      return PORTAL_VISUALS.IMG[t[n]||"thermal"];
+    } else {
+      var s={"Overview":"aerial_waterfront","South plane":"storm","East plane":"listing_aerial","Detail — anomaly 1":"claims","Detail — anomaly 2":"property","Flight path":"mapping"};
+      return PORTAL_VISUALS.IMG[s[n]||"aerial_waterfront"];
+    }
+  }
+  var pmap={
+    "Street view — the fixed comparison frame":"property",
+    "North elevation":"listing_aerial",
+    "South elevation":"aerial_waterfront",
+    "Lanai and pool":"lanai",
+    "Garage and water heater":"equipment",
+    "Air handler and filter date":"specialist"
+  };
+  return PORTAL_VISUALS.IMG[pmap[n]||"property"];
+}
+function ph(k,n,mod){
+  var src=portalPhotoSrc(k,n);
+  return '<figure class="portal-photo'+(mod?' '+mod:'')+'"><img src="'+src+'" alt="'+esc(n)+'" loading="lazy"><span class="pp-tag">Specimen</span><figcaption class="pp-meta"><b>'+k+'</b><span>'+n+'</span></figcaption></figure>';
+}
+function tbl(h, rows, nums, click){
+  return '<div class="tblwrap"><table><thead><tr>'+h.map(function(x){return '<th>'+x+'</th>';}).join("")+'</tr></thead><tbody>'
+    + rows.map(function(r,ri){
+        var attr = click ? ' class="clickable" data-row="'+ri+'"' : '';
+        return '<tr'+attr+'>'+r.map(function(c,i){ return '<td'+(nums&&nums.indexOf(i)>-1?' class="num"':'')+'>'+c+'</td>'; }).join("")+'</tr>';
+      }).join("")+'</tbody></table></div>';
+}
+
+/* ================= SPECIMEN DATA ================= */
+var PROP = { name:"Specimen Property", sub:"Single family · 4 bed · 3,400 sf · built 2008 · pool",
+  level:"Chronicle · weekly", since:"20 September 2026", area:"Naples, Collier County",
+  contact:"[Name]", phone:"[phone]", email:"[email]", authority:"$250 per event" };
+
+var MONTH = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
+function fmt(d){ return d.getDate()+" "+MONTH[d.getMonth()]+" "+d.getFullYear(); }
+var VISITS = (function(){
+  var out = [], start = new Date(2026, 8, 20);
+  var spec = [
+    ["baseline","Four items need a decision.",4,12,61,78],
+    ["visit","Nothing has changed. Secure, dry and conditioned.",0,12,58,78],
+    ["visit","Nothing has changed. Secure, dry and conditioned.",0,12,57,78],
+    ["visit","One item needs your attention.",1,12,59,79],
+    ["visit","Nothing has changed. Secure, dry and conditioned.",0,11,55,78],
+    ["visit","Nothing has changed. Secure, dry and conditioned.",0,11,54,77],
+    ["visit","Nothing has changed. Secure, dry and conditioned.",0,11,53,78],
+    ["visit","One item needs your attention.",1,11,56,78],
+    ["visit","Nothing has changed. Secure, dry and conditioned.",0,10,52,78],
+    ["visit","Nothing has changed. Secure, dry and conditioned.",0,10,51,77],
+    ["visit","Nothing has changed. Secure, dry and conditioned.",0,10,52,78],
+    ["visit","Two items need your attention.",2,10,63,81],
+    ["visit","Nothing has changed. Secure, dry and conditioned.",0,9,56,78],
+    ["visit","Nothing has changed. Secure, dry and conditioned.",0,9,54,78],
+    ["visit","Nothing has changed. Secure, dry and conditioned.",0,9,53,78]
+  ];
+  for (var i = 0; i < spec.length; i++){
+    var d = new Date(start.getTime() + i * 7 * 86400000);
+    out.push({ n:i, date:d, label:fmt(d), kind:spec[i][0], headline:spec[i][1],
+      actions:spec[i][2], monitors:spec[i][3], rh:spec[i][4], temp:spec[i][5],
+      points: i === 0 ? 172 : 121, photos: i === 0 ? 136 : (18 + (i % 5)),
+      mins: i === 0 ? 255 : (62 + (i % 4) * 7) });
+  }
+  return out.reverse();
+})();
+
+var FINDINGS = {
+  0:[["WAT-08","action","Continuous meter movement with every fixture closed; traced to the irrigation supply. Isolated at the backflow with your agreement."],
+     ["LAU-04","action","Dryer vent duct disconnected at the wall penetration, with lint accumulation behind the machine and in the wall cavity."],
+     ["WAT-03","action","Water heater: corrosion at the tank base and a slow drip at the T&amp;P discharge. Plate date 2008."],
+     ["ELE-06","action","Lanai GFCI tested and tripped correctly but would not reset; three outlets without power."],
+     ["HVA-02","monitor","Relative humidity 61% against a humidistat set to 55%. Both systems running, supply air 56 °F."],
+     ["INT-07","monitor","Guest bedroom ceiling: brown staining 180 × 140 mm, dry to the touch, moisture meter 11%."]],
+  3:[["EXT-06","action","Sealant at the south window heads has opened to 6 mm after the storm. Water tracking visible on the sill below."]],
+  7:[["LAN-10","action","East screen wall: two panels have come free of the spline over roughly 900 mm. Opening is large enough to admit wildlife."]],
+  11:[["HVA-02","action","Relative humidity 63% — second consecutive visit above 60%. Air handler 2 drain pan holding water, float switch not yet tripped."],
+      ["GAR-05","action","Staining beneath the water heater pan has spread to roughly 600 × 300 mm and reads 19% on the meter. Wet, not dry."]]
+};
+
+var ZONES = ["Arrival & approach","Roof & attic","Exterior envelope","Lanai, pool & spa","Waterfront","Garage & vehicles","Security & access","Interior general","Kitchen & appliances","Laundry","Bathrooms & plumbing","HVAC & air","Water systems","Electrical & generator","Technology","Pest & environment","Storm readiness","Documents & assets","Arrival & departure"];
+
+var ASSETS = [
+  ["Air conditioning — unit 1","Garage closet / north condenser","Carrier","•••••1742","2016","Running. Filter 20 × 25 × 1."],
+  ["Air conditioning — unit 2","Upstairs closet / east condenser","Carrier","•••••0388","2016","Running. Filter 16 × 25 × 1."],
+  ["Water heater","Garage","Rheem","•••••9015","2008","Corrosion at tank base; drip at discharge."],
+  ["Pool pump & filter","Equipment pad, east side","Pentair","•••••4471","2019","Running on schedule. Baseline 18 psi."],
+  ["Standby generator","South side enclosure","Generac","•••••6230","2018","142.3 hrs. Exercises Wednesdays 11:00."],
+  ["Refrigerator","Kitchen","Sub-Zero","•••••5518","2014","37 °F / −2 °F. Seals intact."],
+  ["Washer & dryer","Laundry","LG","•••••8804","2019","Hoses braided, dated 2019, dry."],
+  ["Water softener","Garage","Culligan","•••••3390","2015","Salt above one third."],
+  ["Roof covering","Whole property","Concrete tile","—","2008","Reviewed from ground level at all elevations."]
+];
+
+var DOCS = [
+  ["Insurance policy — property","held","Carrier, deductible and agent surfaced the moment a claim starts","policy-2026.pdf","1.4 MB"],
+  ["Vendor list with account numbers","held","One emergency call list instead of five","vendors-2026.pdf","210 KB"],
+  ["Association documents and rules","held","Approval process known before work is booked","association-rules.pdf","3.1 MB"],
+  ["Standing instructions","held","Your house, run your way, without repeating yourself","standing-instructions.pdf","88 KB"],
+  ["Appliance and system manuals","partial","Model and serial pulled into the asset register — 4 of 9 held","",""],
+  ["Warranties — roof, HVAC, appliances, pool","needed","Expiry dates become alerts before they lapse","",""],
+  ["Permits and completed work records","needed","Proof for a buyer or an insurer years later","",""],
+  ["Survey, plat or site plan","needed","Settles boundary and easement questions","",""],
+  ["Floor plan","needed","Findings pinned to rooms instead of listed","",""],
+  ["Paint colours and finish schedules","needed","Matching paint three years later without guessing","",""]
+];
+
+var AERIAL = [
+  { id:"ca-01", name:"Roof and thermal survey", date:"14 November 2026", status:"Delivered", sector:"Thermal",
+    note:"Flown late afternoon for readable differential. Two anomalies marked on the south roof plane and referred to a licensed roofer.",
+    files:[["Thermal frames — south plane","24 images","TIFF + JPG"],["Paired visible frames","24 images","JPG"],["Anomaly report","6 pages","PDF"],["Flight record","1 page","PDF"]] },
+  { id:"ca-02", name:"Pre-storm photographic record", date:"29 September 2026", status:"Delivered", sector:"Storm",
+    note:"Complete set of every elevation, opening and the roof from ground and air, taken before landfall. The comparison set for any claim.",
+    files:[["Elevations — all four","48 images","JPG"],["Roof from above","16 images","JPG"],["Openings and closures","31 images","JPG"],["Delivery note","2 pages","PDF"]] }
+];
+
+var READINGS_DEF = [["Interior temperature","°F","77–80"],["Interior humidity","%","45–60"],["Attic temperature","°F","Ambient +20–40"],["Refrigerator / freezer","°F","<40 / <0"],["Pool water level","—","Mid-skimmer"],["Pool filter pressure","psi","Baseline ±5"],["Water meter, all closed","—","No movement"],["Generator run hours","hrs","Rising on schedule"],["Propane / fuel","%","Above 30"],["Device batteries","%","Above 20"],["Softener salt","—","Above one third"]];
+
+/* ================= STATE ================= */
+var state = { notes:"", dbReady:false };
+var dbP = null;
+function getDb(){
+  if (!dbP) dbP = (window.claude && window.claude.use) ? window.claude.use("db").catch(function(){ return null; }) : Promise.resolve(null);
+  return dbP;
+}
+var dlP = null;
+function getDl(){
+  if (!dlP) dlP = (window.claude && window.claude.use) ? window.claude.use("downloads").catch(function(){ return null; }) : Promise.resolve(null);
+  return dlP;
+}
+
+
+function propertyHero(){
+  return '<section class="property-hero"><img src="'+PORTAL_VISUALS.IMG.property+'" alt="Specimen waterfront property">'
+    + '<div class="ph-inner"><div class="ph-eye">'+PROP.area+'</div><h2>'+PROP.name+'</h2>'
+    + '<p>'+PROP.sub+' · '+PROP.level+' · looked after since '+PROP.since+'.</p>'
+    + '<div class="ph-tags"><span>Weekly Chronicle</span><span>19 zones</span><span>11 readings</span><span>Visual record active</span></div></div></section>';
+}
+
+/* ================= CHART: humidity across the season ================= */
+function humidityChart(){
+  var v = VISITS.slice().reverse();
+  var W = 720, H = 190, L = 40, R = 16, T = 16, B = 32;
+  var lo = 40, hi = 70;
+  var x = function(i){ return L + i * (W - L - R) / (v.length - 1); };
+  var y = function(val){ return T + (hi - val) * (H - T - B) / (hi - lo); };
+  var pts = v.map(function(d, i){ return x(i).toFixed(1) + "," + y(d.rh).toFixed(1); }).join(" ");
+  var bandTop = y(60), bandBot = y(45);
+  var s = '<svg viewBox="0 0 '+W+' '+H+'" style="width:100%;height:auto;display:block;color:var(--ink3)" role="img" '
+    + 'aria-label="Interior humidity at each visit from September to December, against the 45 to 60 per cent normal band. Two visits sit above the band.">';
+  s += '<rect x="'+L+'" y="'+bandTop.toFixed(1)+'" width="'+(W-L-R)+'" height="'+(bandBot-bandTop).toFixed(1)+'" fill="var(--good)" fill-opacity=".10"/>';
+  s += '<line x1="'+L+'" y1="'+bandTop.toFixed(1)+'" x2="'+(W-R)+'" y2="'+bandTop.toFixed(1)+'" stroke="var(--good)" stroke-opacity=".5" stroke-width="1" stroke-dasharray="4 4"/>';
+  s += '<line x1="'+L+'" y1="'+bandBot.toFixed(1)+'" x2="'+(W-R)+'" y2="'+bandBot.toFixed(1)+'" stroke="var(--good)" stroke-opacity=".5" stroke-width="1" stroke-dasharray="4 4"/>';
+  [40,50,60,70].forEach(function(t){
+    s += '<text x="'+(L-8)+'" y="'+(y(t)+3.5).toFixed(1)+'" font-size="10" fill="currentColor" text-anchor="end">'+t+'</text>';
+  });
+  s += '<line x1="'+L+'" y1="'+(H-B)+'" x2="'+(W-R)+'" y2="'+(H-B)+'" stroke="currentColor" stroke-opacity=".3"/>';
+  s += '<polyline points="'+pts+'" fill="none" stroke="var(--monitor)" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/>';
+  v.forEach(function(d, i){
+    var over = d.rh > 60;
+    s += '<circle cx="'+x(i).toFixed(1)+'" cy="'+y(d.rh).toFixed(1)+'" r="'+(over?4.2:3)+'" fill="'+(over?'var(--action)':'var(--monitor)')+'" stroke="var(--surface)" stroke-width="1.6"/>';
+    if (over) s += '<text x="'+x(i).toFixed(1)+'" y="'+(y(d.rh)-10).toFixed(1)+'" font-size="10.5" font-weight="700" fill="var(--action)" text-anchor="middle">'+d.rh+'</text>';
+  });
+  s += '<text x="'+L+'" y="'+(H-10)+'" font-size="10" fill="currentColor">'+v[0].label+'</text>';
+  s += '<text x="'+(W-R)+'" y="'+(H-10)+'" font-size="10" fill="currentColor" text-anchor="end">'+v[v.length-1].label+'</text>';
+  s += '</svg>';
+  return '<div class="card"><h3>Interior humidity, every visit</h3>'
+    + '<p>The pale band is the normal range for an unoccupied Florida home. Two visits sit above it — both were reported the same day.</p>'
+    + '<div class="chart-shell" style="margin-top:14px">'+s+'</div></div>';
+}
+
+/* ================= PAGES ================= */
+var P = {};
+
+P.signin = function(){
+  return '<div class="signin">'
+    + '<svg class="mk" viewBox="15 33 170 134" fill="none" aria-hidden="true"><g stroke="currentColor" stroke-linecap="round"><path d="M 134.67 48.60 A 62 62 0 1 0 134.67 151.40" stroke-width="6"/><path d="M 117.53 64.05 A 40 40 0 1 0 117.53 135.95" stroke-width="6"/><path d="M 20 100 L 180 100" stroke-width="5"/></g><rect x="121" y="93" width="14" height="14" fill="currentColor" stroke="none"/></svg>'
+    + '<h1>Your property record</h1>'
+    + '<p>Every Chronicle, every photograph, your asset register and the documents you have added — in one place, available whenever you want it.</p>'
+    + '<label>Email<input id="si-email" type="email" placeholder="you@example.com" autocomplete="email"></label>'
+    + '<label>Password<input id="si-pass" type="password" placeholder="••••••••"></label>'
+    + '<div style="margin-top:18px"><button class="btn gold" style="width:100%;justify-content:center" id="si-go">Sign in</button></div>'
+    + '<p class="tiny" style="margin-top:16px">This is a demonstration. The sign-in above is not connected to anything — real client accounts need production hosting. Use the button below to see the portal as a client would.</p>'
+    + '<div style="margin-top:12px"><a class="btn" style="width:100%;justify-content:center" href="#dashboard">Enter the demonstration portal</a></div>'
+    + '</div>';
+};
+
+P.dashboard = function(){
+  var last = VISITS[0], actions = 0, monitors = 0;
+  VISITS.forEach(function(v){ actions += v.actions; });
+  monitors = last.monitors;
+  var open = FINDINGS[11] ? FINDINGS[11].length : 0;
+  return propertyHero() + '<div class="phead"><div><div class="ey">'+PROP.area+'</div><h1>'+PROP.name+'</h1></div>'
+    + '<div class="rt"><a class="btn" href="#chronicles">All Chronicles</a><a class="btn gold" href="#report">Latest report</a></div></div>'
+    + '<p class="lead">'+PROP.sub+' · '+PROP.level+' · looked after since '+PROP.since+'.</p>'
+    + '<div class="tiles">'
+    + '<div class="tile" style="--tc:var(--good)"><div class="k">Last Chronicle</div><div class="v">'+last.label.split(" ").slice(0,2).join(" ")+'</div><div class="d">'+last.headline+'</div></div>'
+    + '<div class="tile"><div class="k">Chronicles this season</div><div class="v">'+VISITS.length+'</div><div class="d">'+VISITS.reduce(function(a,v){return a+v.photos;},0)+' photographs in your record</div></div>'
+    + '<div class="tile" style="--tc:var(--action)"><div class="k">Needing a decision</div><div class="v">'+open+'</div><div class="d">From the visit of '+VISITS[3].label+'</div></div>'
+    + '<div class="tile" style="--tc:var(--monitor)"><div class="k">Being watched</div><div class="v">'+monitors+'</div><div class="d">Measured and compared at every visit</div></div>'
+    + '</div>'
+    + '<h2 class="sec">This season</h2>'
+    + humidityChart()
+    + '<h2 class="sec">Recent Chronicles</h2>'
+    + tbl(['Date','Visit','Headline','Actions','Photos'],
+        VISITS.slice(0,5).map(function(v){
+          return [v.label, v.kind === "baseline" ? "First Chronicle" : "Chronicle", v.headline,
+            v.actions ? chip("action", v.actions + "") : chip("good","None"), String(v.photos)];
+        }), [4], true)
+    + '<p class="tiny" style="margin-top:10px">Select a row to open that report.</p>'
+    + '<h2 class="sec">Also waiting for you</h2>'
+    + '<div class="cards">'
+    + '<div class="card"><h3>Six documents still to add</h3><p>Warranties, permits, the survey, a floor plan and your paint schedules. Each one makes the next report more useful.</p><div style="margin-top:12px"><a class="btn" href="#documents">Open your documents</a></div></div>'
+    + '<div class="card"><h3>Two aerial deliveries</h3><p>A roof and thermal survey, and the pre-storm photographic record from September.</p><div style="margin-top:12px"><a class="btn" href="#aerial">Open Chronicle Aerial</a></div></div>'
+    + '<div class="card"><h3>Your asset register</h3><p>Nine systems with their plate data, filter sizes and service contacts — the part you cannot reconstruct later.</p><div style="margin-top:12px"><a class="btn" href="#record">Open the record</a></div></div>'
+    + '</div>';
+};
+
+P.chronicles = function(){
+  return '<div class="phead"><div><div class="ey">Chronicle Home Watch</div><h1>Your Chronicles</h1></div>'
+    + '<div class="rt"><button class="btn" id="dl-visits">'+I.down+'Download the log (CSV)</button></div></div>'
+    + '<p class="lead">Every attendance since the baseline, with arrival logged automatically. Select any row to open that report.</p>'
+    + tbl(['Date','Visit','Headline','Points','Photos','On site','Actions'],
+        VISITS.map(function(v){
+          return [v.label, v.kind === "baseline" ? "First Chronicle" : "Chronicle", v.headline,
+            String(v.points), String(v.photos), Math.floor(v.mins/60)+"h "+(v.mins%60)+"m",
+            v.actions ? chip("action", v.actions + "") : chip("good","None")];
+        }), [3,4,5], true);
+};
+
+P.report = function(){
+  var idx = (state.report != null) ? state.report : 0;
+  var v = VISITS[idx];
+  var orig = VISITS.length - 1 - idx;
+  var f = FINDINGS[orig] || [];
+  var prev = VISITS[idx + 1];
+  var html = '<div class="phead"><div><div class="ey">'
+    + (v.kind === "baseline" ? "The First Chronicle · baseline" : "Chronicle No. " + (orig + 1)) + '</div>'
+    + '<h1>' + v.label + '</h1></div>'
+    + '<div class="rt"><a class="btn" href="#chronicles">'+I.back+'All Chronicles</a>'
+    + '<button class="btn gold" id="dl-report">'+I.down+'Download this report</button></div></div>';
+  html += '<div class="card" style="border-left:4px solid var(--'+(v.actions?'action':'good')+')">'
+    + '<h3 style="font-family:var(--f-display);font-weight:400;font-size:21px">'+v.headline+'</h3>'
+    + '<p>Attended for '+Math.floor(v.mins/60)+' hours '+(v.mins%60)+' minutes. '+v.points+' points reviewed, '+v.photos+' photographs taken'
+    + (v.actions ? ', and you were called the same day.' : '.') + '</p></div>';
+  html += '<div class="tiles" style="margin-top:16px">'
+    + '<div class="tile" style="--tc:var(--good)"><div class="k">Good</div><div class="v">'+(v.points - v.actions - v.monitors - (v.kind==="baseline"?3:1))+'</div></div>'
+    + '<div class="tile" style="--tc:var(--monitor)"><div class="k">Monitor</div><div class="v">'+v.monitors+'</div></div>'
+    + '<div class="tile" style="--tc:var(--action)"><div class="k">Action</div><div class="v">'+v.actions+'</div></div>'
+    + '<div class="tile" style="--tc:var(--na)"><div class="k">Not reached</div><div class="v">'+(v.kind==="baseline"?3:1)+'</div></div>'
+    + '</div>';
+  if (f.length){
+    html += '<h2 class="sec">What was found</h2><div class="docs">'
+      + f.map(function(x){
+          return '<div class="card" style="border-left:4px solid var(--'+x[1]+')">'
+            + '<div style="display:flex;gap:10px;align-items:center;flex-wrap:wrap">'+chip(x[1])+'<b style="font-size:12px;letter-spacing:.12em;color:var(--gold)">'+x[0]+'</b></div>'
+            + '<p>'+x[2]+'</p></div>';
+        }).join("") + '</div>';
+  } else {
+    html += '<h2 class="sec">What was found</h2><div class="card"><p>Nothing graded Action or Monitor at this visit. Every zone was reviewed and recorded as expected for a property of this age.</p></div>';
+  }
+  html += '<h2 class="sec">Readings</h2>'
+    + tbl(['Reading','Unit','Normal','This visit','Last visit'],
+        READINGS_DEF.map(function(r, i){
+          var now = "—", then = "—";
+          if (i === 0){ now = String(v.temp); then = prev ? String(prev.temp) : "—"; }
+          if (i === 1){ now = String(v.rh); then = prev ? String(prev.rh) : "—"; }
+          if (i === 6){ now = (orig === 0 ? "Moving" : "No movement"); then = "No movement"; }
+          if (i === 7){ now = (142.3 + orig * 1.1).toFixed(1); then = prev ? (142.3 + (orig-1) * 1.1).toFixed(1) : "—"; }
+          var cls = (i === 1 && v.rh > 60) ? ' style="color:var(--action);font-weight:700"' : '';
+          return [r[0], r[1], r[2], '<span'+cls+'>'+now+'</span>', then];
+        }), [3,4]);
+  html += '<h2 class="sec">Photographs</h2><div class="gal">'
+    + ["Street view — the fixed comparison frame","North elevation","South elevation","Lanai and pool","Garage and water heater","Air handler and filter date"]
+        .map(function(c){ return ph("PHOTOGRAPH", c); }).join("")
+    + '</div><p class="tiny" style="margin-top:10px">'+v.photos+' photographs in this report. In production these are the real images, full resolution.</p>';
+  html += '<h2 class="sec">Zones reviewed</h2><div class="gal" style="grid-template-columns:repeat(auto-fill,minmax(190px,1fr))">'
+    + ZONES.map(function(z, i){
+        var g = "good";
+        if (f.length && i === 12 && orig === 0) g = "action";
+        return '<div class="card" style="padding:11px 13px"><div style="display:flex;gap:9px;align-items:center;justify-content:space-between">'
+          + '<span style="font-size:13px;font-weight:500;min-width:0">'+z+'</span>'
+          + '<span class="chip '+GL[g][1]+'" style="font-size:9px;padding:2px 6px">'+GL[g][0]+'</span></div></div>';
+      }).join("") + '</div>';
+  return html;
+};
+
+P.gallery = function(){
+  var byZone = ZONES.slice(0, 12);
+  return '<div class="phead"><div><div class="ey">Chronicle Home Watch</div><h1>Photographs</h1></div></div>'
+    + '<p class="lead">Every image from every visit, grouped by zone. The fixed comparison frames are taken from the same standing point each time, which is what lets a change be seen at all.</p>'
+    + '<div class="card"><h3>The comparison series</h3><p>One standing point, one framing, every visit since '+PROP.since+'.</p>'
+    + '<div class="gal" style="margin-top:14px">'
+    + VISITS.slice(0, 6).map(function(v){ return ph("STREET VIEW", v.label); }).join("")
+    + '</div></div>'
+    + '<h2 class="sec">By zone</h2>'
+    + '<div class="gal">' + byZone.map(function(z){ return ph("ZONE", z); }).join("") + '</div>'
+    + '<div class="note"><h3>In production</h3><p>Each tile is a real photograph at full resolution, with the date, the visit and the point reference attached, and every image downloadable individually or as a set.</p></div>';
+};
+
+P.record = function(){
+  return '<div class="phead"><div><div class="ey">Chronicle Home Watch</div><h1>Your record</h1></div>'
+    + '<div class="rt"><button class="btn" id="dl-assets">'+I.down+'Download the register (CSV)</button>'
+    + '<button class="btn" id="dl-readings">'+I.down+'Readings (CSV)</button></div></div>'
+    + '<p class="lead">Every major system captured from a photograph of its data plate at the baseline, and maintained since. Serial numbers are masked here as they are in anything shared outside your own file.</p>'
+    + tbl(['System','Location','Make','Serial','Plate','Condition and notes'],
+        ASSETS.map(function(a){ return [a[0], a[1], a[2], a[3], a[4], a[5]]; }))
+    + '<h2 class="sec">Readings, every visit</h2>'
+    + humidityChart()
+    + '<div style="margin-top:14px">'
+    + tbl(['Reading','Unit','Normal for an unoccupied Florida home'], READINGS_DEF.map(function(r){ return [r[0], r[1], r[2]]; }))
+    + '</div>'
+    + '<h2 class="sec">Your notes</h2>'
+    + '<div class="card"><p>Anything you want kept against this property — a preference, a reminder, something to raise at the next visit. Saved to your account.</p>'
+    + '<textarea id="notes" placeholder="e.g. The upstairs guest room blind sticks — please leave it up." style="margin-top:12px">'+esc(state.notes)+'</textarea>'
+    + '<div style="display:flex;gap:10px;align-items:center;margin-top:11px;flex-wrap:wrap">'
+    + '<button class="btn gold" id="save-notes">Save</button><span class="tiny" id="notes-state"></span></div></div>';
+};
+
+P.documents = function(){
+  var held = DOCS.filter(function(d){ return d[1] === "held"; }).length;
+  return '<div class="phead"><div><div class="ey">Chronicle Home Watch</div><h1>Your documents</h1></div>'
+    + '<div class="rt"><button class="btn gold" id="up-btn">'+I.up+'Add a document</button></div></div>'
+    + '<p class="lead">'+held+' of '+DOCS.length+' in place. Everything here belongs to you and can be exported in full at any time, including after you stop using us.</p>'
+    + '<div class="drop" id="dropzone"><p><b>Drag a file here, or use “Add a document”.</b></p>'
+    + '<p class="tiny" style="margin-top:7px">Warranties, manuals, permits, policies, drawings, surveys, floor plans, paint schedules — PDF, image or document files.</p></div>'
+    + '<div id="up-msg"></div>'
+    + '<h2 class="sec">In your record</h2><div class="docs">'
+    + DOCS.map(function(d){
+        var badge = d[1] === "held" ? chip("good","Held") : (d[1] === "partial" ? chip("monitor","Partial") : chip("na","Not yet"));
+        return '<div class="docrow">'+I.file
+          + '<div class="nm">'+d[0]+'<small>'+d[2]+'</small></div>'
+          + '<div class="rt">'+(d[3] ? '<span class="tiny">'+d[3]+' · '+d[4]+'</span>' : '')
+          + badge
+          + (d[3] ? '<button class="btn" data-dl-doc="'+esc(d[3])+'">'+I.down+'Download</button>' : '<button class="btn" data-up-doc="'+esc(d[0])+'">'+I.up+'Add</button>')
+          + '</div></div>';
+      }).join("") + '</div>'
+    + '<div class="note"><h3>Why we keep asking</h3><p>Every document you add makes the next report more useful. Warranty dates become alerts before they lapse. Your policy means that on the day of a claim, everything the adjuster asks for is already in one place with the photographs attached. Your vendor list becomes one number to find at two in the morning instead of five.</p></div>';
+};
+
+P.aerial = function(){
+  if (state.project != null){
+    var p = AERIAL[state.project];
+    return '<div class="phead"><div><div class="ey">Chronicle Aerial · '+p.sector+'</div><h1>'+p.name+'</h1></div>'
+      + '<div class="rt"><a class="btn" href="#aerial" data-clear="project">'+I.back+'All projects</a>'
+      + '<button class="btn gold" id="dl-project">'+I.down+'Download the delivery note</button></div></div>'
+      + '<p class="lead">'+p.date+' · '+p.status+'</p>'
+      + '<div class="card"><p>'+p.note+'</p></div>'
+      + '<h2 class="sec">Deliverables</h2>'
+      + '<div class="docs">' + p.files.map(function(f){
+          return '<div class="docrow">'+I.folder+'<div class="nm">'+f[0]+'<small>'+f[1]+' · '+f[2]+'</small></div>'
+            + '<div class="rt"><button class="btn" data-dl-doc="'+esc(f[0])+'">'+I.down+'Download</button></div></div>';
+        }).join("") + '</div>'
+      + '<h2 class="sec">Imagery</h2><div class="gal">'
+      + ["Overview","South plane","East plane","Detail — anomaly 1","Detail — anomaly 2","Flight path"].map(function(c){ return ph("AERIAL", c); }).join("")
+      + '</div>'
+      + '<div class="note"><h3>Not a survey</h3><p>Aerial imagery is a visual and photogrammetric record. It is not a land survey, is not prepared by a licensed surveyor and mapper, and must not be relied on for boundaries, elevations or setting-out. Thermal anomalies are indicators for follow-up by a licensed trade, not a diagnosis.</p></div>';
+  }
+  return '<div class="phead"><div><div class="ey">Chronicle Aerial</div><h1>Aerial projects</h1></div></div>'
+    + '<p class="lead">Flights commissioned for this property, with every deliverable kept alongside your Chronicle Home Watch record rather than in a separate system.</p>'
+    + '<div class="cards">' + AERIAL.map(function(p, i){
+        return '<a class="card" href="#aerial" data-project="'+i+'" style="text-decoration:none;display:block">'
+          + '<div style="display:flex;gap:9px;align-items:center;justify-content:space-between;flex-wrap:wrap">'
+          + '<h3>'+p.name+'</h3>'+chip("good", p.status)+'</div>'
+          + '<p>'+p.note+'</p>'
+          + '<p class="tiny" style="margin-top:10px">'+p.date+' · '+p.files.length+' deliverables · '+p.sector+'</p></a>';
+      }).join("") + '</div>'
+    + '<h2 class="sec">Commission another flight</h2>'
+    + '<div class="card"><p>Roof and thermal surveys, a pre-storm photographic record, construction progress, or listing media if you are selling. Member rates apply to anything commissioned while you are with Chronicle Home Watch.</p>'
+    + '<div style="margin-top:12px"><a class="btn gold" href="#account">Ask your contact</a></div></div>';
+};
+
+P.account = function(){
+  return '<div class="phead"><div><div class="ey">Account</div><h1>Your property and service</h1></div></div>'
+    + '<div class="cards">'
+    + '<div class="card"><h3>The property</h3><p>'+PROP.name+'<br>'+PROP.sub+'<br>'+PROP.area+'</p></div>'
+    + '<div class="card"><h3>Your service</h3><p>'+PROP.level+'<br>Looked after since '+PROP.since+'<br>Month to month, 30 days’ notice</p></div>'
+    + '<div class="card"><h3>Spending authority</h3><p>'+PROP.authority+' without calling you, and only where waiting would make the damage worse. Above that we call you, then your emergency contact.</p></div>'
+    + '</div>'
+    + '<h2 class="sec">Your Chronicle contact</h2>'
+    + '<div class="cards">'
+    + '<div class="card"><h3>'+PROP.contact+'</h3><p>The person who attends your property. No call centre and no account manager in between.</p>'
+    + '<p style="margin-top:9px"><b>'+PROP.phone+'</b><br>'+PROP.email+'</p></div>'
+    + '<div class="card"><h3>Out of hours</h3><p>Anything urgent reaches us on the same number. We are not an alarm response service and are not at the property outside a scheduled attendance.</p></div>'
+    + '<div class="card"><h3>Billing</h3><p>Monthly in advance. Additional services and reimbursable costs invoiced separately, at cost, with receipts and no markup.</p></div>'
+    + '</div>'
+    + '<h2 class="sec">Invoices</h2>'
+    + tbl(['Invoice','Period','Amount','Status'],
+        [['INV-0007','December 2026','$450','Paid'],['INV-0006','November 2026','$450','Paid'],
+         ['INV-0005','Aerial — roof and thermal survey','$395','Paid'],
+         ['INV-0004','October 2026','$450','Paid'],['INV-0003','The First Chronicle','$1,495','Paid']], [2])
+    + '<div class="note"><h3>Taking your record with you</h3><p>Everything in this portal — every report, every photograph, the asset register and every document you have added — is yours and can be exported in full at any time, including the day you stop using us. Ask your contact and it is sent within one business day.</p></div>';
+};
+
+/* ================= NAV + ROUTER ================= */
+var NAV = [["dashboard","Dashboard","grid"],["chronicles","Chronicles","list"],["gallery","Photographs","camera"],
+  ["record","The record","file"],["documents","Documents","folder"],["aerial","Chronicle Aerial","drone"],["account","Account","user"]];
+function renderNav(r){
+  document.getElementById("nav").innerHTML = NAV.map(function(n){
+    return '<a href="#'+n[0]+'" class="'+(n[0] === r ? "on" : "")+'">'+I[n[2]]+n[1]+'</a>';
+  }).join("");
+}
+function route(){
+  var r = (location.hash || "#signin").slice(1).replace(/[^a-z]/g, "");
+  if (!P[r]) r = "signin";
+  document.getElementById("work").innerHTML = P[r]();
+  renderNav(r);
+  wire(r);
+  window.scrollTo(0, 0);
+}
+window.addEventListener("hashchange", route);
+
+/* ================= WIRING ================= */
+function wire(r){
+  var si = document.getElementById("si-go");
+  if (si) si.addEventListener("click", function(){
+    var m = document.createElement("div"); m.className = "msg bad";
+    m.textContent = "This demonstration has no accounts behind it. Use “Enter the demonstration portal” below to see the portal as a client would.";
+    si.parentNode.parentNode.insertBefore(m, si.parentNode.nextSibling);
+  });
+
+  Array.prototype.forEach.call(document.querySelectorAll("tr.clickable"), function(tr){
+    tr.addEventListener("click", function(){
+      var i = parseInt(tr.getAttribute("data-row"), 10);
+      state.report = (r === "dashboard") ? i : i;
+      location.hash = "#report";
+      if (location.hash === "#report") route();
+    });
+  });
+
+  Array.prototype.forEach.call(document.querySelectorAll("[data-project]"), function(a){
+    a.addEventListener("click", function(e){ e.preventDefault(); state.project = parseInt(a.getAttribute("data-project"), 10); route(); });
+  });
+  Array.prototype.forEach.call(document.querySelectorAll("[data-clear]"), function(a){
+    a.addEventListener("click", function(e){ e.preventDefault(); state.project = null; route(); });
+  });
+
+  var dlr = document.getElementById("dl-report");
+  if (dlr) dlr.addEventListener("click", function(){ downloadReport(); });
+  var dlv = document.getElementById("dl-visits");
+  if (dlv) dlv.addEventListener("click", function(){
+    var rows = [["Date","Visit","Headline","Points","Photographs","Minutes on site","Actions","Monitors"]].concat(
+      VISITS.map(function(v){ return [v.label, v.kind === "baseline" ? "First Chronicle" : "Chronicle", v.headline, v.points, v.photos, v.mins, v.actions, v.monitors]; }));
+    save("chronicle-attendance-log.csv", csv(rows), dlv);
+  });
+  var dla = document.getElementById("dl-assets");
+  if (dla) dla.addEventListener("click", function(){
+    var rows = [["System","Location","Make","Serial","Plate date","Condition and notes"]].concat(ASSETS);
+    save("chronicle-asset-register.csv", csv(rows), dla);
+  });
+  var dlrd = document.getElementById("dl-readings");
+  if (dlrd) dlrd.addEventListener("click", function(){
+    var rows = [["Date","Interior temperature F","Interior humidity %"]].concat(
+      VISITS.slice().reverse().map(function(v){ return [v.label, v.temp, v.rh]; }));
+    save("chronicle-readings.csv", csv(rows), dlrd);
+  });
+  var dlp = document.getElementById("dl-project");
+  if (dlp) dlp.addEventListener("click", function(){
+    var p = AERIAL[state.project];
+    var rows = [["Deliverable","Quantity","Format"]].concat(p.files);
+    save("chronicle-aerial-" + p.id + "-delivery-note.csv", csv(rows), dlp);
+  });
+
+  Array.prototype.forEach.call(document.querySelectorAll("[data-dl-doc]"), function(b){
+    b.addEventListener("click", function(){
+      flash(b, "In production this returns the file itself.");
+    });
+  });
+  Array.prototype.forEach.call(document.querySelectorAll("[data-up-doc]"), function(b){
+    b.addEventListener("click", function(){ uploadNotice(b.getAttribute("data-up-doc")); });
+  });
+  var ub = document.getElementById("up-btn");
+  if (ub) ub.addEventListener("click", function(){ uploadNotice(); });
+  var dz = document.getElementById("dropzone");
+  if (dz){
+    dz.addEventListener("dragover", function(e){ e.preventDefault(); dz.style.borderColor = "var(--goldbrand)"; });
+    dz.addEventListener("dragleave", function(){ dz.style.borderColor = ""; });
+    dz.addEventListener("drop", function(e){ e.preventDefault(); dz.style.borderColor = ""; uploadNotice(); });
+  }
+
+  var sn = document.getElementById("save-notes");
+  if (sn){
+    loadNotes();
+    sn.addEventListener("click", function(){ saveNotes(); });
+  }
+}
+
+function flash(btn, text){
+  var o = btn.innerHTML;
+  btn.innerHTML = text;
+  setTimeout(function(){ btn.innerHTML = o; }, 2200);
+}
+function uploadNotice(name){
+  var z = document.getElementById("up-msg");
+  if (!z) return;
+  z.innerHTML = '<div class="msg">'
+    + (name ? '<b>' + esc(name) + '</b><br>' : '')
+    + 'Uploading works on the production portal, where files are stored against your property and read by your Chronicle contact. This demonstration cannot accept files — artifacts do not give a client write access to storage.</div>';
+  z.scrollIntoView({block:"nearest"});
+}
+
+function csv(rows){
+  return rows.map(function(r){
+    return r.map(function(c){ var s = String(c); return /[",\n]/.test(s) ? '"' + s.replace(/"/g, '""') + '"' : s; }).join(",");
+  }).join("\n");
+}
+function save(filename, data, btn){
+  getDl().then(function(dl){
+    if (!dl){ flash(btn, "Downloads unavailable here"); return; }
+    return dl.save({filename:filename, data:data}).then(function(){ flash(btn, "Saved"); });
+  }).catch(function(err){
+    flash(btn, (err && err.code === "declined") ? "Cancelled" : "Could not save");
+  });
+}
+function downloadReport(){
+  var idx = state.report != null ? state.report : 0;
+  var v = VISITS[idx], orig = VISITS.length - 1 - idx, f = FINDINGS[orig] || [];
+  var h = '<!doctype html><meta charset="utf-8"><title>Chronicle — ' + v.label + '</title>'
+    + '<style>body{font:15px/1.6 system-ui,sans-serif;color:#14213D;max-width:44em;margin:40px auto;padding:0 20px}'
+    + 'h1{font-size:26px;margin:0 0 4px}h2{font-size:17px;margin:28px 0 8px;border-bottom:1px solid #ddd;padding-bottom:5px}'
+    + '.e{letter-spacing:.2em;font-size:11px;color:#A9823F;text-transform:uppercase;font-weight:700}'
+    + 'table{border-collapse:collapse;width:100%;font-size:14px}td,th{border-bottom:1px solid #e5e5e5;padding:7px 9px;text-align:left}'
+    + '.f{border-left:4px solid #8E241B;padding:10px 14px;margin:10px 0;background:#faf8f3}'
+    + '.n{font-size:12px;color:#666;margin-top:28px;border-top:1px solid #ddd;padding-top:14px}</style>'
+    + '<p class="e">' + (v.kind === "baseline" ? "The First Chronicle · baseline" : "Chronicle No. " + (orig + 1)) + '</p>'
+    + '<h1>' + v.label + '</h1><p><b>' + v.headline + '</b></p>'
+    + '<p>' + PROP.name + ' · ' + PROP.sub + '<br>Attended for ' + Math.floor(v.mins/60) + 'h ' + (v.mins%60) + 'm · '
+    + v.points + ' points reviewed · ' + v.photos + ' photographs</p>'
+    + '<h2>What was found</h2>'
+    + (f.length ? f.map(function(x){ return '<div class="f"><b>' + x[0] + ' · ' + GL[x[1]][0] + '</b><br>' + x[2] + '</div>'; }).join("")
+        : '<p>Nothing graded Action or Monitor at this visit.</p>')
+    + '<h2>Readings</h2><table><tr><th>Reading</th><th>Normal</th><th>This visit</th></tr>'
+    + '<tr><td>Interior temperature</td><td>77–80 °F</td><td>' + v.temp + ' °F</td></tr>'
+    + '<tr><td>Interior humidity</td><td>45–60 %</td><td>' + v.rh + ' %</td></tr>'
+    + '<tr><td>Water meter, all fixtures closed</td><td>No movement</td><td>' + (orig === 0 ? "Moving" : "No movement") + '</td></tr></table>'
+    + '<p class="n">SPECIMEN — illustrative only, not a real property and not client work. A Chronicle is a visual record made from normal standing and walking positions. '
+    + 'It is not a home inspection, a survey, an engineering or structural assessment, a mold or pest assessment, or a warranty. '
+    + 'Chronicle Property Group LLC is not a licensed home inspector or contractor.</p>';
+  save("chronicle-" + v.label.replace(/\s+/g, "-").toLowerCase() + ".html", h, document.getElementById("dl-report"));
+}
+
+/* per-viewer notes */
+function loadNotes(){
+  getDb().then(function(db){
+    var el = document.getElementById("notes"), st = document.getElementById("notes-state");
+    if (!db){ if (st) st.textContent = "Notes cannot be saved in this view."; return; }
+    return db.doc("data/users/me/portal").get().then(function(doc){
+      if (doc && doc.data && typeof doc.data.notes === "string"){
+        state.notes = doc.data.notes;
+        if (el && !el.value) el.value = state.notes;
+        if (st) st.textContent = "Last saved to your account.";
+      }
+    }).catch(function(){});
+  });
+}
+function saveNotes(){
+  var el = document.getElementById("notes"), st = document.getElementById("notes-state");
+  if (!el) return;
+  state.notes = el.value;
+  if (st) st.textContent = "Saving…";
+  getDb().then(function(db){
+    if (!db) throw new Error("no-db");
+    return db.doc("data/users/me/portal").set({ notes: state.notes, updatedAt: new Date().toISOString() });
+  }).then(function(){ if (st) st.textContent = "Saved to your account."; })
+    .catch(function(){ if (st) st.textContent = "Could not save from this view."; });
+}
+
+route();
+})();
+</script>
+
+</body></html>
