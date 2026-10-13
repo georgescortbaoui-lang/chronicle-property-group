@@ -1398,11 +1398,10 @@ function selectText(el){
 }
 
 /* ---------- enquiry form ---------- */
-var dbPromise = null;
-function getDb(){
-  if (!dbPromise) dbPromise = (window.claude && window.claude.use) ? window.claude.use("db").catch(function(){ return null; }) : Promise.resolve(null);
-  return dbPromise;
-}
+/* Submissions are emailed to info@chronicleproperty.com through Web3Forms.
+   The access key is public by design: it can only send to the inbox it was created for. */
+var ENQ_ENDPOINT = "https://api.web3forms.com/submit";
+var ENQ_KEY = "__WEB3FORMS_KEY__";
 var SERVICES = ["Chronicle Home Watch — not sure which level yet","Chronicle Home Watch — Watch, every 14 days","Chronicle Home Watch — Chronicle, weekly","Chronicle Home Watch — Steward, weekly plus events","Chronicle Home Watch — storm season only","Chronicle Aerial — real estate media","Chronicle Aerial — construction progress","Chronicle Aerial — mapping","Chronicle Aerial — thermal","Chronicle Aerial — film and media","Something else"];
 function mountForm(){
   var zone = document.getElementById("formzone");
@@ -1417,14 +1416,11 @@ function mountForm(){
     + SERVICES.map(function(s){ return '<option>'+esc(s)+'</option>'; }).join("") + '</select></label>'
     + '<label>When is it empty<input id="f-away" placeholder="e.g. May to November"></label></div>'
     + '<label>Anything we should know<textarea id="f-msg" placeholder="The property, what you are worried about, anything that has happened before."></textarea></label>'
+    + '<input type="checkbox" id="f-bot" tabindex="-1" autocomplete="off" style="display:none" aria-hidden="true">'
     + '<div id="enq-msg"></div>'
     + '<div class="btnrow" style="margin-top:0"><button class="btn solid" type="submit" id="enq-send">Send it</button>'
     + '<span class="tiny" id="enq-note">We reply within one business day. Nothing is shared with anyone.</span></div></form>';
   document.getElementById("enq").addEventListener("submit", function(e){ e.preventDefault(); submitEnquiry(); });
-  getDb().then(function(db){
-    if (!db){ var n = document.getElementById("enq-note");
-      if (n) n.textContent = "This preview cannot store enquiries — use the phone or email on the contact page. On the live site this form works."; }
-  });
 }
 function val(id){ var e = document.getElementById(id); return e ? e.value.trim() : ""; }
 function say(kind, text){ var m = document.getElementById("enq-msg"); if (m) m.innerHTML = '<div class="msg '+kind+'">'+esc(text)+'</div>'; }
@@ -1432,20 +1428,27 @@ function submitEnquiry(){
   var name = val("f-name"), email = val("f-email");
   if (!name || !email){ say("bad", "Please give us a name and an email address so we can reply."); return; }
   if (email.indexOf("@") < 1){ say("bad", "That email address does not look right — please check it."); return; }
+  var bot = document.getElementById("f-bot");
   var btn = document.getElementById("enq-send");
   btn.disabled = true; btn.textContent = "Sending…";
-  var body = { name:name, email:email, phone:val("f-phone"), area:val("f-area"), service:val("f-service"),
-    away:val("f-away"), message:val("f-msg"), receivedAt:new Date().toISOString(), status:"new" };
-  getDb().then(function(db){
-    if (!db) throw new Error("no-db");
-    var id = "enq-" + Date.now().toString(36) + "-" + Math.random().toString(36).slice(2, 7);
-    return db.collection("enquiries").doc(id).set(body);
-  }).then(function(){
-    document.getElementById("enq").reset();
-    say("ok", "Thank you — that has reached us. We reply within one business day, and if we are not the right fit for your property we will say so.");
-  }).catch(function(){
-    say("bad", "We could not send that from here. Please email or call us instead — we would rather you reached us than lost the message.");
-  }).then(function(){ btn.disabled = false; btn.textContent = "Send it"; });
+  var body = {
+    access_key: ENQ_KEY,
+    subject: "Website enquiry — " + val("f-service") + " — " + name,
+    from_name: "Chronicle website",
+    replyto: email,
+    botcheck: bot && bot.checked ? "1" : "",
+    "Name": name, "Email": email, "Phone": val("f-phone") || "—",
+    "Property area": val("f-area") || "—", "Interested in": val("f-service"),
+    "When it is empty": val("f-away") || "—", "Message": val("f-msg") || "—"
+  };
+  fetch(ENQ_ENDPOINT, { method:"POST", headers:{ "Content-Type":"application/json", "Accept":"application/json" }, body: JSON.stringify(body) })
+    .then(function(r){ return r.json().then(function(j){ if (!r.ok || !j.success) throw new Error(j.message || "failed"); }); })
+    .then(function(){
+      document.getElementById("enq").reset();
+      say("ok", "Thank you — that has reached us. We reply within one business day, and if we are not the right fit for your property we will say so.");
+    }).catch(function(){
+      say("bad", "We could not send that from here. Please email info@chronicleproperty.com or call (239) 380-9403 — we would rather you reached us than lost the message.");
+    }).then(function(){ btn.disabled = false; btn.textContent = "Send it"; });
 }
 
 route();
