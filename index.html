@@ -1398,10 +1398,9 @@ function selectText(el){
 }
 
 /* ---------- enquiry form ---------- */
-/* Submissions are emailed to info@chronicleproperty.com through Web3Forms.
-   The access key is public by design: it can only send to the inbox it was created for. */
-var ENQ_ENDPOINT = "https://api.web3forms.com/submit";
-var ENQ_KEY = "__WEB3FORMS_KEY__";
+/* Submissions are emailed to info@chronicleproperty.com through FormSubmit (formsubmit.co).
+   After activation FormSubmit issues a random alias; swap it in below to keep the address out of the page source. */
+var ENQ_ENDPOINT = "https://formsubmit.co/ajax/info@chronicleproperty.com";
 var SERVICES = ["Chronicle Home Watch — not sure which level yet","Chronicle Home Watch — Watch, every 14 days","Chronicle Home Watch — Chronicle, weekly","Chronicle Home Watch — Steward, weekly plus events","Chronicle Home Watch — storm season only","Chronicle Aerial — real estate media","Chronicle Aerial — construction progress","Chronicle Aerial — mapping","Chronicle Aerial — thermal","Chronicle Aerial — film and media","Something else"];
 function mountForm(){
   var zone = document.getElementById("formzone");
@@ -1432,17 +1431,17 @@ function submitEnquiry(){
   var btn = document.getElementById("enq-send");
   btn.disabled = true; btn.textContent = "Sending…";
   var body = {
-    access_key: ENQ_KEY,
-    subject: "Website enquiry — " + val("f-service") + " — " + name,
-    from_name: "Chronicle website",
-    replyto: email,
-    botcheck: bot && bot.checked ? "1" : "",
+    _subject: "Website enquiry — " + val("f-service") + " — " + name,
+    _replyto: email,
+    _template: "table",
+    _captcha: "false",
+    _honey: bot && bot.checked ? "1" : "",
     "Name": name, "Email": email, "Phone": val("f-phone") || "—",
     "Property area": val("f-area") || "—", "Interested in": val("f-service"),
     "When it is empty": val("f-away") || "—", "Message": val("f-msg") || "—"
   };
   fetch(ENQ_ENDPOINT, { method:"POST", headers:{ "Content-Type":"application/json", "Accept":"application/json" }, body: JSON.stringify(body) })
-    .then(function(r){ return r.json().then(function(j){ if (!r.ok || !j.success) throw new Error(j.message || "failed"); }); })
+    .then(function(r){ return r.json().then(function(j){ if (!r.ok || String(j.success) !== "true") throw new Error(j.message || "failed"); }); })
     .then(function(){
       document.getElementById("enq").reset();
       say("ok", "Thank you — that has reached us. We reply within one business day, and if we are not the right fit for your property we will say so.");
