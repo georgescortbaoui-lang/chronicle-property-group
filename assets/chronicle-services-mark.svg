@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" fill="none" role="img" aria-label="Chronicle monogram">
+  <g stroke="#B8975A" stroke-linecap="round" fill="none">
+    <path d="M 134.67 48.60 A 62.00 62.00 0 1 0 134.67 151.40" stroke-width="6"/>
+    <path d="M 117.53 64.05 A 40.00 40.00 0 1 0 117.53 135.95" stroke-width="6"/>
+    <path d="M 20 100 L 180 100" stroke-width="5"/>
+  </g>
+  <rect x="121" y="93" width="14" height="14" fill="#B8975A"/>
+</svg>

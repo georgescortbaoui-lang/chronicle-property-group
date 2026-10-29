@@ -1,0 +1,127 @@
+{
+  "version": "2026-10-29-progressive-v1",
+  "effective_date": "2026-10-29",
+  "currency": "USD",
+  "prices_include_tax": false,
+  "automatic_discounts": false,
+  "member_rate_distinction": false,
+  "plans": [
+    {
+      "id": "care-condo",
+      "family": "condo",
+      "variant": "standard",
+      "name": "Chronicle Condo",
+      "scope_guide": "Condo or villa up to 1,500 sq. ft.",
+      "weekly_cents": 29900,
+      "every_14_days_cents": 18900,
+      "starting_price": false,
+      "onsite_planning_minutes": 30,
+      "record_capacity_hours": 2
+    },
+    {
+      "id": "care-condo-plus",
+      "family": "condo",
+      "variant": "plus",
+      "name": "Chronicle Condo+",
+      "scope_guide": "Condo or villa 1,501–2,500 sq. ft.",
+      "weekly_cents": 35900,
+      "every_14_days_cents": 21900,
+      "starting_price": false,
+      "onsite_planning_minutes": 40,
+      "record_capacity_hours": 3
+    },
+    {
+      "id": "care-residence",
+      "family": "residence",
+      "variant": "standard",
+      "name": "Chronicle Residence",
+      "scope_guide": "Detached home up to 3,000 sq. ft.",
+      "weekly_cents": 38900,
+      "every_14_days_cents": 23900,
+      "starting_price": false,
+      "onsite_planning_minutes": 45,
+      "record_capacity_hours": 4
+    },
+    {
+      "id": "care-residence-plus",
+      "family": "residence",
+      "variant": "plus",
+      "name": "Chronicle Residence+",
+      "scope_guide": "Detached home 3,001–4,500 sq. ft.",
+      "weekly_cents": 47900,
+      "every_14_days_cents": 27900,
+      "starting_price": false,
+      "onsite_planning_minutes": 60,
+      "record_capacity_hours": 5
+    },
+    {
+      "id": "care-estate",
+      "family": "estate",
+      "variant": "standard",
+      "name": "Chronicle Estate",
+      "scope_guide": "4,501–6,500 sq. ft.; assessed scope",
+      "weekly_cents": 64900,
+      "every_14_days_cents": 36900,
+      "starting_price": true,
+      "onsite_planning_minutes": 90,
+      "record_capacity_hours": 6
+    },
+    {
+      "id": "care-estate-plus",
+      "family": "estate",
+      "variant": "plus",
+      "name": "Chronicle Estate+",
+      "scope_guide": "6,501–9,000 sq. ft.; assessed scope",
+      "weekly_cents": 80900,
+      "every_14_days_cents": 44900,
+      "starting_price": true,
+      "onsite_planning_minutes": 120,
+      "record_capacity_hours": 8
+    }
+  ],
+  "assistance": {
+    "ordinary": {
+      "minimum_minutes": 30,
+      "minimum_cents": 8500,
+      "increment_minutes": 15,
+      "increment_cents": 2000,
+      "crew_size": 1
+    },
+    "practical": {
+      "minimum_minutes": 30,
+      "minimum_cents": 10500,
+      "increment_minutes": 15,
+      "increment_cents": 2500,
+      "crew_size": 1
+    },
+    "crew": {
+      "minimum_minutes": 60,
+      "minimum_cents": 22500,
+      "increment_minutes": 15,
+      "increment_cents": 4000,
+      "crew_size": 2,
+      "whole_crew_price": true
+    },
+    "remote": {
+      "minimum_minutes": 15,
+      "minimum_cents": 1500,
+      "increment_minutes": 15,
+      "increment_cents": 1500,
+      "crew_size": 1
+    }
+  },
+  "modifiers": {
+    "accepted_same_day_daytime_cents": 5000,
+    "accepted_after_hours_multiplier": 1.5,
+    "stack_same_day_with_after_hours": false
+  },
+  "policy": {
+    "additional_ordinary_minutes_on_included_visit": 15,
+    "additional_ordinary_cents_on_included_visit": 2000,
+    "upfront_standard_record_fee_cents": 0,
+    "record_completion": "Scope and completion date confirmed in accepted quotation",
+    "fixed_minimum_membership_term": null,
+    "seasonal_policy": "Service dates and record milestones confirmed in accepted quotation",
+    "historical_commercial_versions_unchanged": true
+  }
+}
