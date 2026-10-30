@@ -2,6 +2,10 @@
 const $=s=>document.querySelector(s), $$=s=>[...document.querySelectorAll(s)];
 const money=n=>new Intl.NumberFormat('en-US',{style:'currency',currency:'USD',maximumFractionDigits:n%1?2:0}).format(n);
 const C=window.CHRONICLE_CARE_CATALOGUE;
+// One canonical enquiry form (George, 30 Oct): when set, every enquiry button opens the Chronicle OS public form
+// instead of this page's dialog. Empty = off: the site behaves exactly as today. Set only after the end-to-end test,
+// e.g. 'https://portal.chronicleproperty.com/enquire'.
+const OS_ENQUIRE_URL='';
 const plans={condo:{},residence:{},estate:{}};
 for(const p of C.plans)plans[p.family][p.variant]={name:p.name,weekly:p.weekly_cents/100,fortnight:p.every_14_days_cents/100};
 const legacyDestinations={care:'#membership',recurring:'#membership',baseline:'#property-record',record:'#property-record',arrival:'#assistance',vendor:'#assistance',claims:'#assistance',storm:'#assistance'};
@@ -54,10 +58,15 @@ $('#task').addEventListener('change',()=>setTask($('#task').value));$('#duration
 $$('[data-service]').forEach(b=>b.addEventListener('click',()=>{setTask(b.dataset.service);if(innerWidth<801)$('#estimate-title').scrollIntoView({behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth',block:'start'});}));
 const mobile=$('#mobile-nav'),toggle=$('.menu-toggle');toggle.addEventListener('click',()=>{mobile.hidden=!mobile.hidden;toggle.setAttribute('aria-expanded',String(!mobile.hidden));toggle.setAttribute('aria-label',mobile.hidden?'Open navigation':'Close navigation');});$$('#mobile-nav a').forEach(a=>a.addEventListener('click',()=>{mobile.hidden=true;toggle.setAttribute('aria-expanded','false');}));
 const dialog=$('#enquiry-dialog');let enquiryContext='';
-function openEnquiry(family,assistance=false){enquiryContext='';$('#enquiry-result').hidden=true;$('#enquiry-form-view').hidden=false;$('#copy-status').textContent='';$('#enquiry-interest').value=assistance?'One-off assistance':'Recurring homewatch';
+function openEnquiry(family,assistance=false){if(OS_ENQUIRE_URL)return openOsEnquiry(family,assistance);enquiryContext='';$('#enquiry-result').hidden=true;$('#enquiry-form-view').hidden=false;$('#copy-status').textContent='';$('#enquiry-interest').value=assistance?'One-off assistance':'Recurring homewatch';
  if(family){const p=plans[family][$(`#${family}-size`).value];$('#enquiry-property').selectedIndex=family==='condo'?0:family==='residence'?1:2;enquiryContext=`${p.name}; ${frequency==='weekly'?'weekly':'every 14 days'}; ${family==='estate'?'from ':''}${money(p[frequency])}/month, subject to agreed scope.`;}
  if(assistance){const t=tasks[$('#task').value];enquiryContext=`${t.label}; ${$('#duration').value} minutes; ${$('#timing-field').hidden?'remote':$('#timing').selectedOptions[0].textContent}; indicative estimate ${$('#estimate-total').textContent}.`;}
  $('#enquiry-details').value=enquiryContext;document.body.classList.add('dialog-open');dialog.showModal();}
+function openOsEnquiry(family,assistance){let context='';
+ if(family){const p=plans[family][$(`#${family}-size`).value];context=`${p.name}; ${frequency==='weekly'?'weekly':'every 14 days'}; ${family==='estate'?'from ':''}${money(p[frequency])}/month, subject to agreed scope.`;}
+ if(assistance){const t=tasks[$('#task').value];context=`${t.label}; ${$('#duration').value} minutes; ${$('#timing-field').hidden?'remote':$('#timing').selectedOptions[0].textContent}; indicative estimate ${$('#estimate-total').textContent}.`;}
+ const q=new URLSearchParams({catalogue:C.version});if(family)q.set('family',family);if(assistance)q.set('interest','assistance');if(context)q.set('context',context);
+ location.href=`${OS_ENQUIRE_URL}?${q}`;}
 $$('[data-enquire]').forEach(b=>b.addEventListener('click',()=>openEnquiry(b.dataset.family)));$('#enquire-assistance').addEventListener('click',()=>openEnquiry(null,true));$('.dialog-close').addEventListener('click',()=>dialog.close());dialog.addEventListener('close',()=>document.body.classList.remove('dialog-open'));dialog.addEventListener('click',e=>{if(e.target===dialog){const r=dialog.getBoundingClientRect();if(e.clientX<r.left||e.clientX>r.right||e.clientY<r.top||e.clientY>r.bottom)dialog.close();}});
 $('#enquiry-form').addEventListener('submit',async e=>{
  e.preventDefault();
