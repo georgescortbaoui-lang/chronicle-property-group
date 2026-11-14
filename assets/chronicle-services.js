@@ -58,13 +58,13 @@ $('#task').addEventListener('change',()=>setTask($('#task').value));$('#duration
 $$('[data-service]').forEach(b=>b.addEventListener('click',()=>{setTask(b.dataset.service);if(innerWidth<801)$('#estimate-title').scrollIntoView({behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth',block:'start'});}));
 const mobile=$('#mobile-nav'),toggle=$('.menu-toggle');toggle.addEventListener('click',()=>{mobile.hidden=!mobile.hidden;toggle.setAttribute('aria-expanded',String(!mobile.hidden));toggle.setAttribute('aria-label',mobile.hidden?'Open navigation':'Close navigation');});$$('#mobile-nav a').forEach(a=>a.addEventListener('click',()=>{mobile.hidden=true;toggle.setAttribute('aria-expanded','false');}));
 const dialog=$('#enquiry-dialog');let enquiryContext='';
-function openEnquiry(family,assistance=false){if(OS_ENQUIRE_URL)return openOsEnquiry(family,assistance);enquiryContext='';$('#enquiry-result').hidden=true;$('#enquiry-form-view').hidden=false;$('#copy-status').textContent='';$('#enquiry-interest').value=assistance?'One-off assistance':'Recurring homewatch';
+function openEnquiry(family,assistance=false){if(OS_ENQUIRE_URL)return openOsEnquiry(family,assistance);enquiryContext='';$('#enquiry-result').hidden=true;$('#enquiry-form-view').hidden=false;$('#copy-status').textContent='';$('#enquiry-interest').value=assistance===true?'One-off assistance':assistance==='onetime'?'One-time home watch visit':'Recurring home watch';
  if(family){const p=plans[family][$(`#${family}-size`).value];$('#enquiry-property').selectedIndex=family==='condo'?0:family==='residence'?1:2;enquiryContext=`${p.name}; ${frequency==='weekly'?'weekly':'every 14 days'}; ${family==='estate'?'from ':''}${money(p[frequency])}/month, subject to agreed scope.`;}
- if(assistance){const t=tasks[$('#task').value];enquiryContext=`${t.label}; ${$('#duration').value} minutes; ${$('#timing-field').hidden?'remote':$('#timing').selectedOptions[0].textContent}; indicative estimate ${$('#estimate-total').textContent}.`;}
+ if(assistance===true){const t=tasks[$('#task').value];enquiryContext=`${t.label}; ${$('#duration').value} minutes; ${$('#timing-field').hidden?'remote':$('#timing').selectedOptions[0].textContent}; indicative estimate ${$('#estimate-total').textContent}.`;}
  $('#enquiry-details').value=enquiryContext;document.body.classList.add('dialog-open');dialog.showModal();}
 function openOsEnquiry(family,assistance){let context='';
  if(family){const p=plans[family][$(`#${family}-size`).value];context=`${p.name}; ${frequency==='weekly'?'weekly':'every 14 days'}; ${family==='estate'?'from ':''}${money(p[frequency])}/month, subject to agreed scope.`;}
- if(assistance){const t=tasks[$('#task').value];context=`${t.label}; ${$('#duration').value} minutes; ${$('#timing-field').hidden?'remote':$('#timing').selectedOptions[0].textContent}; indicative estimate ${$('#estimate-total').textContent}.`;}
+ if(assistance===true){const t=tasks[$('#task').value];context=`${t.label}; ${$('#duration').value} minutes; ${$('#timing-field').hidden?'remote':$('#timing').selectedOptions[0].textContent}; indicative estimate ${$('#estimate-total').textContent}.`;}
  const q=new URLSearchParams({catalogue:C.version});if(family)q.set('family',family);if(assistance)q.set('interest','assistance');if(context)q.set('context',context);
  location.href=`${OS_ENQUIRE_URL}?${q}`;}
 $$('[data-enquire]').forEach(b=>b.addEventListener('click',()=>openEnquiry(b.dataset.family)));$('#enquire-assistance').addEventListener('click',()=>openEnquiry(null,true));$('.dialog-close').addEventListener('click',()=>dialog.close());dialog.addEventListener('close',()=>document.body.classList.remove('dialog-open'));dialog.addEventListener('click',e=>{if(e.target===dialog){const r=dialog.getBoundingClientRect();if(e.clientX<r.left||e.clientX>r.right||e.clientY<r.top||e.clientY>r.bottom)dialog.close();}});
@@ -87,5 +87,8 @@ $('#enquiry-form').addEventListener('submit',async e=>{
 });
 $('#copy-enquiry').addEventListener('click',async()=>{try{await navigator.clipboard.writeText($('#enquiry-summary').textContent);$('#copy-status').textContent='Summary copied.';}catch{$('#copy-status').textContent='Select the summary above to copy it.';}});$('#edit-enquiry').addEventListener('click',()=>{$('#enquiry-result').hidden=true;$('#enquiry-form-view').hidden=false;$('#enquiry-location').focus();});
 setTask('access');updatePlans();
+// one-time home watch visit (George 13 Nov): the list item jumps to the price table; its button opens the enquiry
+$$('[data-goto]').forEach(b=>b.addEventListener('click',()=>document.getElementById(b.dataset.goto)?.scrollIntoView({behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth',block:'start'})));
+$$('[data-enquire-onetime]').forEach(b=>b.addEventListener('click',()=>openEnquiry(null,'onetime')));
 
 routeLegacyHash();

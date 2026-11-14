@@ -385,8 +385,8 @@ input,textarea{
 
 <div class="demo">
   <div class="in">
-    <span class="tag">DEMONSTRATION</span>
-    <p>A working prototype of the Chronicle client portal, filled with specimen data. The property, the visits and the findings are illustrative — not a real property and not client work. Real client accounts require production hosting; what you can do here is use every screen. This Signature Dark preview adds embedded illustrative imagery; no external image hosting is required.</p>
+    <span class="tag">SAMPLE</span>
+    <p>A tour of the Chronicle client portal, shown with a sample property. Clients sign in to their own portal from the link we send when their service begins.</p>
   </div>
 </div>
 
@@ -396,7 +396,7 @@ input,textarea{
       <svg class="mark" viewBox="15 33 170 134" fill="none" aria-hidden="true"><g stroke="currentColor" stroke-linecap="round"><path d="M 134.67 48.60 A 62 62 0 1 0 134.67 151.40" stroke-width="6"/><path d="M 117.53 64.05 A 40 40 0 1 0 117.53 135.95" stroke-width="6"/><path d="M 20 100 L 180 100" stroke-width="5"/></g><rect x="121" y="93" width="14" height="14" fill="currentColor" stroke="none"/></svg>
       <span class="bt">CHRONICLE<small>CLIENT PORTAL</small></span>
     </a>
-    <div class="who"><div class="n" id="who-n">Specimen Property</div><div class="s" id="who-s">Chronicle · weekly · since Sep 2026</div></div>
+    <div class="who"><div class="n" id="who-n">Sample Property</div><div class="s" id="who-s">Chronicle · weekly · since Sep 2026</div></div>
     <nav id="nav"></nav>
     <div class="foot">Questions about anything here?<a href="#account">Your Chronicle contact →</a></div>
   </aside>
@@ -456,7 +456,7 @@ function portalPhotoSrc(k,n){
 }
 function ph(k,n,mod){
   var src=portalPhotoSrc(k,n);
-  return '<figure class="portal-photo'+(mod?' '+mod:'')+'"><img src="'+src+'" alt="'+esc(n)+'" loading="lazy"><span class="pp-tag">Specimen</span><figcaption class="pp-meta"><b>'+k+'</b><span>'+n+'</span></figcaption></figure>';
+  return '<figure class="portal-photo'+(mod?' '+mod:'')+'"><img src="'+src+'" alt="'+esc(n)+'" loading="lazy"></figure>';
 }
 function tbl(h, rows, nums, click){
   return '<div class="tblwrap"><table><thead><tr>'+h.map(function(x){return '<th>'+x+'</th>';}).join("")+'</tr></thead><tbody>'
@@ -467,7 +467,7 @@ function tbl(h, rows, nums, click){
 }
 
 /* ================= SPECIMEN DATA ================= */
-var PROP = { name:"Specimen Property", sub:"Single family · 4 bed · 3,400 sf · built 2008 · pool",
+var PROP = { name:"Sample Property", sub:"Single family · 4 bed · 3,400 sf · built 2008 · pool",
   level:"Chronicle · weekly", since:"20 September 2026", area:"Naples, Collier County",
   contact:"[Name]", phone:"[phone]", email:"[email]", authority:"$250 per event" };
 
@@ -568,7 +568,7 @@ function getDl(){
 
 
 function propertyHero(){
-  return '<section class="property-hero"><img src="'+PORTAL_VISUALS.IMG.property+'" alt="Specimen waterfront property">'
+  return '<section class="property-hero"><img src="'+PORTAL_VISUALS.IMG.property+'" alt="Waterfront property">'
     + '<div class="ph-inner"><div class="ph-eye">'+PROP.area+'</div><h2>'+PROP.name+'</h2>'
     + '<p>'+PROP.sub+' · '+PROP.level+' · looked after since '+PROP.since+'.</p>'
     + '<div class="ph-tags"><span>Weekly Chronicle</span><span>19 zones</span><span>11 readings</span><span>Visual record active</span></div></div></section>';
@@ -617,8 +617,8 @@ P.signin = function(){
     + '<label>Email<input id="si-email" type="email" placeholder="you@example.com" autocomplete="email"></label>'
     + '<label>Password<input id="si-pass" type="password" placeholder="••••••••"></label>'
     + '<div style="margin-top:18px"><button class="btn gold" style="width:100%;justify-content:center" id="si-go">Sign in</button></div>'
-    + '<p class="tiny" style="margin-top:16px">This is a demonstration. The sign-in above is not connected to anything — real client accounts need production hosting. Use the button below to see the portal as a client would.</p>'
-    + '<div style="margin-top:12px"><a class="btn" style="width:100%;justify-content:center" href="#dashboard">Enter the demonstration portal</a></div>'
+    + '<p class="tiny" style="margin-top:16px">This is a sample portal. Clients sign in from the link we send when their service begins. Use the button below to see the portal as a client would.</p>'
+    + '<div style="margin-top:12px"><a class="btn" style="width:100%;justify-content:center" href="#dashboard">Enter the sample portal</a></div>'
     + '</div>';
 };
 
@@ -852,7 +852,7 @@ function wire(r){
   var si = document.getElementById("si-go");
   if (si) si.addEventListener("click", function(){
     var m = document.createElement("div"); m.className = "msg bad";
-    m.textContent = "This demonstration has no accounts behind it. Use “Enter the demonstration portal” below to see the portal as a client would.";
+    m.textContent = "This sample portal has no accounts behind it. Use “Enter the sample portal” below to see the portal as a client would.";
     si.parentNode.parentNode.insertBefore(m, si.parentNode.nextSibling);
   });
 
@@ -932,7 +932,7 @@ function uploadNotice(name){
   if (!z) return;
   z.innerHTML = '<div class="msg">'
     + (name ? '<b>' + esc(name) + '</b><br>' : '')
-    + 'Uploading works on the production portal, where files are stored against your property and read by your Chronicle contact. This demonstration cannot accept files — artifacts do not give a client write access to storage.</div>';
+    + 'In your own portal, uploaded files are stored against your property and read by your Chronicle contact. This sample portal does not accept files.</div>';
   z.scrollIntoView({block:"nearest"});
 }
 
@@ -970,7 +970,7 @@ function downloadReport(){
     + '<tr><td>Interior temperature</td><td>77–80 °F</td><td>' + v.temp + ' °F</td></tr>'
     + '<tr><td>Interior humidity</td><td>45–60 %</td><td>' + v.rh + ' %</td></tr>'
     + '<tr><td>Water meter, all fixtures closed</td><td>No movement</td><td>' + (orig === 0 ? "Moving" : "No movement") + '</td></tr></table>'
-    + '<p class="n">SPECIMEN — illustrative only, not a real property and not client work. A Chronicle is a visual record made from normal standing and walking positions. '
+    + '<p class="n">Sample report: a fictional property. A Chronicle is a visual record made from normal standing and walking positions. '
     + 'It is not a home inspection, a survey, an engineering or structural assessment, a mold or pest assessment, or a warranty. '
     + 'Chronicle Property Group LLC is not a licensed home inspector or contractor.</p>';
   save("chronicle-" + v.label.replace(/\s+/g, "-").toLowerCase() + ".html", h, document.getElementById("dl-report"));
