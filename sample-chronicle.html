@@ -71,7 +71,7 @@ dialog::backdrop{background:#050a14cc}
       <p class="eyebrow">Property timeline</p>
       <h1>Sample Residence</h1>
       <p class="muted" style="margin:0">Naples, Florida · Chronicle Residence, every 14 days</p>
-      <div class="facts"><span>Lead representative: your named Chronicle representative</span><span>6 walkthroughs shown</span><span>Every room with its 360°</span></div>
+      <div class="facts"><span>Lead representative: your named Chronicle representative</span><span>6 walkthroughs shown</span><span>A 360° of every room, every visit</span></div>
     </div>
   </section>
 
@@ -101,7 +101,7 @@ dialog::backdrop{background:#050a14cc}
   </section>
 
   <p class="muted small">Each date opens that visit’s full report in the portal. <a href="first-chronicle.html" style="color:var(--gold)">See a sample full report</a>.</p>
-  <p class="foot">Sample: the property, visits, readings and findings are fictional, and the room views are stand-in images. In your portal every 360° is taken at your home from the same marked spot on each visit. A Chronicle is a visual record from normal standing and walking positions; it is not a home inspection, survey or engineering assessment.</p>
+  <p class="foot">Sample: the property, visits, readings and findings are fictional, and the room views are stand-in images (rooms marked “360° view” show where each room’s 360° appears). In your portal every 360° is taken at your home from the same marked spot on each visit. A Chronicle is a visual record from normal standing and walking positions; it is not a home inspection, survey or engineering assessment.</p>
 </main>
 
 <dialog id="dlg" aria-labelledby="dlg-title"><div class="dlg-head"><b id="dlg-title"></b><button class="x" aria-label="Close" id="dlg-x">×</button></div><div id="dlg-body"></div></dialog>
@@ -118,26 +118,54 @@ const AREAS = [
   {title:'Systems', rows:[
     {label:'Main water shut-off', v:[G,G,G,G,G,G]},
     {label:'Electrical panel: no tripped breakers', v:[G,G,G,A,G,G], note:{3:'Kitchen GFCI breaker tripped; reset with the owner’s consent'}},
-    {label:'AC running, set to away (°F)', unit:'°F', r:[78,78,79,78,78,78], max:80},
-    {label:'Water heater: no drips, pan dry', v:[G,G,G,G,M,G], note:{4:'Small drip at the valve; plumber visited Oct 22'}}]},
+    {label:'AC running, set to away (°F)', unit:'°F', r:[78,78,79,78,78,78], max:80}]},
   {title:'Living room', rows:[
     {label:'Temperature (°F)', unit:'°F', r:[77,78,79,78,77,77], max:82},
     {label:'Humidity (%)', unit:'%', r:[54,56,61,63,57,55], max:60},
     {label:'Windows & sliding door closed and locked', v:[G,G,G,G,G,G]},
     {label:'Ceiling, walls, floor: no stains', v:[G,G,G,G,G,G]},
     {label:'360°', pano:'living'}]},
+  {title:'Dining room', rows:[
+    {label:'Ceiling, walls, floor: no stains', v:[G,G,G,G,G,G]},
+    {label:'Windows closed and locked', v:[G,G,G,G,G,G]},
+    {label:'360°', pano:'dining'}]},
   {title:'Kitchen', rows:[
     {label:'Sink: runs and drains; cabinet below dry', v:[G,G,G,M,G,G], note:{3:'Damp base board under the sink; supply line tightened'}},
     {label:'Fridge & freezer running', v:[G,G,G,G,G,G]},
     {label:'Humidity (%)', unit:'%', r:[55,57,60,64,58,56], max:60},
     {label:'360°', pano:'kitchen'}]},
+  {title:'Primary bedroom', rows:[
+    {label:'Windows closed and locked', v:[G,G,G,G,G,G]},
+    {label:'AC vents: air cool, no drips or dark spots', v:[G,G,G,G,G,G]},
+    {label:'360°', pano:'primary-bed'}]},
+  {title:'Primary bathroom', rows:[
+    {label:'Toilet: flushes, refills, no leak at the base', v:[G,G,G,G,G,G]},
+    {label:'Shower run; drain trap kept full', v:[G,G,G,G,G,G]},
+    {label:'Humidity (%)', unit:'%', r:[58,59,62,61,57,56], max:65},
+    {label:'360°', pano:'primary-bath'}]},
+  {title:'Guest bedroom', rows:[
+    {label:'Windows closed and locked', v:[G,G,G,G,G,G]},
+    {label:'Ceiling, walls, floor: no stains', v:[G,G,G,G,G,G]},
+    {label:'360°', pano:'guest-bed'}]},
+  {title:'Guest bathroom', rows:[
+    {label:'Toilet: flushes, refills, no leak at the base', v:[G,G,G,G,G,M], note:{5:'Slow refill; flapper to be replaced by the owner’s plumber'}},
+    {label:'Sink: runs and drains; cabinet below dry', v:[G,G,G,G,G,G]},
+    {label:'360°', pano:'guest-bath'}]},
+  {title:'Laundry', rows:[
+    {label:'Washer hoses: no drips or bulges', v:[G,G,G,G,G,G]},
+    {label:'Dryer vent connected', v:[G,G,G,G,G,G]},
+    {label:'360°', pano:'laundry'}]},
+  {title:'Garage', rows:[
+    {label:'Garage door closed; no gaps or damage', v:[G,G,G,G,G,G]},
+    {label:'Water heater: no drips, pan dry', v:[G,G,G,G,M,G], note:{4:'Small drip at the valve; plumber visited Oct 22'}},
+    {label:'360°', pano:'garage'}]},
   {title:'Lanai', rows:[
     {label:'Screens and enclosure intact', v:[G,G,G,G,G,G]},
     {label:'Floor drain clear', v:[G,G,M,G,G,G], note:{2:'Leaves cleared from the drain'}},
     {label:'Storm damage, loose items', v:[G,G,G,G,NC,G], note:{4:'Not checked: lanai closed by the condo association for painting'}},
     {label:'360°', pano:'lanai'}]}
 ];
-const NAMES={entry:'Entrance',living:'Living room',kitchen:'Kitchen',lanai:'Lanai'};
+const NAMES={entry:'Entrance',living:'Living room',dining:'Dining room',kitchen:'Kitchen','primary-bed':'Primary bedroom','primary-bath':'Primary bathroom','guest-bed':'Guest bedroom','guest-bath':'Guest bathroom',laundry:'Laundry',garage:'Garage',lanai:'Lanai'};
 const TXT={good:'Good',monitor:'Monitor',attention:'Attention',nc:'N/C'};
 const short=d=>new Date(d+'T12:00:00Z').toLocaleDateString('en-US',{month:'short',day:'numeric',timeZone:'UTC'});
 const long=d=>new Date(d+'T12:00:00Z').toLocaleDateString('en-US',{month:'long',day:'numeric',year:'numeric',timeZone:'UTC'});
