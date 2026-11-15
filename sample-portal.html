@@ -1,0 +1,319 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Sample Client Portal — Chronicle Home Watch</title>
+<meta name="description" content="A sample of the Chronicle client portal: your home at a glance, the report after every walkthrough, every visit side by side, and Your Property Chronicle.">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#0E1728;--panel:#15203A;--panel2:#1B2745;--deep:#0A1120;--line:#28334F;--ink:#F0EDE5;--muted:#A7B1C6;--gold:#C9A96A;--good:#3FA371;--monitor:#D9A441;--attention:#D9573F;--serif:"Cinzel",Georgia,serif;--sans:"Inter",system-ui,Arial,sans-serif}
+*{box-sizing:border-box}html{-webkit-text-size-adjust:100%}body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.6 var(--sans)}
+a{color:inherit}button,select{font:inherit;color:inherit}
+.top{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:12px max(16px,calc((100% - 1240px)/2));background:var(--deep);border-bottom:1px solid rgba(201,169,106,.35)}
+.brand{display:flex;align-items:center;gap:10px;text-decoration:none}.brand img{width:38px;height:38px}.brand span{font-family:var(--serif);letter-spacing:.08em;font-size:15px;line-height:1.3}.brand small{display:block;font-family:var(--sans);font-size:8px;letter-spacing:.28em;color:var(--muted)}
+.who{display:flex;align-items:center;gap:10px;font-size:13px;color:var(--muted)}.who b{display:grid;place-items:center;width:34px;height:34px;border-radius:50%;background:var(--gold);color:var(--deep);font-size:13px}
+.back{font-size:13px;color:var(--muted);text-decoration:none}.back:hover{color:var(--gold)}
+.sample{background:var(--panel2);color:#E6D3A8;text-align:center;font-size:13px;padding:8px 16px}.sample b{color:var(--gold);letter-spacing:.06em}
+.shell{width:min(1240px,calc(100% - 32px));margin:0 auto;display:grid;grid-template-columns:220px 1fr;gap:26px;padding:24px 0 64px}
+nav.side{display:flex;flex-direction:column;gap:4px;position:sticky;top:16px;align-self:start}
+nav.side a{display:flex;align-items:center;gap:10px;padding:10px 12px;border-radius:10px;text-decoration:none;color:var(--muted);font-size:14px}
+nav.side a.on,nav.side a:hover{background:var(--panel);color:var(--ink)}nav.side a.on{box-shadow:inset 3px 0 0 var(--gold)}
+nav.side .ico{width:18px;text-align:center;color:var(--gold)}
+nav.side .note{font-size:11px;color:var(--muted);padding:10px 12px;border-top:1px solid var(--line);margin-top:8px}
+main{min-width:0}
+.eyebrow{font-size:11px;letter-spacing:.18em;color:var(--gold);text-transform:uppercase;margin:0 0 6px}
+h1{font-family:var(--serif);font-weight:500;font-size:clamp(24px,3.4vw,36px);margin:0 0 6px;letter-spacing:.02em}
+h2{font-family:var(--serif);font-weight:500;font-size:19px;margin:0 0 12px}
+h3{font-size:15px;font-weight:600;margin:0 0 6px}
+.muted{color:var(--muted)}.small{font-size:12px}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:20px;margin-bottom:16px}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:16px}.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.btn{display:inline-flex;align-items:center;gap:8px;background:var(--gold);color:var(--deep);border:0;border-radius:999px;padding:10px 18px;font-weight:600;cursor:pointer;text-decoration:none}
+.btn.ghost{background:transparent;color:var(--ink);border:1px solid #526080}
+.chip{display:inline-block;border-radius:999px;padding:2px 10px;font-size:12px;font-weight:600}
+.chip.good{background:#173A2C;color:#9FDDBE}.chip.monitor{background:#3D3015;color:#F2CB7A}.chip.attention{background:#43201A;color:#F4A090}.chip.gold{background:#2E2715;color:var(--gold)}
+.hero{display:grid;grid-template-columns:1.1fr 1fr;gap:0;overflow:hidden;padding:0}
+.hero img{width:100%;height:100%;min-height:230px;object-fit:cover;display:block}
+.hero .txt{padding:22px}
+.tiles{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin:12px 0}
+.tile{background:#111B32;border:1px solid var(--line);border-radius:12px;padding:12px}.tile b{display:block;font-size:22px;font-weight:500}.tile span{font-size:12px;color:var(--muted)}
+.list{list-style:none;margin:0;padding:0}.list li{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:11px 0;border-top:1px solid var(--line)}.list li:first-child{border-top:0}
+.list a{text-decoration:none}.list a:hover b{color:var(--gold)}
+.progress{height:10px;border-radius:999px;background:#0E1728;border:1px solid var(--line);overflow:hidden;margin:10px 0 6px}.progress span{display:block;height:100%;background:linear-gradient(90deg,#B8975A,#E1C791)}
+table.eq{width:100%;border-collapse:collapse;font-size:13px}table.eq th{text-align:left;color:var(--muted);font-weight:500;font-size:12px;padding:8px;border-bottom:1px solid var(--line)}table.eq td{padding:10px 8px;border-bottom:1px solid var(--line);vertical-align:middle}
+td.ser,.list li>.muted.small{white-space:nowrap}.mask{font-family:ui-monospace,Menlo,monospace;letter-spacing:.04em}.lock{color:var(--gold);font-size:11px;margin-left:4px}
+.label{display:inline-grid;place-items:center;width:46px;height:34px;border-radius:6px;background:repeating-linear-gradient(135deg,#1E2A48 0 6px,#18233E 6px 12px);border:1px solid #364364;font-size:9px;color:var(--muted)}
+.tick{color:#9FDDBE}.dash{color:var(--muted)}
+.room{display:grid;grid-template-columns:160px 1fr;gap:14px;align-items:start;padding:12px 0;border-top:1px solid var(--line)}.room:first-of-type{border-top:0}
+.thumb{display:block;width:150px;height:75px;border-radius:8px;border:1px solid #364364;background-size:cover;background-position:center;cursor:pointer;position:relative;padding:0}
+.thumb::after{content:"360°";position:absolute;right:4px;bottom:3px;font-size:9px;background:#0A1120cc;color:var(--gold);padding:1px 5px;border-radius:4px}
+.checks{list-style:none;margin:0;padding:0;font-size:13px}.checks li{display:flex;justify-content:space-between;gap:10px;padding:4px 0}.checks li span:first-child{color:#D8DCE5}
+.find{display:grid;grid-template-columns:64px 1fr;gap:12px;padding:12px;border-radius:12px;background:#111B32;border:1px solid var(--line);margin-bottom:10px}
+.find .ph{width:64px;height:64px;border-radius:8px;background-size:cover;background-position:center;border:1px solid #364364}
+.gridwrap{overflow-x:auto;border:1px solid var(--line);border-radius:16px;background:var(--panel);margin-bottom:8px}
+table.tl{border-collapse:separate;border-spacing:0;width:100%;min-width:720px}
+table.tl th,table.tl td{padding:9px 10px;border-bottom:1px solid var(--line);text-align:center;font-size:13px}
+table.tl thead th{background:#111B32;font-size:12px}table.tl thead th small{display:block;font-weight:400;color:var(--muted)}
+table.tl th[scope=row],table.tl thead th:first-child{text-align:left;position:sticky;left:0;background:#111B32;z-index:1;min-width:170px;font-weight:500}
+table.tl tr.area th{background:#0F1930;color:var(--gold);font-family:var(--serif);font-weight:500;letter-spacing:.06em;text-align:left}
+td.good{color:#9FDDBE}td.monitor{color:#F2CB7A}td.attention{color:#F4A090;font-weight:600}td.changed{box-shadow:inset 0 0 0 2px var(--gold);border-radius:6px}
+table.tl .thumb{width:104px;height:52px;margin:auto}
+.legend{display:flex;flex-wrap:wrap;gap:14px;font-size:12px;color:var(--muted);margin:6px 2px 18px}.legend i{display:inline-block;width:10px;height:10px;border-radius:3px;margin-right:6px;vertical-align:middle}
+.compare{display:flex;flex-wrap:wrap;gap:10px 14px;align-items:end}.compare label{display:grid;gap:4px;font-size:12px;color:var(--muted)}
+select{background:#0E1728;color:var(--ink);border:1px solid #364364;border-radius:8px;padding:8px 10px;min-width:150px}
+.graphs{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:12px}
+figure{margin:0;background:#111B32;border:1px solid var(--line);border-radius:12px;padding:12px}figcaption{font-size:13px;margin-bottom:6px}
+svg .lim{stroke:#D9573F;stroke-dasharray:4 4;stroke-width:1.5}svg .ln{stroke:var(--gold);stroke-width:2.5}svg .dot{fill:var(--gold)}svg .dot.f{fill:#D9573F}svg text{fill:var(--muted);font-size:10px;font-family:var(--sans)}
+.pair{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.view360{position:relative;height:300px;border-radius:12px;border:1px solid #364364;background-repeat:repeat-x;background-size:auto 100%;cursor:grab;touch-action:pan-y;user-select:none}
+.view360.drag{cursor:grabbing}.view360 .lab{position:absolute;left:10px;top:10px;background:#0A1120d9;padding:3px 10px;border-radius:999px;font-size:12px}.view360 .hint{position:absolute;right:10px;bottom:10px;background:#0A1120d9;padding:3px 10px;border-radius:999px;font-size:11px;color:var(--muted)}
+dialog{border:1px solid var(--line);border-radius:16px;background:var(--panel);color:var(--ink);width:min(1000px,calc(100% - 24px));padding:16px}dialog::backdrop{background:#050a14cc}
+.dlg-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px}.x{background:none;border:0;color:var(--ink);font-size:26px;cursor:pointer;line-height:1}
+.req{border-left:3px solid var(--gold);padding:10px 14px;background:#111B32;border-radius:0 10px 10px 0;margin:8px 0}
+.foot{border-top:1px solid var(--line);margin-top:22px;padding-top:14px;font-size:12px;color:var(--muted)}
+:focus-visible{outline:3px solid var(--gold);outline-offset:2px}
+@media(max-width:900px){.shell{grid-template-columns:1fr}nav.side{position:static;flex-direction:row;overflow-x:auto;gap:6px;padding-bottom:4px}nav.side a{white-space:nowrap;padding:8px 12px;background:var(--panel)}nav.side .note{display:none}.hero{grid-template-columns:1fr}.grid2{grid-template-columns:1fr}.tiles{grid-template-columns:repeat(2,1fr)}.grid3{grid-template-columns:1fr}}
+@media(max-width:600px){.room{grid-template-columns:1fr}.pair{grid-template-columns:1fr}.view360{height:220px}table.eq .hide-s{display:none}.who span{display:none}}
+</style>
+</head>
+<body>
+<header class="top">
+  <a class="brand" href="index.html"><img src="assets/chronicle-services-mark.svg" alt=""><span>CHRONICLE<small>PROPERTY GROUP</small></span></a>
+  <div class="who"><span>Sample Owner</span><b aria-hidden="true">SO</b><a class="back" href="index.html#property-record">‹ Back to the website</a></div>
+</header>
+<div class="sample"><b>SAMPLE</b> · A fictional property, shown the way a client sees their own home in the Chronicle portal.</div>
+<div class="shell">
+  <nav class="side" aria-label="Portal">
+    <a href="#home" data-tab="home"><span class="ico">⌂</span>Home</a>
+    <a href="#chronicle" data-tab="chronicle"><span class="ico">◈</span>My Property</a>
+    <a href="#visits" data-tab="visits"><span class="ico">▦</span>Visits &amp; Reports</a>
+    <a href="#requests" data-tab="requests"><span class="ico">✉</span>Requests</a>
+    <p class="note">Plan &amp; invoices and Your Details are private to the owner and not shown in this sample.</p>
+  </nav>
+  <main id="view" tabindex="-1"></main>
+</div>
+<dialog id="dlg" aria-labelledby="dlg-title"><div class="dlg-head"><b id="dlg-title"></b><button class="x" aria-label="Close" id="dlg-x">×</button></div><div id="dlg-body"></div></dialog>
+<script>
+// ===== Sample data (fictional): one residence, six walkthroughs every 14 days, oldest → newest =====
+const VISITS = ['2026-08-23','2026-09-06','2026-09-20','2026-10-04','2026-10-18','2026-11-01'];
+const TIMES = [['9:10 AM','10:05 AM'],['9:05 AM','9:58 AM'],['9:20 AM','10:22 AM'],['9:00 AM','10:14 AM'],['9:15 AM','10:06 AM'],['9:08 AM','10:01 AM']];
+const NEXT = '2026-11-15';
+const REP = 'Daniel R.';
+const G='good',M='monitor',A='attention',NC='nc';
+const AREAS = [
+  {title:'Arrival', rows:[
+    {label:'Entrance door locked, no signs of entry', v:[G,G,G,G,G,G]},
+    {label:'Packages, flyers or notices', v:[G,G,M,G,G,G], note:{2:'Two flyers and a courier slip brought inside'}},
+    {label:'360°', pano:'entry'}]},
+  {title:'Systems', rows:[
+    {label:'Main water shut-off', v:[G,G,G,G,G,G]},
+    {label:'Electrical panel: no tripped breakers', v:[G,G,G,A,G,G], note:{3:'Kitchen GFCI breaker tripped; reset with the owner’s consent'}},
+    {label:'AC running, set to away (°F)', unit:'°F', r:[78,78,79,78,78,78], max:80}]},
+  {title:'Living room', rows:[
+    {label:'Temperature (°F)', unit:'°F', r:[77,78,79,78,77,77], max:82},
+    {label:'Humidity (%)', unit:'%', r:[54,56,61,63,57,55], max:60},
+    {label:'Windows & sliding door closed and locked', v:[G,G,G,G,G,G]},
+    {label:'Ceiling, walls, floor: no stains', v:[G,G,G,G,G,G]},
+    {label:'360°', pano:'living'}]},
+  {title:'Dining room', rows:[
+    {label:'Ceiling, walls, floor: no stains', v:[G,G,G,G,G,G]},
+    {label:'Windows closed and locked', v:[G,G,G,G,G,G]},
+    {label:'360°', pano:'dining'}]},
+  {title:'Kitchen', rows:[
+    {label:'Sink: runs and drains; cabinet below dry', v:[G,G,G,M,G,G], note:{3:'Damp base board under the sink; supply line tightened'}},
+    {label:'Fridge & freezer running', v:[G,G,G,G,G,G]},
+    {label:'Humidity (%)', unit:'%', r:[55,57,60,64,58,56], max:60},
+    {label:'360°', pano:'kitchen'}]},
+  {title:'Primary bedroom', rows:[
+    {label:'Windows closed and locked', v:[G,G,G,G,G,G]},
+    {label:'AC vents: air cool, no drips or dark spots', v:[G,G,G,G,G,G]},
+    {label:'360°', pano:'primary-bed'}]},
+  {title:'Primary bathroom', rows:[
+    {label:'Toilet: flushes, refills, no leak at the base', v:[G,G,G,G,G,G]},
+    {label:'Shower run; drain trap kept full', v:[G,G,G,G,G,G]},
+    {label:'Humidity (%)', unit:'%', r:[58,59,62,61,57,56], max:65},
+    {label:'360°', pano:'primary-bath'}]},
+  {title:'Guest bedroom', rows:[
+    {label:'Windows closed and locked', v:[G,G,G,G,G,G]},
+    {label:'Ceiling, walls, floor: no stains', v:[G,G,G,G,G,G]},
+    {label:'360°', pano:'guest-bed'}]},
+  {title:'Guest bathroom', rows:[
+    {label:'Toilet: flushes, refills, no leak at the base', v:[G,G,G,G,G,M], note:{5:'Slow refill; flapper to be replaced by the owner’s plumber'}},
+    {label:'Sink: runs and drains; cabinet below dry', v:[G,G,G,G,G,G]},
+    {label:'360°', pano:'guest-bath'}]},
+  {title:'Laundry', rows:[
+    {label:'Washer hoses: no drips or bulges', v:[G,G,G,G,G,G]},
+    {label:'Dryer vent connected', v:[G,G,G,G,G,G]},
+    {label:'360°', pano:'laundry'}]},
+  {title:'Garage', rows:[
+    {label:'Garage door closed; no gaps or damage', v:[G,G,G,G,G,G]},
+    {label:'Water heater: no drips, pan dry', v:[G,G,G,G,M,G], note:{4:'Small drip at the valve; plumber visited Oct 22'}},
+    {label:'360°', pano:'garage'}]},
+  {title:'Lanai', rows:[
+    {label:'Screens and enclosure intact', v:[G,G,G,G,G,G]},
+    {label:'Floor drain clear', v:[G,G,M,G,G,G], note:{2:'Leaves cleared from the drain'}},
+    {label:'Storm damage, loose items', v:[G,G,G,G,NC,G], note:{4:'Not checked: lanai closed by the condo association for painting'}},
+    {label:'360°', pano:'lanai'}]}
+];
+
+const NAMES={entry:'Entrance',living:'Living room',dining:'Dining room',kitchen:'Kitchen','primary-bed':'Primary bedroom','primary-bath':'Primary bathroom','guest-bed':'Guest bedroom','guest-bath':'Guest bathroom',laundry:'Laundry',garage:'Garage',lanai:'Lanai'};
+// Your Property Chronicle (the record of the home, built over the first 12 months)
+const CHRONICLE = { pct: 68, started: '2026-08-23', due: '2027-08-23', counts: {rooms:'11 of 11', equipment:'12 of about 16', shutoffs:'4 of 4', documents:'5 of about 9'} };
+const EQUIP = [
+  ['AC air handler','Garage closet','Carrier FB4CNP036','7712','2019',G,true,true,'2026-08-23'],
+  ['AC condenser','Side yard','Carrier 24ACC636A003','3108','2019',G,true,true,'2026-08-23'],
+  ['Thermostat','Hallway','Honeywell T6 Pro','',  '2019',G,true,false,'2026-08-23'],
+  ['Water heater (50 gal, electric)','Garage','Rheem XE50T10HD50U1','4821','2017',M,true,true,'2026-09-06'],
+  ['Electrical panel (200 A)','Garage','Square D QO','',  '2008',G,false,false,'2026-08-23'],
+  ['Refrigerator','Kitchen','Sub-Zero BI-36UFD','0937','2020',G,true,true,'2026-09-20'],
+  ['Dishwasher','Kitchen','Bosch SHPM88Z75N','2264','2021',G,true,false,'2026-09-20'],
+  ['Range','Kitchen','Wolf DF366','1150','2020',G,true,false,'2026-09-20'],
+  ['Washer','Laundry','LG WM4000HWA','5590','2021',G,true,true,'2026-10-04'],
+  ['Dryer','Laundry','LG DLEX4000W','5591','2021',G,true,false,'2026-10-04'],
+  ['Garage door opener','Garage','LiftMaster 87504-267','6043','2022',G,true,false,'2026-10-18'],
+  ['Irrigation controller','Side yard','Rain Bird ESP-TM2','',  '2018',G,false,false,'2026-11-01']
+];
+const SHUTOFFS = [
+  ['Main water shut-off','Garage, left wall behind the water heater','Quarter turn clockwise (lever across the pipe). No tool needed.','2026-08-23'],
+  ['Electrical panel','Garage, right of the door to the house','Main breaker at the top. Never switch off without the office’s agreement.','2026-08-23'],
+  ['Water heater cold-water valve','Top of the water heater, cold side (blue)','Turn clockwise to close; switch the heater’s breaker off first.','2026-09-06'],
+  ['Irrigation shut-off','Side yard, next to the backflow preventer','Quarter turn; controller set to “off” during long absences.','2026-11-01']
+];
+const SAFETY = [
+  ['Smoke detectors','6 · bedrooms, hallway, living room','Look only: never press Test; note any chirp or warning light.'],
+  ['Carbon monoxide detector','1 · garage entry hallway','Look only.'],
+  ['Alarm panel','Entrance · monitored','Monitoring company on file with the office. Codes are never stored in the portal.'],
+  ['Fire extinguisher','Kitchen pantry · inspected 2026','Gauge in the green at the last visit.']
+];
+const DOCS = [
+  ['AC warranty (Carrier, to 2029)','Added by Chronicle','2026-08-23',true],
+  ['Water heater manual','Added by Chronicle','2026-09-06',true],
+  ['Appliance manuals (kitchen)','Added by Chronicle','2026-09-20',true],
+  ['HOA rules and gate procedure','Added by the owner','2026-09-12',true],
+  ['Home insurance declarations','To add (owner)','',false],
+  ['Permits and recent work records','To add','',false]
+];
+const VERSIONS = [['Version 3','2026-11-01','Irrigation controller and shut-off added.'],['Version 2','2026-10-04','Water heater label photo replaced with a clearer one; washer and dryer added.'],['Version 1','2026-08-23','First record: access, contacts, rooms, main shut-offs.']];
+const REQUESTS = [
+  {d:'2026-10-27',kind:'Question',q:'The water heater is marked Monitor. Should I replace it before the season?',a:{d:'2026-10-28',who:'Chronicle office',t:'It is 9 years old and was drip-free after the plumber’s visit on Oct 22. We keep it on Monitor and photograph the pan at every visit; we recommend getting a replacement quote within the year.'}},
+  {d:'2026-09-29',kind:'Assistance request',q:'Could someone be there for the pool company on Thursday morning?',a:{d:'2026-09-29',who:'Chronicle office',t:'Scheduled: your representative will let them in at 9:00 AM Thursday and lock up after. Charged at the published assistance tariff.'}}
+];
+
+// ===== helpers =====
+const TXT={good:'Good',monitor:'Monitor',attention:'Needs attention',nc:'Not checked'};
+const SH={good:'Good',monitor:'Monitor',attention:'Attention',nc:'N/C'};
+const short=d=>new Date(d+'T12:00:00Z').toLocaleDateString('en-US',{month:'short',day:'numeric',timeZone:'UTC'});
+const long=d=>new Date(d+'T12:00:00Z').toLocaleDateString('en-US',{weekday:'long',month:'long',day:'numeric',year:'numeric',timeZone:'UTC'});
+const mid=d=>new Date(d+'T12:00:00Z').toLocaleDateString('en-US',{month:'long',day:'numeric',year:'numeric',timeZone:'UTC'});
+const $=s=>document.querySelector(s);
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const shade=i=>`brightness(${[0.94,1,1.04,0.97,1.02,1][i]})`;
+const unitTxt=r=>r.unit==='%'?' %':' '+r.unit;
+const statusOf=(r,i)=>r.r?(r.r[i]>r.max?A:G):r.v[i];
+function counts(i){ const c={good:0,monitor:0,attention:0,nc:0}; AREAS.forEach(a=>a.rows.forEach(r=>{ if(!r.pano) c[statusOf(r,i)]++; })); return c; }
+function thumb(room,i,w){ return `<button type="button" class="thumb" style="background-image:url(assets/sample360/${room}-t.jpg);filter:${shade(i)}${w?';width:'+w+'px;height:'+(w/2)+'px':''}" data-pano="${room}" data-i="${i}" aria-label="Open the 360° of the ${esc(NAMES[room])}, ${mid(VISITS[i])}"></button>`; }
+
+// ===== views =====
+const V = {};
+V.home = () => { const i=5, c=counts(i);
+  return `<section class="card hero"><img src="assets/portal-01.jpg" alt="Sample residence"><div class="txt">
+      <p class="eyebrow">Welcome back</p><h1>Sample Residence</h1><p class="muted" style="margin:0">Naples, Florida · Chronicle Residence, every 14 days</p>
+      <div class="tiles" style="grid-template-columns:1fr 1fr"><div class="tile"><span>Next walkthrough</span><b style="font-size:17px">${long(NEXT).replace(', 2026','')}</b></div><div class="tile"><span>Your lead representative</span><b style="font-size:17px">${REP}</b></div></div>
+      <a class="btn" href="#chronicle">View my Property Chronicle →</a></div></section>
+    <section class="card"><div style="display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap"><h2 style="margin:0">Latest report · ${mid(VISITS[i])}</h2><span class="chip ${c.attention?'attention':c.monitor?'monitor':'good'}">${c.attention?c.attention+' needs attention':c.monitor?'All good · '+c.monitor+' to watch':'All good'}</span></div>
+      <div class="tiles"><div class="tile"><b>${c.good}</b><span>Good</span></div><div class="tile"><b>${c.monitor}</b><span>Monitor</span></div><div class="tile"><b>${c.attention}</b><span>Needs attention</span></div><div class="tile"><b>11</b><span>Rooms with a 360°</span></div></div>
+      <div style="display:flex;gap:10px;flex-wrap:wrap"><a class="btn" href="#report-5">Open the report</a><a class="btn ghost" href="#timeline">Every visit side by side</a></div></section>
+    <div class="grid2"><section class="card"><h2>Your Property Chronicle</h2><p class="muted small" style="margin:0">${CHRONICLE.pct}% recorded · completed within your first 12 months (by ${mid(CHRONICLE.due)})</p><div class="progress"><span style="width:${CHRONICLE.pct}%"></span></div><p class="small muted">Rooms ${CHRONICLE.counts.rooms} · Equipment ${CHRONICLE.counts.equipment} · Shut-offs ${CHRONICLE.counts.shutoffs}</p><a class="btn ghost" href="#chronicle">Open</a></section>
+    <section class="card"><h2>Requests</h2><ul class="list">${REQUESTS.map(r=>`<li><span><b>${r.kind}</b><br><span class="muted small">${short(r.d)} · answered</span></span><a class="btn ghost" href="#requests">View</a></li>`).join('')}</ul></section></div>`; };
+
+V.chronicle = () => `
+  <p class="eyebrow">My Property</p><h1>Your Property Chronicle</h1>
+  <section class="card"><p style="margin:0">The record of your home, built up visit by visit. Each item shows the date it was recorded.</p>
+    <div class="progress" aria-label="${CHRONICLE.pct}% recorded"><span style="width:${CHRONICLE.pct}%"></span></div>
+    <p class="small muted" style="margin:0">${CHRONICLE.pct}% recorded · started ${mid(CHRONICLE.started)} · completed by ${mid(CHRONICLE.due)}</p>
+    <div class="tiles"><div class="tile"><b>${CHRONICLE.counts.rooms}</b><span>Rooms</span></div><div class="tile"><b>${CHRONICLE.counts.equipment}</b><span>Equipment</span></div><div class="tile"><b>${CHRONICLE.counts.shutoffs}</b><span>Shut-offs</span></div><div class="tile"><b>${CHRONICLE.counts.documents}</b><span>Documents</span></div></div></section>
+
+  <section class="card"><h2>Rooms</h2>${AREAS.filter(a=>a.rows.some(r=>r.pano)).map(a=>{const r=a.rows.find(x=>x.pano);return `<div class="room">${thumb(r.pano,5)}<div><h3>${a.title}</h3><p class="muted small" style="margin:0">${a.rows.filter(x=>!x.pano).map(x=>esc(x.label.replace(/ \(.*\)$/,''))).join(' · ')}</p></div></div>`;}).join('')}</section>
+
+  <section class="card"><h2>Equipment</h2><p class="muted small" style="margin-top:-6px">Serial numbers are partly hidden <span class="lock">🔒</span> — the full number is kept on file and shown only to you.</p>
+    <div style="overflow-x:auto"><table class="eq"><thead><tr><th>Item</th><th class="hide-s">Room</th><th>Make &amp; model</th><th>Serial</th><th class="hide-s">Installed</th><th>Condition</th><th class="hide-s">Label</th><th class="hide-s">Manual · warranty</th><th class="hide-s">Recorded</th></tr></thead>
+    <tbody>${EQUIP.map(e=>`<tr><td><b style="font-weight:500">${esc(e[0])}</b></td><td class="hide-s muted">${esc(e[1])}</td><td>${esc(e[2])}</td><td class="ser">${e[3]?`<span class="mask">••••${e[3]}</span><span class="lock" title="Partly hidden">🔒</span>`:'<span class="dash">—</span>'}</td><td class="hide-s">${e[4]}</td><td><span class="chip ${e[5]}">${TXT[e[5]]}</span></td><td class="hide-s"><span class="label">photo</span></td><td class="hide-s">${e[6]?'<span class="tick">✓</span>':'<span class="dash">—</span>'} · ${e[7]?'<span class="tick">✓</span>':'<span class="dash">—</span>'}</td><td class="hide-s muted small">${short(e[8])}</td></tr>`).join('')}</tbody></table></div></section>
+
+  <div class="grid2"><section class="card"><h2>Shut-offs &amp; controls</h2><ul class="list">${SHUTOFFS.map(s=>`<li style="align-items:flex-start"><span><b>${s[0]}</b><br><span class="muted small">${esc(s[1])}</span><br><span class="small">${esc(s[2])}</span></span><span class="muted small">${short(s[3])}</span></li>`).join('')}</ul></section>
+  <section class="card"><h2>Safety items</h2><ul class="list">${SAFETY.map(s=>`<li style="align-items:flex-start"><span><b>${s[0]}</b><br><span class="muted small">${esc(s[1])}</span><br><span class="small">${esc(s[2])}</span></span></li>`).join('')}</ul></section></div>
+
+  <div class="grid2"><section class="card"><h2>Documents</h2><p class="muted small" style="margin-top:-6px">You and Chronicle can both add documents.</p><ul class="list">${DOCS.map(d=>`<li><span><b style="font-weight:500">${esc(d[0])}</b><br><span class="muted small">${esc(d[1])}${d[2]?' · '+short(d[2]):''}</span></span>${d[3]?'<span class="chip good">On file</span>':'<span class="chip gold">To add</span>'}</li>`).join('')}</ul></section>
+  <section class="card"><h2>Version history</h2><p class="muted small" style="margin-top:-6px">A correction becomes a new version; earlier versions are kept.</p><ul class="list">${VERSIONS.map(v=>`<li style="align-items:flex-start"><span><b>${v[0]}</b> · <span class="muted small">${mid(v[1])}</span><br><span class="small">${esc(v[2])}</span></span></li>`).join('')}</ul></section></div>
+  <p class="foot">A Chronicle is a visual record from normal standing and walking positions. It is not a home inspection, survey or engineering assessment. Access codes are never stored in the portal.</p>`;
+
+V.visits = () => `<p class="eyebrow">Visits &amp; Reports</p><h1>Your walkthroughs</h1>
+  <section class="card"><div style="display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap"><span><b>Next walkthrough</b> · ${long(NEXT)}</span><a class="btn ghost" href="#timeline">Every visit side by side</a></div></section>
+  <section class="card"><h2>Reports</h2><ul class="list">${VISITS.map((d,i)=>({d,i})).reverse().map(({d,i})=>{const c=counts(i);return `<li><a href="#report-${i}"><b>${long(d)}</b><br><span class="muted small">Walkthrough · ${REP} · ${c.attention?c.attention+' needs attention':c.monitor?c.monitor+' to watch':'all good'}</span></a><a class="btn ghost" href="#report-${i}">Open</a></li>`;}).join('')}</ul></section>`;
+
+V.report = (i) => { const c=counts(i); const prev=i>0?i-1:null;
+  const flagged=[];AREAS.forEach(a=>a.rows.forEach(r=>{ if(r.pano) return; const s=statusOf(r,i); if(s===A||s===M) flagged.push({a,r,s}); }));
+  const panoOf=a=>{const p=a.rows.find(x=>x.pano);return p?p.pano:null;};
+  return `<p class="eyebrow"><a href="#visits" style="text-decoration:none">Visits &amp; Reports</a></p><h1>Walkthrough · ${mid(VISITS[i])}</h1>
+  <p class="muted" style="margin-top:0">${REP}, Chronicle representative · arrived ${TIMES[i][0]}, left ${TIMES[i][1]} · door locked on leaving</p>
+  <div class="tiles"><div class="tile"><b>${c.attention}</b><span>Needs attention</span></div><div class="tile"><b>${c.monitor}</b><span>Monitor</span></div><div class="tile"><b>${c.good}</b><span>Good</span></div><div class="tile"><b>${c.nc}</b><span>Not checked</span></div></div>
+  <section class="card"><h2>${flagged.length?'What needs your attention':'Nothing needs your attention'}</h2>${flagged.length?flagged.map(f=>`<div class="find"><div class="ph" style="background-image:url(assets/sample360/${panoOf(f.a)||'entry'}-t.jpg)"></div><div><span class="chip ${f.s}">${TXT[f.s]}</span> <b>${f.a.title} · ${esc(f.r.label)}</b><p class="small" style="margin:4px 0 0">${f.r.r?`${f.r.r[i]}${unitTxt(f.r)} (limit ${f.r.max}${unitTxt(f.r)})`:''}${f.r.note&&f.r.note[i]?esc(f.r.note[i]):''}</p></div></div>`).join(''):'<p class="muted" style="margin:0">Every check was as expected on this visit.</p>'}</section>
+  <section class="card"><h2>Room by room</h2>${AREAS.map(a=>{const p=panoOf(a);return `<div class="room">${p?thumb(p,i):'<span></span>'}<div><h3>${a.title}</h3><ul class="checks">${a.rows.filter(r=>!r.pano).map(r=>{const s=statusOf(r,i);return `<li><span>${esc(r.label)}</span><span class="chip ${s==='nc'?'gold':s}">${r.r?r.r[i]+unitTxt(r):SH[s]}</span></li>`;}).join('')}</ul></div></div>`;}).join('')}</section>
+  <div style="display:flex;gap:10px;flex-wrap:wrap">${prev!==null?`<a class="btn ghost" href="#report-${prev}">‹ ${short(VISITS[prev])}</a>`:''}<a class="btn ghost" href="#timeline">Every visit side by side</a>${i<5?`<a class="btn ghost" href="#report-${i+1}">${short(VISITS[i+1])} ›</a>`:''}</div>
+  <p class="foot">Home watch visit: a visual observation of the property at the time of the visit. It is not a home inspection and does not test systems or assess hidden conditions.</p>`; };
+
+// ----- timeline (every walkthrough a column) -----
+function changed(r,x,y){ if(r.pano) return false; if(r.r) return Math.abs(r.r[y]-r.r[x])>=5||((r.r[y]>r.max)!==(r.r[x]>r.max)); return r.v[y]!==r.v[x]; }
+function tlCell(r,cols,k){ const i=cols[k];
+  if(r.pano) return `<td>${thumb(r.pano,i)}</td>`;
+  const ch=k>0&&changed(r,cols[k-1],i)?' changed':'';
+  if(r.r){ const v=r.r[i],f=v>r.max; return `<td class="${f?'attention':'good'}${ch}">${v}${unitTxt(r)}</td>`; }
+  const c=r.v[i],n=r.note&&r.note[i]; return `<td class="${c===NC?'':c}${ch}" ${n?`title="${esc(n)}"`:''}>${SH[c]}${n?' ·':''}</td>`; }
+V.timeline = (pair) => { const cols=pair||VISITS.map((_,i)=>i); const [x,y]=pair||[4,5];
+  const ch=[];AREAS.forEach(a=>a.rows.forEach(r=>{ if(r.pano||!changed(r,x,y)) return; ch.push(`<li><span><b>${a.title} · ${esc(r.label)}</b><br><span class="muted small">${r.r?`${r.r[x]} → ${r.r[y]}${unitTxt(r)}`:`${SH[r.v[x]]} → ${SH[r.v[y]]}`}${!r.r&&r.note&&r.note[y]?' – '+esc(r.note[y]):''}</span></span></li>`); }));
+  const rooms=[];AREAS.forEach(a=>a.rows.forEach(r=>{if(r.pano)rooms.push(r.pano);}));
+  return `<p class="eyebrow"><a href="#visits" style="text-decoration:none">Visits &amp; Reports</a></p><h1>Property timeline</h1>
+  <section class="card"><h2>${pair?`${mid(VISITS[x])} and ${mid(VISITS[y])}`:'Since the visit before'}</h2><ul class="list">${ch.join('')||`<li class="muted">No change between ${short(VISITS[x])} and ${short(VISITS[y])}.</li>`}</ul>
+    <div class="compare" style="margin-top:12px"><label>Compare<select id="ca">${VISITS.map((d,i)=>`<option value="${i}" ${i===(pair?x:0)?'selected':''}>${mid(d)}</option>`).join('')}</select></label><label>with<select id="cb">${VISITS.map((d,i)=>`<option value="${i}" ${i===(pair?y:5)?'selected':''}>${mid(d)}</option>`).join('')}</select></label><button class="btn" id="side">Side by side</button>${pair?'<a class="btn ghost" href="#timeline">Show every visit</a>':''}</div></section>
+  ${pair?`<section class="card"><h2>360° side by side</h2><p class="muted small" style="margin-top:-6px">Drag either view: both turn together, so the same corner is compared.</p>${rooms.map(r=>`<h3 class="muted small" style="margin:14px 0 6px;font-weight:500">${NAMES[r]}</h3><div class="pair"><div class="view360" data-room="${r}" data-i="${x}"><span class="lab">${short(VISITS[x])}</span></div><div class="view360" data-room="${r}" data-i="${y}"><span class="lab">${short(VISITS[y])}</span></div></div>`).join('')}</section>`:''}
+  <div class="gridwrap"><table class="tl"><thead><tr><th scope="col">Check</th>${cols.map(i=>`<th scope="col"><a href="#report-${i}">${short(VISITS[i])}</a><small>Walkthrough</small></th>`).join('')}</tr></thead>${AREAS.map(a=>`<tbody><tr class="area"><th scope="rowgroup" colspan="${cols.length+1}">${a.title}</th></tr>${a.rows.map(r=>`<tr><th scope="row">${esc(r.label)}</th>${cols.map((_,k)=>tlCell(r,cols,k)).join('')}</tr>`).join('')}</tbody>`).join('')}</table></div>
+  <div class="legend"><span><i style="background:#3FA371"></i>Good</span><span><i style="background:#D9A441"></i>Monitor</span><span><i style="background:#D9573F"></i>Needs attention</span><span><i style="box-shadow:inset 0 0 0 2px #C9A96A"></i>Changed since the visit before</span><span>N/C: not checked · tap a date for that visit’s report</span></div>
+  <section class="card"><h2>Readings over time</h2><div class="graphs">${AREAS.flatMap(a=>a.rows.filter(r=>r.r).map(r=>`<figure><figcaption>${a.title} · ${esc(r.label)}</figcaption>${spark(r.r,r.max,r.unit)}<p class="muted small" style="margin:4px 0 0">${short(VISITS[0])} → ${short(VISITS[5])} · dashed line: limit ${r.max}${unitTxt(r)}</p></figure>`)).join('')}</div></section>`; };
+function spark(vals,max,unit){ const W=300,H=96,lo=Math.min(...vals,max)-3,hi=Math.max(...vals,max)+3,n=vals.length-1;
+  const X=i=>22+i/n*(W-44),Y=v=>H-16-(v-lo)/(hi-lo)*(H-32);
+  return `<svg viewBox="0 0 ${W} ${H}" role="img" aria-label="${vals.join(', ')} ${unit}"><line class="lim" x1="12" x2="${W-12}" y1="${Y(max)}" y2="${Y(max)}"/><polyline class="ln" fill="none" points="${vals.map((v,i)=>X(i)+','+Y(v)).join(' ')}"/>${vals.map((v,i)=>`<circle class="dot${v>max?' f':''}" cx="${X(i)}" cy="${Y(v)}" r="4"/><text x="${X(i)}" y="${Y(v)-8}" text-anchor="middle">${v}</text>`).join('')}</svg>`; }
+
+V.requests = () => `<p class="eyebrow">Requests</p><h1>Questions &amp; requests</h1><p class="muted">Ask a question, request assistance or comment on a report. Every answer stays here.</p>
+  ${REQUESTS.map(r=>`<section class="card"><span class="chip gold">${r.kind}</span> <span class="muted small">${mid(r.d)}</span><p style="margin:10px 0">${esc(r.q)}</p><div class="req"><b class="small">${r.a.who} · ${mid(r.a.d)}</b><p class="small" style="margin:4px 0 0">${esc(r.a.t)}</p></div></section>`).join('')}
+  <p class="muted small">In your own portal, a new request goes straight to the Chronicle office.</p>`;
+
+// ===== 360 viewer =====
+function pano(el,room,i,peers){ el.style.backgroundImage=`url(assets/sample360/${room}.jpg)`; el.style.filter=shade(i);
+  let x=0,start=null,base=0; const set=v=>{x=v;(peers||[el]).forEach(p=>p.style.backgroundPositionX=x+'px');};
+  el.addEventListener('pointerdown',e=>{start=e.clientX;base=x;el.setPointerCapture(e.pointerId);el.classList.add('drag');});
+  el.addEventListener('pointermove',e=>{if(start!==null)set(base+(e.clientX-start));});
+  const end=()=>{start=null;el.classList.remove('drag');}; el.addEventListener('pointerup',end); el.addEventListener('pointercancel',end);
+  el.tabIndex=0; el.setAttribute('role','img'); el.setAttribute('aria-label',`360° view of the ${NAMES[room]}; use the arrow keys to turn`);
+  el.addEventListener('keydown',e=>{if(e.key==='ArrowLeft')set(x+40);if(e.key==='ArrowRight')set(x-40);}); }
+function openOne(room,i){ $('#dlg-title').textContent=`${NAMES[room]} · 360° · ${mid(VISITS[i])}`;
+  $('#dlg-body').innerHTML=`<div class="view360" id="p1"><span class="lab">${short(VISITS[i])}</span><span class="hint">Drag to look around</span></div>`; pano($('#p1'),room,i); $('#dlg').showModal(); }
+$('#dlg-x').addEventListener('click',()=>$('#dlg').close());
+
+// ===== router =====
+function route(){ const h=(location.hash||'#home').slice(1); let html, tab;
+  const m=h.match(/^report-(\d)$/), t=h.match(/^timeline-(\d)-(\d)$/);
+  if(m&&+m[1]<6){ html=V.report(+m[1]); tab='visits'; }
+  else if(t&&t[1]!==t[2]){ const a=Math.min(+t[1],+t[2]),b=Math.max(+t[1],+t[2]); html=V.timeline([a,b]); tab='visits'; }
+  else if(h==='timeline'){ html=V.timeline(); tab='visits'; }
+  else if(V[h]&&h!=='report'){ html=V[h](); tab=h; } else { html=V.home(); tab='home'; }
+  $('#view').innerHTML=html;
+  document.querySelectorAll('nav.side a').forEach(a=>{const on=a.dataset.tab===tab;a.classList.toggle('on',on);if(on)a.setAttribute('aria-current','page');else a.removeAttribute('aria-current');});
+  document.querySelectorAll('#view .thumb').forEach(b=>b.addEventListener('click',()=>openOne(b.dataset.pano,+b.dataset.i)));
+  document.querySelectorAll('#view .pair').forEach(p=>{const [a,b]=p.querySelectorAll('.view360');pano(a,a.dataset.room,+a.dataset.i,[a,b]);pano(b,b.dataset.room,+b.dataset.i,[a,b]);});
+  const side=$('#side'); if(side) side.addEventListener('click',()=>{const a=$('#ca').value,b=$('#cb').value; if(a!==b) location.hash=`timeline-${a}-${b}`;});
+  window.scrollTo(0,0); }
+window.addEventListener('hashchange',route); route();
+</script>
+</body>
+</html>
