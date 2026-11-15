@@ -1,0 +1,211 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Sample Property Chronicle — Chronicle Home Watch</title>
+<meta name="description" content="A sample of the Chronicle client portal: every walkthrough side by side, 360° views of each room, readings over time and what changed since the visit before.">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#0E1728;--panel:#15203A;--panel2:#1B2745;--line:#28334F;--ink:#F0EDE5;--muted:#A7B1C6;--gold:#C9A96A;--good:#3FA371;--monitor:#D9A441;--attention:#D9573F;--serif:"Cinzel",Georgia,serif;--sans:"Inter",system-ui,Arial,sans-serif}
+*{box-sizing:border-box}html{-webkit-text-size-adjust:100%}body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.6 var(--sans)}
+a{color:inherit}button,select{font:inherit}
+.top{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:14px max(16px,calc((100% - 1240px)/2));background:#0A1120;border-bottom:1px solid rgba(201,169,106,.35)}
+.brand{display:flex;align-items:center;gap:10px;text-decoration:none}.brand img{width:40px;height:40px}.brand span{font-family:var(--serif);letter-spacing:.08em;font-size:16px;line-height:1.3}.brand small{display:block;font-family:var(--sans);font-size:8px;letter-spacing:.28em;color:var(--muted)}
+.top a.back{font-size:13px;color:var(--muted);text-decoration:none}.top a.back:hover{color:var(--gold)}
+.sample{background:var(--panel2);color:#E6D3A8;text-align:center;font-size:13px;padding:9px 16px}.sample b{color:var(--gold);letter-spacing:.06em}
+main{width:min(1240px,calc(100% - 32px));margin:0 auto;padding:28px 0 64px}
+.eyebrow{font-size:11px;letter-spacing:.18em;color:var(--gold);text-transform:uppercase;margin:0 0 6px}
+h1{font-family:var(--serif);font-weight:500;font-size:clamp(26px,4vw,40px);margin:0 0 4px;letter-spacing:.02em}
+h2{font-family:var(--serif);font-weight:500;font-size:20px;margin:0 0 12px}
+.muted{color:var(--muted)}.small{font-size:12px}
+.prop{display:grid;grid-template-columns:260px 1fr;gap:22px;align-items:center;margin-bottom:22px}
+.prop img{width:100%;aspect-ratio:16/10;object-fit:cover;border-radius:14px;border:1px solid var(--line)}
+.facts{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}.facts span{background:var(--panel);border:1px solid var(--line);border-radius:999px;padding:4px 12px;font-size:12px;color:var(--muted)}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:20px;margin-bottom:18px}
+.changes{list-style:none;margin:0 0 14px;padding:0}.changes li{display:flex;gap:12px;align-items:baseline;padding:9px 0;border-top:1px solid var(--line)}.changes li:first-child{border-top:0}
+.changes b{font-weight:600}.changes .arrow{color:var(--muted)}
+.compare{display:flex;flex-wrap:wrap;gap:10px 14px;align-items:end}.compare label{display:grid;gap:4px;font-size:12px;color:var(--muted)}
+.compare select{background:#0E1728;color:var(--ink);border:1px solid #364364;border-radius:8px;padding:8px 10px;min-width:150px}
+.btn{background:var(--gold);color:#0A1120;border:0;border-radius:999px;padding:9px 18px;font-weight:600;cursor:pointer}.btn.ghost{background:transparent;color:var(--ink);border:1px solid #526080}
+.gridwrap{overflow-x:auto;border:1px solid var(--line);border-radius:16px;background:var(--panel);margin-bottom:8px;-webkit-overflow-scrolling:touch}
+table{border-collapse:separate;border-spacing:0;width:100%;min-width:720px}
+th,td{padding:10px 12px;border-bottom:1px solid var(--line);text-align:center;font-size:13px;vertical-align:middle}
+thead th{position:sticky;top:0;background:#111B32;font-weight:600;font-size:12px;letter-spacing:.04em;z-index:2}
+thead th small{display:block;font-weight:400;color:var(--muted);letter-spacing:0}
+th[scope=row],thead th:first-child{text-align:left;position:sticky;left:0;background:#111B32;z-index:1;min-width:170px;font-weight:500}
+thead th:first-child{z-index:3}
+tr.area th{background:#0F1930;color:var(--gold);font-family:var(--serif);font-weight:500;letter-spacing:.06em;text-align:left;font-size:13px}
+td.good{color:#9FDDBE}td.monitor{color:#F2CB7A}td.attention{color:#F4A090;font-weight:600}
+td.changed{box-shadow:inset 0 0 0 2px var(--gold);border-radius:6px}
+td.pano{padding:6px}
+.thumb{display:block;width:118px;height:59px;border-radius:8px;border:1px solid #364364;background-size:cover;background-position:center;cursor:pointer;position:relative;margin:auto}
+.thumb::after{content:"360°";position:absolute;right:4px;bottom:3px;font-size:9px;background:#0A1120cc;color:var(--gold);padding:1px 5px;border-radius:4px}
+.thumb:focus-visible,.btn:focus-visible,select:focus-visible,button:focus-visible{outline:3px solid var(--gold);outline-offset:2px}
+.legend{display:flex;flex-wrap:wrap;gap:14px;font-size:12px;color:var(--muted);margin:6px 2px 22px}.legend i{display:inline-block;width:10px;height:10px;border-radius:3px;margin-right:6px;vertical-align:middle}
+.graphs{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:14px}
+figure{margin:0;background:#111B32;border:1px solid var(--line);border-radius:12px;padding:12px}figcaption{font-size:13px;margin-bottom:6px}
+svg .lim{stroke:#D9573F;stroke-dasharray:4 4;stroke-width:1.5}svg .ln{stroke:var(--gold);stroke-width:2.5}svg .dot{fill:var(--gold)}svg .dot.f{fill:#D9573F}svg text{fill:var(--muted);font-size:10px;font-family:var(--sans)}
+.pair{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.view360{position:relative;height:300px;border-radius:12px;border:1px solid #364364;background-repeat:repeat-x;background-size:auto 100%;cursor:grab;touch-action:pan-y;user-select:none}
+.view360.drag{cursor:grabbing}.view360 .lab{position:absolute;left:10px;top:10px;background:#0A1120d9;padding:3px 10px;border-radius:999px;font-size:12px}
+.view360 .hint{position:absolute;right:10px;bottom:10px;background:#0A1120d9;padding:3px 10px;border-radius:999px;font-size:11px;color:var(--muted)}
+dialog{border:1px solid var(--line);border-radius:16px;background:var(--panel);color:var(--ink);width:min(1000px,calc(100% - 24px));padding:16px}
+dialog::backdrop{background:#050a14cc}
+.dlg-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px}.x{background:none;border:0;color:var(--ink);font-size:26px;cursor:pointer;line-height:1}
+.foot{border-top:1px solid var(--line);margin-top:26px;padding-top:16px;font-size:12px;color:var(--muted)}
+@media(max-width:760px){.prop{grid-template-columns:1fr}.pair{grid-template-columns:1fr}.view360{height:220px}.thumb{width:96px;height:48px}th[scope=row],thead th:first-child{min-width:130px}}
+</style>
+</head>
+<body>
+<header class="top">
+  <a class="brand" href="index.html"><img src="assets/chronicle-services-mark.svg" alt=""><span>CHRONICLE<small>PROPERTY GROUP</small></span></a>
+  <a class="back" href="index.html#property-record">‹ Chronicle Home Watch</a>
+</header>
+<div class="sample"><b>SAMPLE</b> · A fictional property, shown the way a client sees their own home in the Chronicle portal.</div>
+<main>
+  <section class="prop">
+    <img src="assets/portal-01.jpg" alt="Sample residence">
+    <div>
+      <p class="eyebrow">Property timeline</p>
+      <h1>Sample Residence</h1>
+      <p class="muted" style="margin:0">Naples, Florida · Chronicle Residence, every 14 days</p>
+      <div class="facts"><span>Lead representative: your named Chronicle representative</span><span>6 walkthroughs shown</span><span>Every room with its 360°</span></div>
+    </div>
+  </section>
+
+  <section class="card" aria-labelledby="since">
+    <h2 id="since">Since the visit before</h2>
+    <ul class="changes" id="changes"></ul>
+    <form class="compare" id="compare" onsubmit="return false">
+      <label>Compare<select id="ca"></select></label>
+      <label>with<select id="cb"></select></label>
+      <button class="btn" id="side">Side by side</button>
+      <button class="btn ghost" id="all" hidden>Show every visit</button>
+    </form>
+  </section>
+
+  <section id="pairs" class="card" hidden aria-labelledby="pairs-title">
+    <h2 id="pairs-title">360° side by side</h2>
+    <p class="muted small" style="margin-top:-6px">Drag either view: both turn together, so the same corner is compared.</p>
+    <div id="pairlist"></div>
+  </section>
+
+  <div class="gridwrap"><table id="grid"></table></div>
+  <div class="legend"><span><i style="background:#3FA371"></i>Good</span><span><i style="background:#D9A441"></i>Monitor</span><span><i style="background:#D9573F"></i>Needs attention</span><span><i style="box-shadow:inset 0 0 0 2px #C9A96A"></i>Changed since the visit before</span><span>N/C: not checked</span></div>
+
+  <section class="card" aria-labelledby="graphs-title">
+    <h2 id="graphs-title">Readings over time</h2>
+    <div class="graphs" id="graphs"></div>
+  </section>
+
+  <p class="muted small">Each date opens that visit’s full report in the portal. <a href="first-chronicle.html" style="color:var(--gold)">See a sample full report</a>.</p>
+  <p class="foot">Sample: the property, visits, readings and findings are fictional, and the room views are stand-in images. In your portal every 360° is taken at your home from the same marked spot on each visit. A Chronicle is a visual record from normal standing and walking positions; it is not a home inspection, survey or engineering assessment.</p>
+</main>
+
+<dialog id="dlg" aria-labelledby="dlg-title"><div class="dlg-head"><b id="dlg-title"></b><button class="x" aria-label="Close" id="dlg-x">×</button></div><div id="dlg-body"></div></dialog>
+
+<script>
+// Sample data: six walkthroughs every 14 days, oldest → newest (same structure as the Chronicle portal timeline).
+const VISITS = ['2026-08-23','2026-09-06','2026-09-20','2026-10-04','2026-10-18','2026-11-01'];
+const G='good',M='monitor',A='attention',NC='nc';
+const AREAS = [
+  {title:'Arrival', rows:[
+    {label:'Entrance door locked, no signs of entry', v:[G,G,G,G,G,G]},
+    {label:'Packages, flyers or notices', v:[G,G,M,G,G,G], note:{2:'Two flyers and a courier slip brought inside'}},
+    {label:'360°', pano:'entry'}]},
+  {title:'Systems', rows:[
+    {label:'Main water shut-off', v:[G,G,G,G,G,G]},
+    {label:'Electrical panel: no tripped breakers', v:[G,G,G,A,G,G], note:{3:'Kitchen GFCI breaker tripped; reset with the owner’s consent'}},
+    {label:'AC running, set to away (°F)', unit:'°F', r:[78,78,79,78,78,78], max:80},
+    {label:'Water heater: no drips, pan dry', v:[G,G,G,G,M,G], note:{4:'Small drip at the valve; plumber visited Oct 22'}}]},
+  {title:'Living room', rows:[
+    {label:'Temperature (°F)', unit:'°F', r:[77,78,79,78,77,77], max:82},
+    {label:'Humidity (%)', unit:'%', r:[54,56,61,63,57,55], max:60},
+    {label:'Windows & sliding door closed and locked', v:[G,G,G,G,G,G]},
+    {label:'Ceiling, walls, floor: no stains', v:[G,G,G,G,G,G]},
+    {label:'360°', pano:'living'}]},
+  {title:'Kitchen', rows:[
+    {label:'Sink: runs and drains; cabinet below dry', v:[G,G,G,M,G,G], note:{3:'Damp base board under the sink; supply line tightened'}},
+    {label:'Fridge & freezer running', v:[G,G,G,G,G,G]},
+    {label:'Humidity (%)', unit:'%', r:[55,57,60,64,58,56], max:60},
+    {label:'360°', pano:'kitchen'}]},
+  {title:'Lanai', rows:[
+    {label:'Screens and enclosure intact', v:[G,G,G,G,G,G]},
+    {label:'Floor drain clear', v:[G,G,M,G,G,G], note:{2:'Leaves cleared from the drain'}},
+    {label:'Storm damage, loose items', v:[G,G,G,G,NC,G], note:{4:'Not checked: lanai closed by the condo association for painting'}},
+    {label:'360°', pano:'lanai'}]}
+];
+const NAMES={entry:'Entrance',living:'Living room',kitchen:'Kitchen',lanai:'Lanai'};
+const TXT={good:'Good',monitor:'Monitor',attention:'Attention',nc:'N/C'};
+const short=d=>new Date(d+'T12:00:00Z').toLocaleDateString('en-US',{month:'short',day:'numeric',timeZone:'UTC'});
+const long=d=>new Date(d+'T12:00:00Z').toLocaleDateString('en-US',{month:'long',day:'numeric',year:'numeric',timeZone:'UTC'});
+const $=s=>document.querySelector(s);
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+// a small shift of light per visit so each walkthrough's view is its own
+const shade=i=>`brightness(${[0.94,1,1.04,0.97,1.02,1][i]})`;
+
+function changed(row,i){ if(i<1||row.pano) return false;
+  if(row.r) return Math.abs(row.r[i]-row.r[i-1])>=5 || ((row.r[i]>row.max)!==(row.r[i-1]>row.max));
+  return row.v[i]!==row.v[i-1]; }
+function cell(row,i){
+  if(row.pano){ return `<td class="pano"><button type="button" class="thumb" style="background-image:url(assets/sample360/${row.pano}-t.jpg);filter:${shade(i)}" data-pano="${row.pano}" data-i="${i}" aria-label="Open the 360° of the ${esc(NAMES[row.pano])}, ${long(VISITS[i])}"></button></td>`; }
+  const ch=changed(row,i)?' changed':'';
+  if(row.r){ const v=row.r[i], f=v>row.max; return `<td class="${f?'attention':'good'}${ch}" ${f?`title="Above ${row.max}${row.unit==='%'?' %':' '+row.unit}"`:''}>${v}${row.unit==='%'?' %':' '+row.unit}</td>`; }
+  const c=row.v[i]; const note=row.note&&row.note[i]; return `<td class="${c===NC?'':c}${ch}" ${note?`title="${esc(note)}"`:''}>${TXT[c]}${note?' ·':''}</td>`;
+}
+function render(cols){
+  const head=`<thead><tr><th scope="col">Check</th>${cols.map(i=>`<th scope="col">${short(VISITS[i])}<small>Walkthrough</small></th>`).join('')}</tr></thead>`;
+  const body=AREAS.map(a=>`<tbody><tr class="area"><th scope="rowgroup" colspan="${cols.length+1}">${a.title}</th></tr>${a.rows.map(r=>`<tr><th scope="row">${esc(r.label)}</th>${cols.map(i=>cell(r,i)).join('')}</tr>`).join('')}</tbody>`).join('');
+  $('#grid').innerHTML=head+body;
+  // with two columns, a changed mark compares those two
+  if(cols.length===2){ document.querySelectorAll('#grid td.changed').forEach(td=>td.classList.remove('changed'));
+    const rows=[...document.querySelectorAll('#grid tbody tr:not(.area)')]; let k=0;
+    AREAS.forEach(a=>a.rows.forEach(r=>{ const tr=rows[k++]; if(r.pano) return; const [x,y]=cols;
+      const diff=r.r?Math.abs(r.r[y]-r.r[x])>=5||((r.r[y]>r.max)!==(r.r[x]>r.max)):r.v[y]!==r.v[x]; if(diff) tr.children[2].classList.add('changed'); })); }
+  document.querySelectorAll('.thumb').forEach(b=>b.addEventListener('click',()=>openOne(b.dataset.pano,+b.dataset.i)));
+}
+function changes(x,y){
+  const out=[]; AREAS.forEach(a=>a.rows.forEach(r=>{ if(r.pano) return;
+    if(r.r){ if(Math.abs(r.r[y]-r.r[x])>=5||((r.r[y]>r.max)!==(r.r[x]>r.max))) out.push(`<li><b>${a.title} · ${esc(r.label)}</b><span><span class="arrow">${r.r[x]} → </span>${r.r[y]}${r.unit==='%'?' %':' '+r.unit}${r.r[y]>r.max?' (above the limit)':''}</span></li>`); }
+    else if(r.v[y]!==r.v[x]) out.push(`<li><b>${a.title} · ${esc(r.label)}</b><span><span class="arrow">${TXT[r.v[x]]} → </span>${TXT[r.v[y]]}${r.note&&r.note[y]?' – '+esc(r.note[y]):''}</span></li>`); }));
+  $('#changes').innerHTML=out.length?out.join(''):`<li class="muted">No change between ${short(VISITS[x])} and ${short(VISITS[y])}.</li>`;
+}
+// a 360° view: drag to turn (wraps around); views in a pair turn together
+function pano(el,room,i,peers){
+  el.style.backgroundImage=`url(assets/sample360/${room}.jpg)`; el.style.filter=shade(i);
+  let x=0,start=null,base=0; const set=v=>{x=v;(peers||[el]).forEach(p=>p.style.backgroundPositionX=x+'px');};
+  el.addEventListener('pointerdown',e=>{start=e.clientX;base=x;el.setPointerCapture(e.pointerId);el.classList.add('drag');});
+  el.addEventListener('pointermove',e=>{if(start!==null)set(base+(e.clientX-start));});
+  const end=()=>{start=null;el.classList.remove('drag');}; el.addEventListener('pointerup',end); el.addEventListener('pointercancel',end);
+  el.tabIndex=0; el.addEventListener('keydown',e=>{if(e.key==='ArrowLeft')set(x+40);if(e.key==='ArrowRight')set(x-40);});
+}
+function openOne(room,i){
+  $('#dlg-title').textContent=`${NAMES[room]} · 360° · ${long(VISITS[i])}`;
+  $('#dlg-body').innerHTML=`<div class="view360" id="p1" role="img" aria-label="360° view of the ${esc(NAMES[room])}"><span class="lab">${short(VISITS[i])}</span><span class="hint">Drag to look around</span></div>`;
+  pano($('#p1'),room,i); $('#dlg').showModal();
+}
+$('#dlg-x').addEventListener('click',()=>$('#dlg').close());
+function showPairs(x,y){
+  const rooms=[];AREAS.forEach(a=>a.rows.forEach(r=>{if(r.pano)rooms.push(r.pano);}));
+  $('#pairlist').innerHTML=rooms.map(r=>`<h3 class="muted small" style="margin:14px 0 6px;font-weight:500">${NAMES[r]}</h3><div class="pair"><div class="view360" data-room="${r}" data-i="${x}"><span class="lab">${short(VISITS[x])}</span></div><div class="view360" data-room="${r}" data-i="${y}"><span class="lab">${short(VISITS[y])}</span></div></div>`).join('');
+  document.querySelectorAll('#pairlist .pair').forEach(p=>{const [a,b]=p.querySelectorAll('.view360');pano(a,a.dataset.room,+a.dataset.i,[a,b]);pano(b,b.dataset.room,+b.dataset.i,[a,b]);});
+  $('#pairs').hidden=false;
+}
+// graphs: one per reading, with its limit as a dashed line
+function spark(vals,max,unit){
+  const W=300,H=96,lo=Math.min(...vals,max)-3,hi=Math.max(...vals,max)+3,n=vals.length-1;
+  const X=i=>22+i/n*(W-44),Y=v=>H-16-(v-lo)/(hi-lo)*(H-32);
+  return `<svg viewBox="0 0 ${W} ${H}" role="img" aria-label="${vals.join(', ')} ${unit}"><line class="lim" x1="12" x2="${W-12}" y1="${Y(max)}" y2="${Y(max)}"/><polyline class="ln" fill="none" points="${vals.map((v,i)=>X(i)+','+Y(v)).join(' ')}"/>${vals.map((v,i)=>`<circle class="dot${v>max?' f':''}" cx="${X(i)}" cy="${Y(v)}" r="4"/><text x="${X(i)}" y="${Y(v)-8}" text-anchor="middle">${v}</text>`).join('')}</svg>`;
+}
+$('#graphs').innerHTML=AREAS.flatMap(a=>a.rows.filter(r=>r.r).map(r=>`<figure><figcaption>${a.title} · ${esc(r.label)}</figcaption>${spark(r.r,r.max,r.unit)}<p class="muted small" style="margin:4px 0 0">${short(VISITS[0])} → ${short(VISITS[5])} · dashed line: limit ${r.max}${r.unit==='%'?' %':' '+r.unit}</p></figure>`)).join('');
+
+const all=VISITS.map((_,i)=>i);
+['#ca','#cb'].forEach((s,k)=>{$(s).innerHTML=VISITS.map((d,i)=>`<option value="${i}">${long(d)}</option>`).join('');$(s).value=k?5:0;});
+$('#side').addEventListener('click',()=>{const x=+$('#ca').value,y=+$('#cb').value;if(x===y)return;const [a,b]=x<y?[x,y]:[y,x];render([a,b]);changes(a,b);showPairs(a,b);$('#all').hidden=false;$('#since').textContent=`${long(VISITS[a])} and ${long(VISITS[b])}`;});
+$('#all').addEventListener('click',()=>{render(all);changes(4,5);$('#pairs').hidden=true;$('#all').hidden=true;$('#since').textContent='Since the visit before';});
+render(all);changes(4,5);
+</script>
+</body>
+</html>
