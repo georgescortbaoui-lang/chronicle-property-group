@@ -1,0 +1,14 @@
+BEGIN:VCARD
+VERSION:3.0
+N:Cortbaoui;George;;;
+FN:George Cortbaoui
+ORG:Chronicle Property Group
+TITLE:Founder & Managing Director
+TEL;TYPE=CELL,WORK:+12393809403
+EMAIL;TYPE=WORK:george.c@chronicleproperty.com
+EMAIL;TYPE=OTHER:info@chronicleproperty.com
+URL:https://chronicleproperty.com/
+ADR;TYPE=WORK:;;;Naples;FL;;USA
+NOTE:Instagram @chroniclehomewatch
+X-SOCIALPROFILE;TYPE=instagram:https://www.instagram.com/chroniclehomewatch/
+END:VCARD
